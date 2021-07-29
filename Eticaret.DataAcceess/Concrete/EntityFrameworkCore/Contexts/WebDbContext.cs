@@ -14,7 +14,7 @@ namespace Eticaret.DataAccess.Concrete.EntityFrameworkCore.Contexts
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Data Source=94.73.170.2; Initial Catalog=u9888118_radyogr; User Id=u9888118_radyogr;Password=RTfr49U3KNrw41A;  Integrated Security=True; Persist Security Info=False");
+            optionsBuilder.UseSqlServer(@"Data Source=94.73.170.2; Initial Catalog=u9888118_radyogr; Persist Security Info=True; User ID=u9888118_radyogr; Password=RTfr49U3KNrw41A;");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
