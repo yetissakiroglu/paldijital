@@ -1,5 +1,4 @@
-﻿@model BildirViewModel
-
+﻿@model BildirViewListModel
 <!-- main content -->
 <div class="container-fluid">
     <div class="row row--grid">
@@ -27,24 +26,27 @@
             @using (Html.BeginForm("Save", "Bildir", FormMethod.Post, new { @enctype = "multipart/form-data", @class = "sign__form sign__form--contacts" }))
             {
 
-<div class="row">
-    <div class="col-12 col-md-6">
-        <div class="sign__group">
-            <input type="text" name="name" class="sign__input" placeholder="Adınız Soyadınız">
-        </div>
-    </div>
-
-
-    <div class="col-12">
-        <div class="sign__group">
-            <textarea name="text" class="sign__textarea" placeholder="Hata Bilgileriniz."></textarea>
-        </div>
-    </div>
-
-    <div class="col-12 col-xl-3">
-        <button type="button" class="sign__btn">Gönder</button>
-    </div>
-</div>}
+            <div class="row">
+                <div class="col-12 col-md-6">
+                    <div class="sign__group">
+                        @Html.TextBoxFor(m => m.Bildir.name, new { @class = "form-control", @placeholder = "Adınız Soyadınız." })
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="sign__group">
+                        @Html.TextBoxFor(m => m.Bildir.email, new { @class = "form-control", @placeholder = "E-posta Adresiniz." })
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="sign__group">
+                        @Html.TextAreaFor(m => m.Bildir.message, new { @class = "form-control", @placeholder = "Uygulama Hatasınız Bize Yazınız." })
+                    </div>
+                </div>
+                           <div class="col-12 col-xl-3">
+                    <button type="submit" class="sign__btn">Hata Gönder</button>
+                </div>
+            </div>
+            }
 
 
         </div>

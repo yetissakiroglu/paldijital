@@ -49,7 +49,7 @@ namespace Eticaret.DataAccess.Concrete.EntityFrameworkCore.Contexts
         public DbSet<RoleClaims> AspNetRoleClaims { get; set; }
 
 
-        public DbSet<Bildir> Bildirler { get; set; }
+        public DbSet<Bildir> Bildirs { get; set; }
 
     }
 }

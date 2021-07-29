@@ -10,7 +10,7 @@ namespace Eticaret.UI.Constants
         public static string Haberler = "Haberler";
         public static string Frekanslar = "Frekanslar";
         public static string Radyolar = "Radyolar";
-
+        public static string Bildir = "Hata Bildirimi";
 
     }
 

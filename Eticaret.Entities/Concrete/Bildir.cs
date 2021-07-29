@@ -8,7 +8,9 @@ namespace Eticaret.Entities.Concrete
   public  class Bildir:IEntity
     {
         public int Id { get; set; }
+        public string name { get; set; }
         public string message { get; set; }
+        public string email { get; set; } 
         public bool IsRead { get; set; }
         public bool IsEdited { get; set; }
         
