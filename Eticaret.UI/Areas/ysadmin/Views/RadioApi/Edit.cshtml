@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Areas/ysadmin/Views/Shared/_Layout.cshtml";
+}
+
+
+@section Style {
+
+ 
+}
+<div class="card shadow mb-4">
+    <!-- form start -->
+    @using (Html.BeginForm("Edit", "RadioApi", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+    {
+        @Html.Partial("ViewForm")
+    }
+    <!-- END FORM-->
+</div>
+
+@section Scripts {
+ 
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+}
+
+
+

@@ -1,0 +1,242 @@
+﻿@model UserCreateModel
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/ysadmin/Views/Shared/_Layout.cshtml";
+}
+@section Style {
+    <!--begin::Page Custom Styles(used by this page)-->
+    <link href="/panel/assets/css/pages/wizard/wizard-4.css?v=7.0.4" rel="stylesheet" type="text/css" />
+    <!--end::Page Custom Styles-->
+}
+
+<!--begin::Content-->
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+    <!--begin::Subheader-->
+    <div class="subheader py-2 py-lg-4 subheader-solid" id="kt_subheader">
+        <div class="container-fluid d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
+            <!--begin::Info-->
+            <div class="d-flex align-items-center flex-wrap mr-1">
+                <!--begin::Page Heading-->
+                <div class="d-flex align-items-baseline mr-5">
+                    <!--begin::Page Title-->
+                    <h5 class="text-dark font-weight-bold my-2 mr-5">Kullanicilar</h5>
+                    <!--end::Page Title-->
+                    <!--begin::Breadcrumb-->
+                    <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
+                        <li class="breadcrumb-item">
+                            <a href="" class="text-muted">Yeni Kullanici Ekle</a>
+                        </li>
+                    </ul>
+                    <!--end::Breadcrumb-->
+                </div>
+                <!--end::Page Heading-->
+            </div>
+            <!--end::Info-->
+            <!--begin::Toolbar-->
+            <div class="d-flex align-items-center">
+                <!--begin::Actions-->
+                <a href="javascript:window.history.go(-1);" class="btn btn-light font-weight-bold btn-sm">Geri</a>
+                <!--end::Actions-->
+            </div>
+            <!--end::Toolbar-->
+        </div>
+    </div>
+    <!--end::Subheader-->
+    <!--begin::Entry-->
+    <div class="d-flex flex-column-fluid">
+        <!--begin::Container-->
+        <div class="container">
+            @if (ViewBag.ErrorMessage != null)
+            {
+                <div class="text-danger">@ViewBag.ErrorMessage</div>
+            }
+            <!--begin::Card-->
+            <form asp-controller="Users" class="form" asp-action="Create" method="post" enctype="multipart/form-data">
+                <div class="card card-custom card-sticky" >
+
+                    <!--begin::Body-->
+                    <div class="card-header">
+                        <div class="card-title">
+                            <h3 class="card-label">
+                                User Create
+                                <i class="mr-2"></i>
+                                <small class="">Aşağıdakı Formu Doldurunız.</small>
+                            </h3>
+                        </div>
+                        <div class="card-toolbar">
+    
+                            <div class="btn-group">
+                                <button type="submit" class="btn btn-primary font-weight-bolder">
+                                    <i class="ki ki-check icon-xs"></i>Kaydet
+                                </button>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center py-8 px-8 py-lg-15 px-lg-10">
+                        <div class="col-xl-12 col-xxl-10">
+
+                            <div class="row justify-content-center">
+                              
+                                <div class="col-xl-9">
+                                    <div class="form-group row">
+                                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                    </div>
+                                    <!--begin::Group-->
+                                    <div class="form-group row">
+                                        <label class="col-xl-3 col-lg-3 col-form-label text-left">Avatar</label>
+                                        <div class="col-lg-9 col-xl-9">
+                                            <div class="image-input image-input-outline">
+                                                <div class="image-input-wrapper" style="background-image: url(/panel/assets/media/users/100_6.jpg)"></div>
+                                                <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar">
+                                                    <i class="fa fa-pen icon-sm text-muted"></i>
+                                                    <input type="file" name="profile_avatar" accept=".png, .jpg, .jpeg" />
+                                                    <input type="hidden" name="Avatar" value="" />
+                                                    <input type="hidden" name="profile_avatar_remove" />
+                                                </label>
+                                                <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="cancel" data-toggle="tooltip" title="Cancel avatar">
+                                                    <i class="ki ki-bold-close icon-xs text-muted"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--end::Group-->
+                                    <!--begin::Group-->
+                                    <div class="form-group row">
+                                        <label asp-for="UserName" class="col-xl-3 col-lg-3 col-form-label"></label>
+                                        <div class="col-lg-9 col-xl-9">
+                                            <input class="form-control form-control-solid form-control-lg" asp-for="UserName" />
+                                            <span asp-validation-for="UserName" class="text-danger"></span>
+
+                                        </div>
+                                    </div>
+                                    <!--end::Group-->
+                                    <!--begin::Group-->
+                                    <div class="form-group row">
+                                        <label asp-for="FirstName" class="col-xl-3 col-lg-3 col-form-label"></label>
+                                        <div class="col-lg-9 col-xl-9">
+                                            <input class="form-control form-control-solid form-control-lg" asp-for="FirstName" />
+                                            <span asp-validation-for="FirstName" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <!--end::Group-->
+                                    <!--begin::Group-->
+                                    <div class="form-group row">
+                                        <label asp-for="LastName" class="col-xl-3 col-lg-3 col-form-label"></label>
+                                        <div class="col-lg-9 col-xl-9">
+                                            <input class="form-control form-control-solid form-control-lg" asp-for="LastName" />
+                                            <span asp-validation-for="LastName" class="text-danger"></span>
+
+                                        </div>
+                                    </div>
+                                    <!--end::Group-->
+                                    <!--begin::Group-->
+                                    <div class="form-group row">
+                                        <label asp-for="Email" class="col-xl-3 col-lg-3 col-form-label"></label>
+                                        <div class="col-lg-9 col-xl-9">
+                                            <div class="input-group input-group-solid input-group-lg">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">
+                                                        <i class="la la-at"></i>
+                                                    </span>
+                                                </div>
+                                                <input type="text" class="form-control form-control-solid form-control-lg" asp-for="Email" />
+                                                <span asp-validation-for="Email" class="text-danger"></span>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--end::Group-->
+                                    <!--begin::Group-->
+                                    <div class="form-group row">
+                                        <label asp-for="Password" class="col-form-label col-3"></label>
+                                        <div class="col-9">
+                                            <input class="form-control form-control-lg form-control-solid" asp-for="Password" />
+                                            <span asp-validation-for="Password" class="text-danger"></span>
+
+                                        </div>
+                                    </div>
+                                    <!--end::Group-->
+                                    <!--begin::Group-->
+                                    <div class="form-group row">
+                                        <label asp-for="RePassword" class="col-form-label col-3"></label>
+                                        <div class="col-lg-9 col-xl-9">
+                                            <input class="form-control form-control-lg form-control-solid" asp-for="RePassword" />
+                                            <span asp-validation-for="RePassword" class="text-danger"></span>
+
+                                        </div>
+                                    </div>
+                                    <!--end::Group-->
+                                    <div class="form-group row">
+                                        <div class="col-lg-3 col-xl-3">
+                                        </div>
+                                        <div class="col-lg-9 col-xl-9">
+                                            <label class="col-form-label"><strong>Roles</strong> </label>
+                                            <div class="checkbox-list">
+                                                @foreach (var rolename in ViewBag.Roles)
+                                                {
+                                                    <label class="checkbox">
+                                                        <input type="checkbox"
+                                                               name="selectedRoles"
+                                                               value="@rolename"
+                                                               id="@rolename" /> @rolename
+                                                            <span></span>
+                                                        </label>
+                                                    }
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--end::Group-->
+                                    <div class="form-group row">
+                                        <div class="col-lg-3 col-xl-3">
+                                        </div>
+                                        <div class="col-lg-9 col-xl-9">
+                                            <div class="checkbox-list">
+                                                <label class="col-form-label"><strong>Email Confirmed</strong> </label>
+                                                <label class="checkbox">
+                                                    <input asp-for="EmailConfirmed" type="checkbox">
+                                                    <span></span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <!--end::Group-->
+                                    <div class="form-group row">
+                                     
+
+                                        <label asp-for="LockoutEnd" class="col-xl-3 col-lg-3 col-form-label"></label>
+                                        <div class="col-lg-9 col-xl-9">
+                                            <div class="input-group date" data-z-index="1100">
+                                                <input asp-for="LockoutEnd" class="form-control" value="@Model.LockoutEnd" data-date-format="mm/dd/yyyy" />
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text">
+                                                        <i class="la la-calendar-check-o glyphicon-th"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--begin::Wizard Actions-->
+                                    <div class="d-flex justify-content-between border-top pt-10 mt-15">
+                                        <div class="mr-12 text-center">
+                                            <button type="submit" class="btn btn-primary font-weight-bolder">Save</button>
+                                        </div>
+                                    </div>
+                                    <!--end::Wizard Actions-->
+                                </div>
+                                </div>
+                            </div>
+                    </div>
+                    <!--end::Body-->
+                </div>
+                <!--end::Card-->
+            </form>
+
+        </div>
+        <!--end::Container-->
+    </div>
+    <!--end::Entry-->
+</div>
+<!--end::Content-->

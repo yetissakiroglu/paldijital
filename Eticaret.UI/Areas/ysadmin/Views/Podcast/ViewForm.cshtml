@@ -1,0 +1,111 @@
+﻿@model PodcastMusicListListViewModel
+
+<div class="small-header affix-top">
+    <div class="mb-4">
+        <div class="card-header py-3 d-sm-flex align-items-center justify-content-between">
+            <div class="pull-left">
+                <h4 class="m-b-xs">
+                    @Model.title
+                </h4>
+                <small>Yeni nesil panelde masaüstü ve mobil aygıtlarda hızlı bir şekilde veri ekleyebilir ve düzenleyebilirsiniz.</small>
+            </div>
+            <div class="btn-group pull-right">
+                <button name="geri_don" type="button" value="Geri Dön" onclick="javascript:window.history.go(-1);" class="btn btn-primary btn-sm"><i class="fa fa-angle-left"></i>&nbsp;Geri Dön</button>
+                <div class="btn-group">
+                    <a class="btn btn-sm green dropdown-toggle" href="javascript:;" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                        İşlemler
+                        <i class="fa fa-angle-down"></i>
+                    </a>
+                    <ul class="dropdown-menu pull-right">
+                        <li>
+                            <a asp-action="Create"><i class="fa fa-plus"></i>&nbsp;Yeni Ekle</a>
+                        </li>
+                        <li class="split"></li>
+                        <li>
+                            <a asp-action="Index"><i class="fa fa-list"></i>&nbsp;Tüm Kayıtlar</a>
+                        </li>
+                    </ul>
+                </div>
+                <input type="submit" value="KAYDET" class="btn btn-success btn-sm" />
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card-body">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" name="PodcastMusicList.podcastMusicListId" asp-for="PodcastMusicList.podcastMusicListId" value="@Model.PodcastMusicList.podcastMusicListId">
+    <input type="hidden" name="PodcastMusicList.soundPath" asp-for="PodcastMusicList.soundPath" value="@Model.PodcastMusicList.soundPath">
+    <div class="form-group">
+        @Html.LabelFor(model => model.PodcastMusicList.programId, htmlAttributes: new { @class = "control-label" })
+        <div class="col-md-12 p-0">
+            <div class="input-group">
+                @Html.DropDownListFor(model => model.PodcastMusicList.programId, (IEnumerable<SelectListItem>)Model.Programs, new { @class = "form-control" })
+            </div>
+            @Html.ValidationMessageFor(model => model.PodcastMusicList.programId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="PodcastMusicList.title" class="control-label"></label>
+        <input asp-for="PodcastMusicList.title" class="form-control" />
+        <span asp-validation-for="PodcastMusicList.title" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="PodcastMusicList.detail" class="control-label"></label>
+        <textarea asp-for="PodcastMusicList.detail" class="form-control" rows="4"></textarea>
+        <span asp-validation-for="PodcastMusicList.detail" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="PodcastMusicList.soundPath" class="control-label col-sm-12"></label>
+        <div class="col-sm-12">
+            @if (Model.PodcastMusicList.soundPath == null)
+            {
+            }
+            else
+            {
+                <audio controls>
+                    <source src="horse.ogg" type="audio/ogg">
+                    <source src="/upload/Podcast/@Model.PodcastMusicList.soundPath" type="audio/mpeg">
+                </audio>
+            }
+            <div class="fileinput fileinput-new" data-provides="fileinput">
+                <div class="input-group input-large">
+                    <div class="form-control uneditable-input input-fixed input-medium" data-trigger="fileinput">
+                        <i class="fa fa-file fileinput-exists"></i>&nbsp;
+                        <span class="fileinput-filename">@Model.PodcastMusicList.soundPath</span>
+                    </div>
+                    <span class="input-group-addon btn default btn-file">
+                        <span class="fileinput-new"> Dosya Seç </span>
+                        <span class="fileinput-exists"> Değiştir </span>
+                        <input type="file" id="soundPath" name="soundPath" class="form-control" accept=".mp3" />
+                    </span>
+                    <a href="javascript:;" class="input-group-addon btn red fileinput-exists" data-dismiss="fileinput"> Sil </a>
+                </div>
+            </div>
+            <br />
+            <span class="help-block">Sadece mp3</span>
+
+        </div>
+        <span asp-validation-for="PodcastMusicList.soundPath" class="text-danger"></span>
+
+    </div>
+    <div class="form-group">
+        <label asp-for="PodcastMusicList.startingDate" class="control-label"></label>
+        <input asp-for="PodcastMusicList.startingDate" class="form-control" />
+        <span asp-validation-for="PodcastMusicList.startingDate" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="PodcastMusicList.row" class="control-label"></label>
+        <input asp-for="PodcastMusicList.row" class="form-control" />
+        <span asp-validation-for="PodcastMusicList.row" class="text-danger"></span>
+    </div>
+    <div class="form-group form-check">
+        <label class="form-check-label">
+            <input class="form-check-input" asp-for="PodcastMusicList.status" /> @Html.DisplayNameFor(model => model.PodcastMusicList.status)
+        </label>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="KAYDET" class="btn btn-primary" />
+    </div>
+</div>
+

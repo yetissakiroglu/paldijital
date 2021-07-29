@@ -1,0 +1,43 @@
+﻿
+    <!--begin::Profile Card-->
+    <div class="card card-custom card-stretch">
+
+        <div class="card-header">
+            <div class="d-flex align-items-center">
+                <div class="symbol symbol-60 symbol-xxl-100 mr-3 align-self-start align-self-xxl-center">
+                    <div class="symbol-label" style="background-image:url(@Model.Avatar)"></div>
+                    <i class="symbol-badge bg-success"></i>
+                </div>
+                <div>
+                    <a href="#" class="font-weight-bolder font-size-h5 text-dark-75 text-hover-primary">@Model.FirstName @Model.LastName</a>
+                    <div class="text-muted">@Model.UserName</div>
+                    <a href="#" class="font-weight-bolder font-size-h5 text-dark-75 text-hover-primary">@Model.Email</a><br />
+                    <span class="font-weight-bolder font-size-h5 text-dark-75 text-hover-primary">@Model.PhoneNumber</span>
+                </div>
+            </div>
+        </div>
+
+        <!--begin::Body-->
+        <div class="card-body">
+            <!--begin::User-->
+         
+         
+            <div class="navi navi-bold navi-hover navi-active navi-link-rounded">
+                <div class="navi-item p-1">
+                    <a asp-controller="Profil" asp-action="hesabim" class="navi-link btn btn-primary btn-block">
+                        <span class="navi-text font-size-lg">Hesabım</span>
+                    </a>
+                </div>
+                <div class="navi-item p-1">
+                    <a asp-controller="Profil" asp-action="InformationViewEdit" class="navi-link btn btn-danger btn-block">
+                        <span class="navi-text font-size-lg">Düzenle</span>
+                    </a>
+                </div>
+                <div class="navi-item p-1">
+                    <a asp-controller="Profil" asp-action="ChangePassword" class="navi-link btn btn-success btn-block">
+                        <span class="navi-text font-size-lg">Şifre Değiştir</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>

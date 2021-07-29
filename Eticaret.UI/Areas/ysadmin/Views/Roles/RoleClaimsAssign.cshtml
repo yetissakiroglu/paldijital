@@ -1,0 +1,40 @@
+﻿@model List<RoleClaimsAssignViewModel>
+@{
+    ViewData["Title"] = "RoleAssign";
+    Layout = "~/Areas/ysadmin/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3 d-sm-flex align-items-center justify-content-between">
+        <h6 class="m-0 font-weight-bold text-primary">Role Yetkileri</h6>
+        <a asp-action="Create" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-plus fa-sm text-white-50"></i> Yeni Ekle </a>
+    </div>
+    <div class="card-body">
+        <div class="row justify-content-center py-8 px-8 py-lg-15 px-lg-10">
+            <div class="col-xl-12 col-xxl-10">
+                <div class="row justify-content-center">
+                    <div class="col-md-12 col-xxl-12">
+                        <form asp-controller="Roles" asp-action="RoleClaimsAssign" method="post">
+                            @for (int i = 0; i < Model.Count; i++)
+                            {
+                                <div class="form-check">
+                                    <input asp-for="@Model[i].Exist" type="checkbox" class="checkbox" />
+                                    <label asp-for="@Model[i].RoleId"> @Model[i].ClaimType </label>
+                                    <input type="hidden" asp-for="@Model[i].ClaimType" />
+                                    <input type="hidden" asp-for="@Model[i].ClaimValue" />
+                                    <input type="hidden" asp-for="@Model[i].RoleId" />
+                                    <input type="hidden" asp-for="@Model[i].Id" />
+
+                                </div>
+                            }
+                            <button type="submit" class="btn btn-primary font-weight-bolder">Yetki Ver</button>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

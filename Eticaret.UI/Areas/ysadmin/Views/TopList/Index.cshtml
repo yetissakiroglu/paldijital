@@ -1,0 +1,235 @@
+﻿@model TopListListViewModel
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/ysadmin/Views/Shared/_Layout.cshtml";
+    int index = 0;
+}
+
+@section Style {
+    <link href="/npanel/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link href="/npanel/vendor/bootstrap-editable/bootstrap-editable/css/bootstrap-editable.css" rel="stylesheet">
+
+}
+
+<div class="card shadow mb-4">
+    @using (Html.BeginForm("Index", "TopList", FormMethod.Get))
+    {
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-1">
+                    <select name="limit" asp-for="@Model.Limit" id="limit" class="select limit_kriter form-control input-sm">
+                        <option value="10">10</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                        <option value="200">200</option>
+                        <option value="250">250</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    @Html.DropDownListFor(model => model.RadioApiId, (IEnumerable<SelectListItem>)Model.RadiosApi, new { @class = "select kategori_kriter form-control input-sm" })
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <input asp-for="@Model.SDate" class="form-control" />
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <input asp-for="@Model.FDate" class="form-control" />
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <input asp-for="@Model.Search" name="metin" id="metin" placeholder=" Arama ... " class="form-control input-sm">
+                </div>
+                <div class="col-md-1">
+                    <input name="submit" type="submit" value="Ara" class="btn btn-primary form-control">
+                </div>
+
+            </div>
+        </div>
+    }
+    <div class="card-header py-3 d-sm-flex align-items-center justify-content-between">
+        <h6 class="m-0 font-weight-bold text-primary">@Model.title</h6>
+        <a asp-action="Create" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-plus fa-sm text-white-50"></i> Yeni Ekle </a>
+    </div>
+    <div class="card-body">
+        @if (Model.TopMusicLists.Count > 0)
+        {
+            <div class="table-responsive">
+                <table class="table table-condensed table-striped table-hover" @*id="dataTable"*@ width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+
+
+                            <th>
+                                @Html.DisplayNameFor(model => model.TopMusicList.topmusicListId)
+                            </th>
+                            <th>
+                                Bağlı Olduğu Radyo
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.TopMusicList.title)
+                            </th>
+                            <th>
+                                Şarkılar
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.TopMusicList.startDate)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.TopMusicList.finishDate)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.TopMusicList.row)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.TopMusicList.status)
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.TopMusicLists)
+                        {
+                            index++;
+
+                            <tr>
+                                <td class="text-center">
+                                    <span class="btn  dark btn-sm badge">
+                                        @Html.DisplayFor(modelItem => item.topmusicListId)
+                                    </span>
+                                </td>
+                                <td class="text-center">
+                                    <span class="btn btn-sm red">
+                                        @Html.DisplayFor(modelItem => item.RadioApi.title)
+                                    </span>
+                                </td>
+                                <td class="text-center">
+                                    <h6 class="m-0 font-weight-bold text-primary">
+                                        <a asp-action="Edit" asp-route-Id="@item.topmusicListId" class="editable_date editable-click editable">@Html.DisplayFor(modelItem => item.title)</a>
+                                    </h6>
+                                </td>
+
+                                <td class="text-center">
+
+                                    @if (item.MusicLists.Count > 0)
+                                    {
+                                        <a class="btn btn-light btn-sm" data-toggle="collapse" href="#collapseExample-@index" role="button" aria-expanded="false" aria-controls="collapseExample">
+
+                                            Radyolara Git <i class="fas fa-caret-down ml-2"></i>
+                                            <span class="badge badge-dark">@item.MusicLists.Count</span>
+                                        </a>
+                                    }
+
+                                    <div class="collapse" id="collapseExample-@index" style="padding-top:10px;">
+                                        @foreach (var rapor in item.MusicLists)
+                                        {
+                                            <p class="badge-dark">@rapor.row . @rapor.songName - @rapor.singerName</p>
+                                        }
+                                    </div>
+                                </td>
+
+
+                                <td class="text-center">
+                                    @Html.DisplayFor(modelItem => item.startDate)
+                                </td>
+                                <td class="text-center">
+                                    @Html.DisplayFor(modelItem => item.finishDate)
+                                </td>
+                                <td class="text-center">
+                                    @Html.DisplayFor(modelItem => item.row)
+                                </td>
+                                <td class="text-center">
+                                    <form asp-action="Active" asp-route-active="@item.status" asp-route-id="@item.topmusicListId" method="post">
+                                        @if (item.status == true)
+                                        {
+                                        <button type="submit" title="Status" class="btn dark btn-sm yellow">
+                                            <strong>   Yayındı </strong>
+
+                                        </button>
+                                        }
+                                        @if (item.status == false)
+                                        {
+                                            <button type="submit" title="Status" class="btn dark btn-sm red">
+                                                Taslak
+                                            </button>
+                                        }
+                                    </form>
+                                </td>
+                                <td class="text-center">
+                                    <a asp-action="MusicListIndex" asp-route-TopMusicListId="@item.topmusicListId" class="btn btn-sm btn-danger btn-clean">
+                                        <i class="la la-plus"></i> Müzik Listeleri
+                                    </a>
+
+                                    <a asp-action="MusicListCreate" asp-route-TopMusicListId="@item.topmusicListId" class="btn btn-sm btn-danger btn-clean">
+                                        <i class="la la-plus"></i> Müzik Ekle
+                                    </a>
+
+                                    <a href="javascript:;" data-target="/ysadmin/TopList/ViewPreview/@item.topmusicListId" class="btn btn-outline btn-sm purple detail">
+                                        <i class="fa fa-eye"></i> İncele
+                                    </a>
+                                    @Html.ActionLink("Düzenle", "Edit", new { id = item.topmusicListId }, new { @class = "btn btn-outline dark btn-sm black " }) |
+                                    @Html.ActionLink("Sil", "Delete", new { id = item.topmusicListId }, new { @class = "btn btn-outline btn-circle dark btn-sm" })
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div page-model="@Model.PagingInfo"></div>
+        }
+        else
+        {
+            <div class="alert text-center">
+                <p>No Data</p>
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    <!-- Page level plugins -->
+    <script src="/npanel/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="/npanel/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <!-- Page level custom scripts -->
+    <script src="/npanel/js/demo/datatables-demo.js"></script>
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        $(function () {
+            $("body").on("click", ".detail", function () {
+                //data-target dan url mizi al
+                var url = $(this).data("target");
+                //bu urlimizi post et
+                $.post(url, function (data) { })
+                    //eğer işlemimiz başarılı bir şekilde gerçekleşirse
+                    .done(function (data) {
+                        //gelen datayı .modal-body mizin içerise html olarak ekle
+                        $("#modelDetail .modal-body").html(data);
+                        $("#modelDetail").modal("show");
+                    })
+                    //eğer işlem başarısız olursa
+                    .fail(function () {
+                        //modalımızın bodysine Error! yaz
+                        $("#modelDetail .modal-body").text("Error!!");
+                        $("#modelDetail").modal("show");
+                    })
+            });
+        })
+    </script>
+}
+<!--begin::Modal-->
+<div class="modal" id="modelDetail" tabindex="-1" role="dialog" aria-labelledby="">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--end::Modal-->

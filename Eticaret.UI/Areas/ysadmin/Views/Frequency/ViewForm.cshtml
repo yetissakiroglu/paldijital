@@ -1,0 +1,108 @@
+﻿@model FrequencyListViewModel
+
+<div class="small-header affix-top">
+    <div class="mb-4">
+        <div class="card-header py-3 d-sm-flex align-items-center justify-content-between">
+            <div class="pull-left">
+                <h4 class="m-b-xs">
+                    @Model.title
+                </h4>
+                <small>Yeni nesil panelde masaüstü ve mobil aygıtlarda hızlı bir şekilde veri ekleyebilir ve düzenleyebilirsiniz.</small>
+            </div>
+            <div class="btn-group pull-right">
+                <button name="geri_don" type="button" value="Geri Dön" onclick="javascript:window.history.go(-1);" class="btn btn-primary btn-sm"><i class="fa fa-angle-left"></i>&nbsp;Geri Dön</button>
+                <div class="btn-group">
+                    <a class="btn btn-sm green dropdown-toggle" href="javascript:;" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                        İşlemler
+                        <i class="fa fa-angle-down"></i>
+                    </a>
+                    <ul class="dropdown-menu pull-right">
+                        <li>
+                            <a asp-action="Create"><i class="fa fa-plus"></i>&nbsp;Yeni Ekle</a>
+                        </li>
+                        <li class="split"></li>
+                        <li>
+                            <a asp-action="Index"><i class="fa fa-list"></i>&nbsp;Tüm Kayıtlar</a>
+                        </li>
+                    </ul>
+                </div>
+                <input type="submit" value="KAYDET" class="btn btn-success btn-sm" />
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card-body">
+
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" name="Frequency.frequencyId" asp-for="Frequency.frequencyId" value="@Model.Frequency.frequencyId">
+    <input type="hidden" name="Frequency.imgPath" asp-for="Frequency.imgPath" value="@Model.Frequency.imgPath">
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Frequency.radioApiId, htmlAttributes: new { @class = "control-label" })
+        <div class="col-md-12 p-0">
+            <div class="input-group">
+                @Html.DropDownListFor(model => model.Frequency.radioApiId, (IEnumerable<SelectListItem>)Model.RadiosApi, new { @class = "form-control" })
+            </div>
+            @Html.ValidationMessageFor(model => model.Frequency.radioApiId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Frequency.cityName" class="control-label"></label>
+        <input asp-for="Frequency.cityName" class="form-control" />
+        <span asp-validation-for="Frequency.cityName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Frequency.frequencyNo" class="control-label"></label>
+        <input asp-for="Frequency.frequencyNo" class="form-control" />
+        <span asp-validation-for="Frequency.frequencyNo" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <div class="row">
+            <div class="form-group col-md-4">
+                <div class="row">
+                    @Html.LabelFor(model => model.Frequency.imgPath, htmlAttributes: new { @class = "control-label col-md-12" })
+                    <div class="col-md-12">
+                        <div class="fileinput fileinput-new" data-provides="fileinput">
+                            <div class="fileinput-new thumbnail">
+                                @if (Model.Frequency.imgPath == null)
+                                {
+                                    <img src="https://via.placeholder.com/100x100" alt="" />
+                                }
+                                else
+                                {<img src="@Model.Frequency.imgPath" width="250" alt="" />
+                                }
+                            </div>
+                            <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"> </div>
+                            <div>
+                                <span class="btn default btn-file">
+                                    <span class="fileinput-new"> Resim Seç </span>
+                                    <span class="fileinput-exists"> Değiştir </span>
+                                    <input type="file" id="imgPath" name="imgPath" class="form-control" accept=".jpg,.png" />
+                                </span>
+                                <a href="javascript:;" class="btn red fileinput-exists" data-dismiss="fileinput"> Sil </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @Html.ValidationMessageFor(model => model.Frequency.imgPath, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="Frequency.row" class="control-label"></label>
+        <input asp-for="Frequency.row" class="form-control" />
+        <span asp-validation-for="Frequency.row" class="text-danger"></span>
+    </div>
+    <div class="form-group form-check">
+        <label class="form-check-label">
+            <input class="form-check-input" asp-for="Frequency.status" /> @Html.DisplayNameFor(model => model.Frequency.status)
+        </label>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Create" class="btn btn-primary" />
+    </div>
+
+

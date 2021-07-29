@@ -1,0 +1,104 @@
+﻿@model TopListListViewModel
+
+
+
+
+<div class="small-header affix-top">
+    <div class="mb-4">
+        <div class="card-header py-3 d-sm-flex align-items-center justify-content-between">
+            <div class="pull-left">
+                <h4 class="m-b-xs">
+                    @Model.title
+                </h4>
+                <small>Yeni nesil panelde masaüstü ve mobil aygıtlarda hızlı bir şekilde veri ekleyebilir ve düzenleyebilirsiniz.</small>
+            </div>
+            <div class="btn-group pull-right">
+                <button name="geri_don" type="button" value="Geri Dön" onclick="javascript:window.history.go(-1);" class="btn btn-primary btn-sm"><i class="fa fa-angle-left"></i>&nbsp;Geri Dön</button>
+                <div class="btn-group">
+                    <a class="btn btn-sm green dropdown-toggle" href="javascript:;" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                        İşlemler
+                        <i class="fa fa-angle-down"></i>
+                    </a>
+                    <ul class="dropdown-menu pull-right">
+                        <li>
+                            <a asp-action="Create"><i class="fa fa-plus"></i>&nbsp;Yeni Ekle</a>
+                        </li>
+                        <li class="split"></li>
+                        <li>
+                            <a asp-action="Index"><i class="fa fa-list"></i>&nbsp;Tüm Kayıtlar</a>
+                        </li>
+                    </ul>
+                </div>
+                <input type="submit" value="KAYDET" class="btn btn-success btn-sm" />
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card-body">
+
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" name="TopMusicList.topmusicListId" asp-for="TopMusicList.topmusicListId" value="@Model.TopMusicList.topmusicListId">
+    <input type="hidden" name="TopMusicList.url" asp-for="TopMusicList.url" value="@Model.TopMusicList.url">
+
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.TopMusicList.radioApiId, htmlAttributes: new { @class = "control-label" })
+        <div class="col-md-12 p-0">
+            <div class="input-group">
+                @Html.DropDownListFor(model => model.TopMusicList.radioApiId, (IEnumerable<SelectListItem>)Model.RadiosApi, new { @class = "form-control" })
+            </div>
+            @Html.ValidationMessageFor(model => model.TopMusicList.radioApiId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+
+
+    <div class="form-group">
+        <label asp-for="TopMusicList.title" class="control-label"></label>
+        <input asp-for="TopMusicList.title" class="form-control" />
+        <span asp-validation-for="TopMusicList.title" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="TopMusicList.keywords" class="control-label"></label>
+        <div class="form-group">
+            <input asp-for="TopMusicList.keywords" class="form-control" data-role="tagsinput" />
+        </div>
+        <span asp-validation-for="TopMusicList.keywords" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="TopMusicList.description" class="control-label"></label>
+        <textarea asp-for="TopMusicList.description" class="form-control" rows="4"></textarea>
+        <span asp-validation-for="TopMusicList.description" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="TopMusicList.startDate" class="control-label"></label>
+        <input asp-for="TopMusicList.startDate" class="form-control" />
+        <span asp-validation-for="TopMusicList.startDate" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="TopMusicList.finishDate" class="control-label"></label>
+        <input asp-for="TopMusicList.finishDate" class="form-control" />
+        <span asp-validation-for="TopMusicList.finishDate" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="TopMusicList.row" class="control-label"></label>
+        <input asp-for="TopMusicList.row" class="form-control" />
+        <span asp-validation-for="TopMusicList.row" class="text-danger"></span>
+    </div>
+
+    <div class="form-group form-check">
+        <label class="form-check-label">
+            <input class="form-check-input" asp-for="TopMusicList.status" /> @Html.DisplayNameFor(model => model.TopMusicList.status)
+        </label>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Create" class="btn btn-primary" />
+    </div>
+</div>

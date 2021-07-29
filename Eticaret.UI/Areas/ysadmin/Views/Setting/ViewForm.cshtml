@@ -1,0 +1,107 @@
+﻿@model SettingListViewModel
+
+
+@using (Html.BeginForm("Index", "Setting", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+{
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" name="settingId" asp-for="settingId" value="@Model.settingId">
+    <input type="hidden" name="logoPath" asp-for="logoPath" value="@Model.logoPath">
+    <input type="hidden" name="footerLogoPath" asp-for="footerLogoPath" value="@Model.footerLogoPath">
+
+    <div class="form-group">
+        <label asp-for="title" class="control-label"></label>
+        <input asp-for="title" value="@Model.title" class="form-control" />
+        <span asp-validation-for="title" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="slogan" class="control-label"></label>
+        <input asp-for="slogan" value="@Model.slogan" class="form-control" />
+        <span asp-validation-for="slogan" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="keywords" class="control-label"></label>
+        <input asp-for="keywords" value="@Model.keywords" class="form-control" />
+        <span asp-validation-for="keywords" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="description" class="control-label"></label>
+        <textarea asp-for="description" class="form-control" value="@Model.description"  rows="6"></textarea>
+        <span asp-validation-for="description" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <div class="row">
+
+            <div class="form-group col-md-4">
+                <div class="row">
+                    @Html.LabelFor(model => model.logoPath, htmlAttributes: new { @class = "control-label col-md-12" })
+                    <div class="col-md-12">
+                        <div class="fileinput fileinput-new" data-provides="fileinput">
+                            <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
+                                @if (Model.logoPath == null)
+                                {
+                                    <img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image" alt="" />
+                                }
+                                else
+                                {<img src="/img/@Model.logoPath" alt="" />
+                                }
+                            </div>
+                            <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"> </div>
+                            <div>
+                                <span class="btn default btn-file">
+                                    <span class="fileinput-new"> Resim Seç </span>
+                                    <span class="fileinput-exists"> Değiştir </span>
+                                    <input type="file" id="logoPath" name="logoPath" class="form-control" accept=".jpg,.png" />
+                                </span>
+                                <a href="javascript:;" class="btn red fileinput-exists" data-dismiss="fileinput"> Sil </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @Html.ValidationMessageFor(model => model.logoPath, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group col-md-4">
+                <div class="row">
+                    @Html.LabelFor(model => model.footerLogoPath, htmlAttributes: new { @class = "control-label col-md-12" })
+                    <div class="col-md-12">
+                        <div class="fileinput fileinput-new" data-provides="fileinput">
+                            <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
+                                @if (Model.footerLogoPath == null)
+                                {
+                                    <img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image" alt="" />
+                                }
+                                else
+                                {<img src="/img/@Model.logoPath" alt="" />
+                                }
+                            </div>
+                            <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"> </div>
+                            <div>
+                                <span class="btn default btn-file">
+                                    <span class="fileinput-new"> Resim Seç </span>
+                                    <span class="fileinput-exists"> Değiştir </span>
+                                    <input type="file" id="footerLogoPath" name="footerLogoPath" class="form-control" accept=".jpg,.png" />
+                                </span>
+                                <a href="javascript:;" class="btn red fileinput-exists" data-dismiss="fileinput"> Sil </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @Html.ValidationMessageFor(model => model.footerLogoPath, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+    <div class="form-group form-check">
+        <label class="form-check-label">
+            <input class="form-check-input" asp-for="status" /> @Html.DisplayNameFor(model => model.status)
+        </label>
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="KAYDET" class="btn btn-primary" />
+    </div>
+
+}

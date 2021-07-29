@@ -1,0 +1,212 @@
+﻿@model MusicListListViewModel
+
+@{
+    ViewData["Title"] = "MusicListIndex";
+    Layout = "~/Areas/ysadmin/Views/Shared/_Layout.cshtml";
+}
+
+@section Style {
+    <link href="/npanel/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link href="/npanel/vendor/bootstrap-editable/bootstrap-editable/css/bootstrap-editable.css" rel="stylesheet">
+
+}
+
+<div class="card shadow mb-4">
+    @using (Html.BeginForm("MusicListIndex", "TopList", FormMethod.Get))
+    {
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-1">
+                    <select name="limit" asp-for="@Model.Limit" id="limit" class="select limit_kriter form-control input-sm">
+                        <option value="10">10</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                        <option value="200">200</option>
+                        <option value="250">250</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    @Html.DropDownListFor(model => model.TopMusicListId, (IEnumerable<SelectListItem>)Model.TopMusicLists, new { @class = "select kategori_kriter form-control input-sm" })
+                </div>
+
+                <div class="col-md-4">
+                    <input asp-for="@Model.Search" name="metin" id="metin" placeholder=" Arama ... " class="form-control input-sm">
+                </div>
+                <div class="col-md-1">
+                    <input name="submit" type="submit" value="Ara" class="btn btn-primary form-control">
+                </div>
+
+            </div>
+        </div>
+    }
+    <div class="card-header py-3 d-sm-flex align-items-center justify-content-between">
+        <h6 class="m-0 font-weight-bold text-primary">@Model.title</h6>
+        <div class="btn-group pull-right">
+            <a asp-action="MusicListCreate" asp-route-TopMusicListId="@Model.TopMusicListId" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-plus fa-sm text-white-50"></i> Yeni Ekle </a>
+            <a asp-action="Index" class="d-none green d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa fa-list fa-sm text-white-50"></i> Tüm Listeler </a>
+            <a asp-action="Index" class="d-none green d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa fa-list fa-sm text-white-50"></i> Tüm Listeler </a>
+
+        </div>
+    </div>
+    <div class="card-body">
+        @if (Model.MusicLists.Count > 0)
+        {
+            <div class="table-responsive">
+                <table class="table table-condensed table-striped table-hover" @*id="dataTable"*@ width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.MusicList.musicListId)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.MusicList.topmusicListId)
+                            </th>
+
+                            <th>
+                                @Html.DisplayNameFor(model => model.MusicList.imgPath)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.MusicList.filePath)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.MusicList.songName)
+                            </th>
+                        
+                            <th>
+                                @Html.DisplayNameFor(model => model.MusicList.row)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.MusicList.rating)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.MusicList.status)
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.MusicLists)
+                        {
+                            <tr>
+                                <td class="text-center">
+                                    @Html.DisplayFor(modelItem => item.musicListId)
+                                </td>
+
+                                <td class="text-center">
+                                    <span class="btn btn-outline dark btn-sm black">
+                                        @item.TopMusicList.title
+                                    </span>
+                                </td>
+
+                                <td class="text-center">
+                                    <img src="@Html.DisplayFor(modelItem => item.imgPath)" width="50" class="img-fluid img-thumbnail" alt="@item.singerName">
+                                </td>
+
+
+                                <td class="text-center">
+                                    @if (item.filePath == null)
+                                    {
+                                        <p>Mp3 Dosyası Yok</p>
+                                    }
+                                    else
+                                    {
+                                        <audio id="myAudio" class="myAudioa" controls>
+                                            <source src="@item.filePath" type="audio/mpeg">
+                                        </audio>
+                                    }
+                                </td>
+                                <td class="text-center">
+                                    @Html.DisplayFor(modelItem => item.songName) - @Html.DisplayFor(modelItem => item.singerName)
+                                </td>
+                  
+                                <td class="text-center">
+                                    @Html.DisplayFor(modelItem => item.row)
+                                </td>
+                                <td class="text-center">
+                                    @Html.DisplayFor(modelItem => item.rating)
+                                </td>
+                                <td class="text-center">
+                                    <form asp-action="MusicListActive" asp-route-active="@item.status" asp-route-id="@item.musicListId" method="post">
+                                        @if (item.status == true)
+                                        {
+                                            <button type="submit" title="Status" class="btn dark btn-sm yellow">
+                                                @item.status
+                                            </button>
+                                        }
+                                        @if (item.status == false)
+                                        {
+                                            <button type="submit" title="Status" class="btn dark btn-sm red">
+                                                @item.status
+                                            </button>
+                                        }
+                                    </form>
+                                </td>
+
+                                <td class="text-center">
+                                    <a href="javascript:;" data-target="/ysadmin/TopList/MusicListViewPreview/@item.musicListId" class="btn btn-outline btn-sm purple detail">
+                                        <i class="fa fa-eye"></i> İncele
+                                    </a>
+                                    @Html.ActionLink("Düzenle", "MusicListEdit", new { id = item.musicListId }, new { @class = "btn btn-outline dark btn-sm black " }) |
+                                    @Html.ActionLink("Sil", "MusicListDelete", new { id = item.musicListId }, new { @class = "btn btn-outline btn-circle dark btn-sm" })
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div page-model="@Model.PagingInfo"></div>
+        }
+        else
+        {
+            <div class="alert text-center">
+                <p>No Data</p>
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    <!-- Page level plugins -->
+    <script src="/npanel/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="/npanel/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <!-- Page level custom scripts -->
+    <script src="/npanel/js/demo/datatables-demo.js"></script>
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        $(function () {
+            $("body").on("click", ".detail", function () {
+                //data-target dan url mizi al
+                var url = $(this).data("target");
+                //bu urlimizi post et
+                $.post(url, function (data) { })
+                    //eğer işlemimiz başarılı bir şekilde gerçekleşirse
+                    .done(function (data) {
+                        //gelen datayı .modal-body mizin içerise html olarak ekle
+                        $("#modelDetail .modal-body").html(data);
+                        $("#modelDetail").modal("show");
+                    })
+                    //eğer işlem başarısız olursa
+                    .fail(function () {
+                        //modalımızın bodysine Error! yaz
+                        $("#modelDetail .modal-body").text("Error!!");
+                        $("#modelDetail").modal("show");
+                    })
+            });
+        })
+    </script>
+}
+<!--begin::Modal-->
+<div class="modal" id="modelDetail" tabindex="-1" role="dialog" aria-labelledby="">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--end::Modal-->

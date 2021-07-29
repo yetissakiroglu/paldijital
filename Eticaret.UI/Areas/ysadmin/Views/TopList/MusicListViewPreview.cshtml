@@ -1,0 +1,67 @@
+﻿@model MusicListListViewModel
+
+<div>
+    <h4>MusicList</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.MusicList.musicListId)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.MusicList.musicListId)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.MusicList.topmusicListId)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.MusicList.topmusicListId)
+        </dd>
+      
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.MusicList.imgPath)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.MusicList.imgPath)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.MusicList.filePath)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.MusicList.filePath)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.MusicList.songName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.MusicList.songName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.MusicList.singerName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.MusicList.singerName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.MusicList.row)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.MusicList.row)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.MusicList.rating)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.MusicList.rating)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.MusicList.status)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.MusicList.status)
+        </dd>
+    </dl>
+</div>
+<div>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    <a asp-action="Index">Back to List</a>
+</div>

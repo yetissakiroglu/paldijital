@@ -1,0 +1,136 @@
+﻿@model ProfilInformationViewEditModel
+
+@{
+    ViewData["Title"] = "Information";
+    Layout = "~/Areas/ysadmin/Views/Shared/_Layout.cshtml";
+}
+
+@section Style {
+
+}
+@section Scripts {
+
+}
+
+@*<div class="page-heading">
+    <div class="page-breadcrumb">
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h5 class="page-title page-title-sep"></h5>
+            <a href="javascript:window.history.go(-1);" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-align-left fa-sm text-white-50"></i> Geri </a>
+        </div>
+    </div>
+</div>*@
+
+<div class="row">
+    <div class="col-md-3">
+        @await Component.InvokeAsync("Profil")
+    </div>
+    <div class="col-md-9">
+        <!--begin::Content-->
+        <div class="flex-row-fluid ml-lg-8">
+            <!--begin::Form-->
+            <form class="form" asp-controller="Profil" asp-action="InformationViewEdit" method="post" enctype="multipart/form-data">
+                <!--begin::Card-->
+                <div class="card card-custom card-stretch">
+                    <!--begin::Header-->
+                    <div class="card-header py-3">
+                        <div class="card-title align-items-start flex-column">
+                            <h3 class="card-label font-weight-bolder text-dark">Kişisel Bilgilerim</h3>
+                            <span class="text-muted font-weight-bold font-size-sm mt-1">Bilgilerinizi Düzenleyebilirsiniz.</span>
+                        </div>
+
+                    </div>
+
+                    <div class="card-body">
+                        <div class="form-group row">
+                            <label class="col-xl-3 col-lg-3 col-form-label text-right">Avatar</label>
+                            <div class="col-lg-9 col-xl-6">
+                                <div class="image-input image-input-outline" id="kt_profile_avatar" style="background-image: url(@Model.Avatar)">
+                                    <div class="image-input-wrapper" style="background-image: url(@Model.Avatar)"></div>
+                                    <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar">
+                                        <i class="fa fa-pen icon-sm text-muted"></i>
+                                        <input type="file" name="profile_avatar" accept=".png, .jpg, .jpeg" />
+                                        <input type="hidden" name="Avatar" value="@Model.Avatar" />
+                                        <input type="hidden" name="profile_avatar_remove" />
+                                    </label>
+                                    <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="cancel" data-toggle="tooltip" title="Cancel avatar">
+                                        <i class="ki ki-bold-close icon-xs text-muted"></i>
+                                    </span>
+                                    <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="remove" data-toggle="tooltip" title="Remove avatar">
+                                        <i class="ki ki-bold-close icon-xs text-muted"></i>
+                                    </span>
+                                </div>
+                                <span class="form-text text-muted">Allowed file types: png, jpg, jpeg.</span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label asp-for="UserName" class="col-xl-3 col-lg-3 col-form-label text-right">Username</label>
+                            <div class="col-lg-9 col-xl-6">
+                                <input asp-for="UserName" value="@Model.UserName" class="form-control form-control-lg form-control-solid" type="text" />
+                                <span asp-validation-for="UserName" class="text-danger form-text"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label asp-for="FirstName" class="col-xl-3 col-lg-3 col-form-label text-right">Adı</label>
+                            <div class="col-lg-9 col-xl-6">
+                                <input asp-for="FirstName" value="@Model.FirstName" class="form-control form-control-lg form-control-solid" type="text" />
+                                <span asp-validation-for="FirstName" class="text-danger form-text"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label asp-for="LastName" class="col-xl-3 col-lg-3 col-form-label text-right">Soyadı</label>
+                            <div class="col-lg-9 col-xl-6">
+                                <input asp-for="LastName" value="@Model.LastName" class="form-control form-control-lg form-control-solid" type="text" />
+                                <span asp-validation-for="LastName" class="text-danger form-text"></span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <label class="col-xl-3"></label>
+                            <div class="col-lg-9 col-xl-6">
+                                <h5 class="font-weight-bold mt-10 mb-6">İletişim Bilgileri</h5>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label asp-for="PhoneNumber" class="col-xl-3 col-lg-3 col-form-label text-right">Telefon: </label>
+                            <div class="col-lg-9 col-xl-6">
+                                <div class="input-group input-group-lg input-group-solid">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="la la-phone"></i>
+                                        </span>
+                                    </div>
+                                    <input asp-for="PhoneNumber" value="@Model.PhoneNumber" type="text" class="form-control form-control-lg form-control-solid" />
+                                </div>
+                                <span asp-validation-for="PhoneNumber" class="text-danger form-text"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label asp-for="Email" class="col-xl-3 col-lg-3 col-form-label text-right">E-posta : </label>
+                            <div class="col-lg-9 col-xl-6">
+                                <div class="input-group input-group-lg input-group-solid">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="la la-at"></i>
+                                        </span>
+                                    </div>
+                                    <input asp-for="Email" value="@Model.Email" type="text" class="form-control form-control-lg form-control-solid" />
+                                </div>
+                                <span asp-validation-for="Email" class="text-danger form-text"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-header py-3">
+                          <div class="card-toolbar">
+                            <button type="submit" class="btn btn-success mr-2">Düzenle</button>
+                            <button type="reset" class="btn btn-secondary">Vazgeç</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <!--end::Form-->
+        </div>
+    </div>
+</div>

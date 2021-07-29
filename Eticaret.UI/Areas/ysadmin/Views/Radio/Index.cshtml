@@ -1,0 +1,254 @@
+﻿@model RadioListViewModel
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/ysadmin/Views/Shared/_Layout.cshtml";
+}
+
+@section Style {
+    <link href="/npanel/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link href="/npanel/vendor/bootstrap-editable/bootstrap-editable/css/bootstrap-editable.css" rel="stylesheet">
+
+}
+
+<div class="card shadow mb-4">
+    @using (Html.BeginForm("Index", "Radio", FormMethod.Get))
+    {
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-2">
+                    <select name="limit" asp-for="@Model.Limit" id="limit" class="select limit_kriter form-control input-sm">
+                        <option value="10">10</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                        <option value="200">200</option>
+                        <option value="250">250</option>
+                    </select>
+                </div>
+
+                <div class="col-md-5">
+
+                    <input asp-for="@Model.Search" name="metin" id="metin" placeholder=" Arama ... " class="form-control input-sm">
+                </div>
+                <div class="col-md-1">
+                    <input name="submit" type="submit" value="Ara" class="btn btn-primary form-control">
+                </div>
+
+            </div>
+        </div>
+    }
+    <div class="card-header py-3 d-sm-flex align-items-center justify-content-between">
+        <h6 class="m-0 font-weight-bold text-primary">@Model.title</h6>
+        <a asp-action="Create" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-plus fa-sm text-white-50"></i> Yeni Ekle </a>
+    </div>
+    <div class="card-body">
+
+        @if (Model.Radios.Count > 0)
+        {
+
+            <div class="table-responsive">
+                <table class="table table-condensed table-striped table-hover" @*id="dataTable"*@ width="100%" cellspacing="0">
+
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Radio.radioId)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Radio.title)
+                            </th>
+                            <th>
+                                Kategoriler
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Radio.imgPath)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Radio.streamUrl)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.streamState)
+                            </th>
+
+                            <th>
+                                @Html.DisplayNameFor(model => model.Radio.row)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Radio.webstatus)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Radio.mobilstatus)
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Radios)
+                        {
+                            <tr>
+                                <td class="text-center">
+                                    <span class="btn  dark btn-sm badge">
+
+                                        @Html.DisplayFor(modelItem => item.radioId)
+                                    </span>
+                                </td>
+                                <td class="text-center">
+                                    <span class="btn btn-outline btn-sm black">
+
+                                        @Html.DisplayFor(modelItem => item.title)
+                                    </span>
+                                </td>
+                                <td class="text-center">
+                                    <span class="btn btn-outline dark btn-sm black">
+                                        @item.RadioCategory.title
+                                    </span>
+                                </td>
+                                <td class="text-center">
+                                    <img src="@item.imgPath" width="100" class="img-fluid img-thumbnail" alt="@item.title">
+                                </td>
+
+                                <td class="text-center">
+                                    @Html.DisplayFor(modelItem => item.streamUrl)/@Html.DisplayFor(modelItem => item.streamId)
+                                </td>
+                                <td class="text-center">
+                                    @foreach (var streamstatus in Model.streamStatus)
+                                    {
+                                        if (item.radioId == streamstatus.RadioId)
+                                        {
+                                            if (streamstatus.StreamStatus == item.streamId.ToString())
+                                            {
+                                                <span class="btn btn-outline dark btn-sm black">
+                                                    Aktif
+                                                </span>
+                                            }
+                                            else
+                                            {
+                                                <span class="btn btn-outline dark btn-sm red">
+                                                    Pasif
+                                                </span>
+                                            }
+                                        }
+                                    }
+                                </td>
+                                <td class="text-center">
+                                    <span class="label label-sm label-info">
+                                        @Html.DisplayFor(modelItem => item.row)
+                                    </span>
+                                </td>
+                                <td class="text-center">
+                                    <form asp-action="RadioWebActive" asp-route-active="@item.webstatus" asp-route-id="@item.radioId" method="post">
+                                        @if (item.webstatus == true)
+                                        {
+                                            <button type="submit" title="Status" class="btn dark btn-sm yellow">
+                                                @item.webstatus
+                                            </button>
+                                        }
+                                        @if (item.webstatus == false)
+                                        {
+                                            <button type="submit" title="Status" class="btn dark btn-sm red">
+                                                @item.webstatus
+                                            </button>
+                                        }
+                                    </form>
+                                </td>
+                                <td class="text-center">
+                                    <form asp-action="RadioMobilActive" asp-route-active="@item.mobilstatus" asp-route-id="@item.radioId" method="post">
+                                        @if (item.mobilstatus == true)
+                                        {
+                                            <button type="submit" title="Status" class="btn dark btn-sm yellow">
+                                                @item.mobilstatus
+                                            </button>
+                                        }
+                                        @if (item.mobilstatus == false)
+                                        {
+                                            <button type="submit" title="Status" class="btn dark btn-sm red">
+                                                @item.mobilstatus
+                                            </button>
+                                        }
+
+                                    </form>
+                                </td>
+                                <td class="text-center">
+                                    <a href="javascript:;" data-target="/ysadmin/Radio/RadioPreview/@item.radioId" class="btn btn-outline btn-sm purple detail">
+                                        <i class="fa fa-eye"></i> İncele
+                                    </a>
+                                    @Html.ActionLink("Düzenle", "Edit", new { id = item.radioId }, new { @class = "btn btn-outline dark btn-sm black " }) |
+                                    @Html.ActionLink("Sil", "Delete", new { id = item.radioId }, new { @class = "btn btn-outline btn-circle dark btn-sm" })
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div page-model="@Model.PagingInfo"></div>
+
+        }
+        else
+        {
+            <div class="alert text-center">
+                <p>No Data</p>
+            </div>
+        }
+
+
+
+    </div>
+</div>
+
+@section Scripts {
+    <!-- Page level plugins -->
+    <script src="/npanel/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="/npanel/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="/npanel/js/demo/datatables-demo.js"></script>
+
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+
+        $(function () {
+
+            $("body").on("click", ".detail", function () {
+                //data-target dan url mizi al
+                var url = $(this).data("target");
+                //bu urlimizi post et
+
+                $.post(url, function (data) { })
+                    //eğer işlemimiz başarılı bir şekilde gerçekleşirse
+                    .done(function (data) {
+                        //gelen datayı .modal-body mizin içerise html olarak ekle
+                        $("#modelDetail .modal-body").html(data);
+                        $("#modelDetail").modal("show");
+
+                    })
+                    //eğer işlem başarısız olursa
+                    .fail(function () {
+                        //modalımızın bodysine Error! yaz
+                        $("#modelDetail .modal-body").text("Error!!");
+                        $("#modelDetail").modal("show");
+
+                    })
+            });
+
+        })
+    </script>
+
+}
+
+
+
+<!--begin::Modal-->
+<div class="modal" id="modelDetail" tabindex="-1" role="dialog" aria-labelledby="">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--end::Moda

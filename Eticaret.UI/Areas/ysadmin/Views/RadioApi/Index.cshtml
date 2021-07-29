@@ -1,0 +1,272 @@
+﻿@model RadioApiListeViewModel
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/ysadmin/Views/Shared/_Layout.cshtml";
+}
+
+@section Style {
+    <link href="/npanel/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    }
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3 d-sm-flex align-items-center justify-content-between">
+        <h6 class="m-0 font-weight-bold text-primary">@Model.title</h6>
+        <a asp-controller="RadioApi" asp-action="Create" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-plus fa-sm text-white-50"></i> Yeni Ekle </a>
+    </div>
+
+
+    <div class="card-body">
+        @if (Model.RadiosApi.Count > 0)
+        {
+
+            <div class="table-responsive">
+                <table class="table table-condensed table-striped table-hover" @*id="dataTable"*@ width="100%" cellspacing="0">
+
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.RadioApi.radioApiId)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.RadioApi.title)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.RadioApi.programStatus)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.RadioApi.topmusiclistStatus)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.RadioApi.podcastStatus)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.RadioApi.broadcastStatus)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.RadioApi.frequencyStatus)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.RadioApi.djStatus)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.RadioApi.status)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.RadioApi.securitykey)
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.RadiosApi)
+                        {
+                        <tr>
+                            <td class="text-center">
+                                @Html.DisplayFor(modelItem => item.radioApiId)
+                            </td>
+                            <td class="text-center">
+                                <span class="progress-bar bg-info">
+                                    @Html.DisplayFor(modelItem => item.title)
+                                </span>
+                            </td>
+                            <td class="text-center">
+                                <form asp-action="ActiveProgram" asp-route-active="@item.programStatus" asp-route-id="@item.radioApiId" method="post">
+                                    @if (item.programStatus == true)
+                                    {
+                                        <button type="submit" title="Status" class="btn dark btn-sm yellow">
+                                            @item.programStatus
+                                        </button>
+                                    }
+                                    @if (item.programStatus == false)
+                                    {
+                                        <button type="submit" title="Status" class="btn dark btn-sm red">
+                                            @item.programStatus
+                                        </button>
+                                    }
+                                </form>
+                            </td>
+                            <td class="text-center">
+                                <form asp-action="ActiveTopmusiclist" asp-route-active="@item.topmusiclistStatus" asp-route-id="@item.radioApiId" method="post">
+                                    @if (item.topmusiclistStatus == true)
+                                    {
+                                        <button type="submit" title="Status" class="btn dark btn-sm yellow">
+                                            @item.topmusiclistStatus
+                                        </button>
+                                    }
+                                    @if (item.topmusiclistStatus == false)
+                                    {
+                                        <button type="submit" title="Status" class="btn dark btn-sm red">
+                                            @item.topmusiclistStatus
+                                        </button>
+                                    }
+                                </form>
+                            </td>
+                            <td class="text-center">
+                                <form asp-action="ActivePodcast" asp-route-active="@item.podcastStatus" asp-route-id="@item.radioApiId" method="post">
+                                    @if (item.podcastStatus == true)
+                                    {
+                                        <button type="submit" title="Status" class="btn dark btn-sm yellow">
+                                            @item.podcastStatus
+                                        </button>
+                                    }
+                                    @if (item.podcastStatus == false)
+                                    {
+                                        <button type="submit" title="Status" class="btn dark btn-sm red">
+                                            @item.podcastStatus
+                                        </button>
+                                    }
+                                </form>
+                            </td>
+                            <td class="text-center">
+                                <form asp-action="ActiveBroadcast" asp-route-active="@item.broadcastStatus" asp-route-id="@item.radioApiId" method="post">
+                                    @if (item.broadcastStatus == true)
+                                    {
+                                        <button type="submit" title="Status" class="btn dark btn-sm yellow">
+                                            @item.broadcastStatus
+                                        </button>
+                                    }
+                                    @if (item.broadcastStatus == false)
+                                    {
+                                        <button type="submit" title="Status" class="btn dark btn-sm red">
+                                            @item.broadcastStatus
+                                        </button>
+                                    }
+                                </form>
+                            </td>
+                            <td class="text-center">
+                                <form asp-action="ActiveFrequency" asp-route-active="@item.frequencyStatus" asp-route-id="@item.radioApiId" method="post">
+                                    @if (item.frequencyStatus == true)
+                                    {
+                                        <button type="submit" title="Status" class="btn dark btn-sm yellow">
+                                            @item.frequencyStatus
+                                        </button>
+                                    }
+                                    @if (item.frequencyStatus == false)
+                                    {
+                                        <button type="submit" title="Status" class="btn dark btn-sm red">
+                                            @item.frequencyStatus
+                                        </button>
+                                    }
+                                </form>
+                            </td>
+                            <td class="text-center">
+                                <form asp-action="ActiveDj" asp-route-active="@item.djStatus" asp-route-id="@item.radioApiId" method="post">
+                                    @if (item.djStatus == true)
+                                    {
+                                        <button type="submit" title="Status" class="btn dark btn-sm yellow">
+                                            @item.djStatus
+                                        </button>
+                                    }
+                                    @if (item.djStatus == false)
+                                    {
+                                        <button type="submit" title="Status" class="btn dark btn-sm red">
+                                            @item.djStatus
+                                        </button>
+                                    }
+                                </form>
+                            </td>
+                            <td class="text-center">
+                                <form asp-action="Active" asp-route-active="@item.status" asp-route-id="@item.radioApiId" method="post">
+                                    @if (item.status == true)
+                                    {
+                                        <button type="submit" title="Status" class="btn dark btn-sm yellow">
+                                            @item.status
+                                        </button>
+                                    }
+                                    @if (item.status == false)
+                                    {
+                                        <button type="submit" title="Status" class="btn dark btn-sm red">
+                                            @item.status
+                                        </button>
+                                    }
+                                </form>
+                            </td>
+                            <td>
+                                <span>
+                                    @Html.DisplayFor(modelItem => item.securitykey)
+                                </span>
+                            </td>
+                            <td class="text-center">
+                                <a href="javascript:;" data-target="/ysadmin/RadioApi/ViewPreview/@item.radioApiId" class="btn btn-outline btn-sm purple detail">
+                                    <i class="fa fa-eye"></i> İncele
+                                </a>
+                                @Html.ActionLink("Düzenle", "Edit", new { id = item.radioApiId }, new { @class = "btn btn-outline dark btn-sm black " }) |
+                                @Html.ActionLink("Sil", "Delete", new { id = item.radioApiId }, new { @class = "btn btn-outline btn-circle dark btn-sm" })
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div page-model="@Model.PagingInfo"></div>
+
+        }
+        else
+        {
+            <div class="alert text-center">
+                <p>No Data</p>
+            </div>
+        }
+
+
+
+    </div>
+</div>
+
+@section Scripts {
+    <!-- Page level plugins -->
+    <script src="/npanel/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="/npanel/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="/npanel/js/demo/datatables-demo.js"></script>
+
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+
+        $(function () {
+
+            $("body").on("click", ".detail", function () {
+                //data-target dan url mizi al
+                var url = $(this).data("target");
+                //bu urlimizi post et
+
+                $.post(url, function (data) { })
+                    //eğer işlemimiz başarılı bir şekilde gerçekleşirse
+                    .done(function (data) {
+                        //gelen datayı .modal-body mizin içerise html olarak ekle
+                        $("#modelDetail .modal-body").html(data);
+                        $("#modelDetail").modal("show");
+
+                    })
+                    //eğer işlem başarısız olursa
+                    .fail(function () {
+                        //modalımızın bodysine Error! yaz
+                        $("#modelDetail .modal-body").text("Error!!");
+                        $("#modelDetail").modal("show");
+
+                    })
+            });
+
+        })
+    </script>
+
+}
+
+
+
+<!--begin::Modal-->
+<div class="modal" id="modelDetail" tabindex="-1" role="dialog" aria-labelledby="">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--end::Modal-->

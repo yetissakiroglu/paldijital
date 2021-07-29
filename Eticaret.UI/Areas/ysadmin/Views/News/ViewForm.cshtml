@@ -1,0 +1,362 @@
+﻿@model NewsListViewModel
+@{
+    var counter = 0;
+}
+
+
+<div class="small-header affix-top">
+    <div class="mb-4">
+        <div class="card-header py-3 d-sm-flex align-items-center justify-content-between">
+            <div class="pull-left">
+                <h4 class="m-b-xs">
+                    @Model.title
+                </h4>
+                <small>Yeni nesil panelde masaüstü ve mobil aygıtlarda hızlı bir şekilde veri ekleyebilir ve düzenleyebilirsiniz.</small>
+            </div>
+            <div class="btn-group pull-right">
+                <button name="geri_don" type="button" value="Geri Dön" onclick="javascript:window.history.go(-1);" class="btn btn-primary btn-sm"><i class="fa fa-angle-left"></i>&nbsp;Geri Dön</button>
+                <div class="btn-group">
+                    <a class="btn btn-sm green dropdown-toggle" href="javascript:;" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                        İşlemler
+                        <i class="fa fa-angle-down"></i>
+                    </a>
+                    <ul class="dropdown-menu pull-right">
+                        <li>
+                            <a asp-action="Create"><i class="fa fa-plus"></i>&nbsp;Yeni Ekle</a>
+                        </li>
+                        <li class="split"></li>
+                        <li>
+                            <a asp-action="Index"><i class="fa fa-list"></i>&nbsp;Tüm Kayıtlar</a>
+                        </li>
+                    </ul>
+                </div>
+                <input type="submit" value="KAYDET" class="btn btn-success btn-sm" />
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="card-body">
+    <nav>
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">@Model.title</a>
+            <a class="nav-item nav-link" id="nav-seo-tab" data-toggle="tab" href="#nav-seo" role="tab" aria-controls="nav-seo" aria-selected="false">Seo</a>
+        </div>
+    </nav>
+    <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" name="News.imgPath" asp-for="News.imgPath" value="@Model.News.imgPath">
+            <input type="hidden" name="News.newsId" asp-for="News.newsId" value="@Model.News.newsId">
+            <input type="hidden" name="News.url" asp-for="News.url" value="@Model.News.url">
+            <input type="hidden" name="News.updateTime" asp-for="News.updateTime" value="@Model.News.updateTime">
+            <input type="hidden" name="News.imgPathAm" asp-for="News.imgPathAm" value="@Model.News.imgPathAm">
+            <input type="hidden" name="News.imgPathFp" asp-for="News.imgPathFp" value="@Model.News.imgPathFp">
+
+            <div class="row">
+                <div class="col-sm-9 m-t-md">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.News.categoryId, htmlAttributes: new { @class = "control-label" })
+                                <div class="col-md-12 p-0">
+                                    <div class="input-group">
+                                        @Html.DropDownListFor(model => model.News.categoryId, (IEnumerable<SelectListItem>)Model.Categories, new { @class = "form-control" })
+                                        @*<div class="input-group-append">
+                                <a href="javascript:;" data-target="/ysadmin/News/NewsCategoryCreate" class="btn btn-secondary categorycreate">
+                                    <i class="la la-plus"></i>Ekle
+                                </a>
+                            </div>*@
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.News.categoryId, "", new { @class = "text-danger" })
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label asp-for="News.addTime" class="control-label"></label>
+                                <input asp-for="News.addTime" class="form-control" />
+                                <span asp-validation-for="News.addTime" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-5">
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="News.title" class="control-label"></label>
+                        <input asp-for="News.title" class="form-control" />
+                        <span class="help-block m-b-none">70 karakterden uzun olan başlıklar arama sonuçlarından çıkarılır. Arama motorları bu kelimeleri kaydetmezler.</span>
+                        <span asp-validation-for="News.title" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="News.shortDetail" class="control-label"></label>
+                        <textarea asp-for="News.shortDetail" class="form-control" rows="5"></textarea>
+                        <span asp-validation-for="News.shortDetail" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-sm-3 m-t-md">
+                    <div class="form-group">
+                        <label class="control-label card-header">Radio Seç  <span class="badge badge-danger badge-counter">İsteğe Bağlı</span></label>
+
+                        <div class="p-xs" style="background:#F9F9F9">
+
+                            @foreach (var item in Model.WebRadios)
+                            {
+                                var isChecked = "";
+                                if (Model.SelectedWebRadios.Any(i => i.radioApiId == item.radioApiId))
+                                {
+                                    isChecked = "checked";
+
+                                    <input type="hidden" name="SelectedCategories[@counter].Id" value="@item.radioApiId" />
+                                    <input type="hidden" name="SelectedCategories[@counter].Name" value="@item.title" />
+                                    counter++;
+                                }
+                                else
+                                {
+                                    isChecked = "";
+                                }
+
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox"
+                                           name="categoryIds"
+                                           value="@item.radioApiId"
+                                           class="custom-control-input"
+                                           id="category@(item.radioApiId)"
+                                           @isChecked>
+                                    <label class="custom-control-label" for="category@(item.radioApiId)">@item.title</label>
+                                </div>
+
+                            }
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label card-header">Konum Seç <span class="badge badge-danger badge-counter">İsteğe Bağlı</span></label>
+
+                        <div class="p-xs" style="background:#F9F9F9">
+
+                            <div class="custom-checkbox checkbox-danger">
+                                <input class="form-control-label" asp-for="News.aM" /> @Html.DisplayNameFor(model => model.News.aM)
+                            </div>
+                            <div class="custom-checkbox checkbox-danger">
+                                <input class="form-control-label" asp-for="News.oC" /> @Html.DisplayNameFor(model => model.News.oC)
+                            </div>
+                            <div class="custom-checkbox checkbox-danger">
+                                <input class="form-control-label" asp-for="News.hB" /> @Html.DisplayNameFor(model => model.News.hB)
+                            </div>
+                            <div class="custom-checkbox checkbox-danger">
+                                <input class="form-control-label" asp-for="News.sD" /> @Html.DisplayNameFor(model => model.News.sD)
+                            </div>
+                            <div class="custom-checkbox checkbox-danger">
+                                <input class="form-control-label" asp-for="News.oH" /> @Html.DisplayNameFor(model => model.News.oH)
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="p-xs" style="background:#F9F9F9">
+                            <div class="form-group form-check">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" asp-for="News.status" /> @Html.DisplayNameFor(model => model.News.status)
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+         
+            <div class="form-group">
+                <label asp-for="News.detail" class="control-label"></label>
+                <textarea id="editor" asp-for="News.detail" class="form-control" rows="6"></textarea>
+                <span asp-validation-for="News.detail" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="News.dLink" class="control-label"></label>
+                <input asp-for="News.dLink" class="form-control" />
+                <span class="help-block m-b-none">Sayfanın detaya girince nereye yönlenmesini istiyorsanız http://www.site.com formatında link girin.</span>
+                <span asp-validation-for="News.dLink" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="form-group col-md-4">
+                        <div class="row">
+                            @Html.LabelFor(model => model.News.imgPath, htmlAttributes: new { @class = "control-label col-md-12" })
+                            <div class="col-md-12">
+                                <div class="fileinput fileinput-new" data-provides="fileinput">
+                                    <div class="fileinput-new thumbnail">
+                                        @if (Model.News.imgPath == null)
+                                        {
+                                            <img src="https://via.placeholder.com/706x431" alt="" />
+                                        }
+                                        else
+                                        {<img src="@Model.News.imgPath" width="706" alt="" />
+                                        }
+                                    </div>
+                                    <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"> </div>
+                                    <div>
+                                        <span class="btn default btn-file">
+                                            <span class="fileinput-new"> Resim Seç </span>
+                                            <span class="fileinput-exists"> Değiştir </span>
+                                            <input type="file" id="imgPath" name="imgPath" class="form-control" accept=".jpg,.png" />
+                                        </span>
+                                        <a href="javascript:;" class="btn red fileinput-exists" data-dismiss="fileinput"> Sil </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.News.imgPath, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">
+                        <label asp-for="News.viewHit"></label>
+                    </span>
+                </div>
+                <input asp-for="News.viewHit" class="form-control" aria-describedby="basic-addon3" />
+            </div>
+            <div class="form-group">
+                <label asp-for="News.row" class="control-label"></label>
+                <input asp-for="News.row" class="form-control" />
+                <span asp-validation-for="News.row" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-12 p-0">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Ek Alanlar</h6>
+                    </div>
+                    <div class="card-body" style="background-color:#F9F9F9;">
+                        <div class="form-group">
+                            <div class="row justify-content-center">
+                                <div class="col col-sm-6">
+                                    <label asp-for="News.imgPathAm" class="control-label col-sm-12"></label>
+                               
+                                        @if (Model.News.imgPathAm == null)
+                                        {
+                                        }
+                                        else
+                                        {<img src="@Model.News.imgPathAm" width="500" alt="" />
+                                        }
+
+                                        <div class="fileinput fileinput-new" data-provides="fileinput">
+                                            <div class="input-group input-large">
+                                                <div class="form-control uneditable-input input-fixed input-medium" data-trigger="fileinput">
+                                                    <i class="fa fa-file fileinput-exists"></i>&nbsp;
+                                                    <span class="fileinput-filename">@Model.News.imgPathAm</span>
+                                                </div>
+                                                <span class="input-group-addon btn default btn-file">
+                                                    <span class="fileinput-new"> Dosya Seç </span>
+                                                    <span class="fileinput-exists"> Değiştir </span>
+                                                    <input type="file" id="imgPathAm" name="imgPathAm" class="form-control" accept=".jpg,.png" />
+                                                </span>
+                                                <a href="javascript:;" class="input-group-addon btn red fileinput-exists" data-dismiss="fileinput"> Sil </a>
+                                            </div>
+                                        </div>
+                                        <br />
+                                        <span class="help-block">Boyutlar:706 x 431</span>
+
+                              
+                                    <span asp-validation-for="News.imgPathAm" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="row justify-content-center">
+                                <div class="col col-sm-6">
+                                    <div class="form-group">
+                                        <label asp-for="News.detailAm" class="control-label"></label>
+                                        <textarea asp-for="News.detailAm" class="form-control" rows="4"></textarea>
+                                        <span asp-validation-for="News.detailAm" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="form-group">
+                            <div class="row justify-content-center">
+                                <div class="col col-sm-6">
+
+                                    <label asp-for="News.imgPathFp" class="control-label col-sm-12"></label>
+                                    <div class="col-sm-12">
+
+                                        @if (Model.News.imgPathFp == null)
+                                        {
+                                        }
+                                        else
+                                        {
+                                            <img src="/img/@Model.News.imgPathFp" width="500" alt="" />
+
+                                        }
+                                        <div class="fileinput fileinput-new" data-provides="fileinput">
+                                            <div class="input-group input-large">
+                                                <div class="form-control uneditable-input input-fixed input-medium" data-trigger="fileinput">
+                                                    <i class="fa fa-file fileinput-exists"></i>&nbsp;
+                                                    <span class="fileinput-filename">@Model.News.imgPathFp</span>
+                                                </div>
+                                                <span class="input-group-addon btn default btn-file">
+                                                    <span class="fileinput-new"> Dosya Seç </span>
+                                                    <span class="fileinput-exists"> Değiştir </span>
+                                                    <input type="file" id="imgPathFp" name="imgPathFp" class="form-control custom-file-label" accept=".jpg,.png" />
+                                                </span>
+                                                <a href="javascript:;" class="input-group-addon btn red fileinput-exists" data-dismiss="fileinput"> Sil </a>
+                                            </div>
+                                        </div>
+                                        <br />
+                                        <span class="help-block">Boyutlar:600x315</span>
+                                    </div>
+                                    <span asp-validation-for="News.imgPathFp" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="tab-pane fade" id="nav-seo" role="tabpanel" aria-labelledby="nav-seo-tab">
+
+            <div class="row">
+                <div class="form-group col-md-12">
+                    <label asp-for="Seo.title" class="control-label"></label>
+                    <input asp-for="Seo.title" class="form-control" />
+                    <span class="help-block m-b-none">70 karakterden uzun olan başlıklar arama sonuçlarından çıkarılır. Arama motorları bu kelimeleri kaydetmezler.</span>
+                    <span asp-validation-for="Seo.title" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-12">
+                    <label asp-for="Seo.keywords" class="control-label"></label>
+                    <div class="form-group">
+                        <input asp-for="Seo.keywords" class="form-control" data-role="tagsinput" />
+                    </div>
+                    <span class="help-block m-b-none">
+                        Anahtar kelime meta etiketi 260 karakterden az olmalıdır. 260 karakterden uzun olması arama motorları tarafından spam olarak yorumlanmaktadır.
+                    </span>
+                    <span asp-validation-for="Seo.keywords" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-12">
+                    <label asp-for="Seo.description" class="control-label"></label>
+                    <textarea asp-for="Seo.description" class="form-control" rows="4"></textarea>
+                    <span class="help-block m-b-none">
+                        Açıklama meta etiketi 160 karakterden az olmalıdır. 160 karakterden uzun olması arama motorları tarafından spam olarak yorumlanmaktadır.
+                    </span>
+                    <span asp-validation-for="Seo.description" class="text-danger"></span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+    <div class="form-group">
+        <input type="submit" value="KAYDET" class="btn btn-primary" />
+    </div>
+
+</div>

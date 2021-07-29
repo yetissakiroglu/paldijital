@@ -1,0 +1,76 @@
+﻿@model RadioCategoryListViewModel
+
+
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<input type="hidden" name="RadioCategory.categoryId" asp-for="RadioCategory.categoryId" value="@Model.RadioCategory.categoryId">
+<input type="hidden" name="RadioCategory.imgPath" asp-for="RadioCategory.imgPath" value="@Model.RadioCategory.imgPath">
+<input type="hidden" name="RadioCategory.url" asp-for="RadioCategory.url" value="@Model.RadioCategory.url">
+
+
+<div class="form-group">
+    <label asp-for="RadioCategory.title" class="control-label"></label>
+    <input asp-for="RadioCategory.title" class="form-control" />
+    <span asp-validation-for="RadioCategory.title" class="text-danger"></span>
+</div>
+
+<div class="form-group">
+    <label asp-for="RadioCategory.keywords" class="control-label"></label>
+    <input asp-for="RadioCategory.keywords" class="form-control" />
+    <span asp-validation-for="RadioCategory.keywords" class="text-danger"></span>
+</div>
+
+<div class="form-group">
+    <label asp-for="RadioCategory.description" class="control-label"></label>
+    <textarea asp-for="RadioCategory.description" class="form-control" rows="6"></textarea>
+    <span asp-validation-for="RadioCategory.description" class="text-danger"></span>
+</div>
+
+
+<div class="form-group">
+    <div class="row">
+        <div class="form-group col-md-4">
+            <div class="row">
+                @Html.LabelFor(model => model.RadioCategory.imgPath, htmlAttributes: new { @class = "control-label col-md-12" })
+                <div class="col-md-12">
+                    <div class="fileinput fileinput-new" data-provides="fileinput">
+                        <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
+                            @if (Model.RadioCategory.imgPath == null)
+                            {
+                                <img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image" alt="" />
+                            }
+                            else
+                            {<img src="@Model.RadioCategory.imgPath" alt="" />
+                            }
+                        </div>
+                        <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"> </div>
+                        <div>
+                            <span class="btn default btn-file">
+                                <span class="fileinput-new"> Resim Seç </span>
+                                <span class="fileinput-exists"> Değiştir </span>
+                                <input type="file" id="imgPath" name="imgPath" class="form-control" accept=".jpg,.png" />
+                            </span>
+                            <a href="javascript:;" class="btn red fileinput-exists" data-dismiss="fileinput"> Sil </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @Html.ValidationMessageFor(model => model.RadioCategory.imgPath, "", new { @class = "text-danger" })
+        </div>
+    </div>
+</div>
+
+
+<div class="form-group">
+    <label asp-for="RadioCategory.row" class="control-label"></label>
+    <input asp-for="RadioCategory.row" class="form-control" />
+    <span asp-validation-for="RadioCategory.row" class="text-danger"></span>
+</div>
+<div class="form-group form-check">
+    <label class="form-check-label">
+        <input class="form-check-input" asp-for="RadioCategory.status" /> @Html.DisplayNameFor(model => model.RadioCategory.status)
+    </label>
+</div>
+
+<div class="form-group">
+    <input type="submit" value="KAYDET" class="btn btn-primary" />
+</div>

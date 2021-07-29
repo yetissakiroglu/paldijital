@@ -1,0 +1,193 @@
+﻿@model RoleList
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/ysadmin/Views/Shared/_Layout.cshtml";
+}
+
+@section style {
+    <link href="/npanel/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link href="/npanel/vendor/bootstrap-editable/bootstrap-editable/css/bootstrap-editable.css" rel="stylesheet">
+
+}
+
+@section Scripts {
+
+    <!-- Page level plugins -->
+    <script src="/npanel/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="/npanel/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <!-- Page level custom scripts -->
+    <script src="/npanel/js/demo/datatables-demo.js"></script>
+
+    <script>
+        $(function () {
+            // a tagimizde bulunan .view classımıza click olduğunda
+            $("body").on("click", ".edit", function () {
+                //data-target dan url mizi al
+                var url = $(this).data("target");
+                //bu urlimizi post et
+
+                $.get(url, function (data) { })
+                    //eğer işlemimiz başarılı bir şekilde gerçekleşirse
+                    .done(function (data) {
+                        //gelen datayı .modal-body mizin içerise html olarak ekle
+                        $("#modelEdit .modal-body").html(data);
+                        $("#modelEdit").modal("show");
+
+                    })
+                    //eğer işlem başarısız olursa
+                    .fail(function () {
+                        //modalımızın bodysine Error! yaz
+                        $("#modelEdit .modal-body").text("Error!!");
+                        $("#modelEdit").modal("show");
+
+                    })
+            });
+            $("body").on("click", ".detail", function () {
+                //data-target dan url mizi al
+                var url = $(this).data("target");
+                //bu urlimizi post et
+
+                $.post(url, function (data) { })
+                    //eğer işlemimiz başarılı bir şekilde gerçekleşirse
+                    .done(function (data) {
+                        //gelen datayı .modal-body mizin içerise html olarak ekle
+                        $("#modelDetail .modal-body").html(data);
+                        $("#modelDetail").modal("show");
+
+                    })
+                    //eğer işlem başarısız olursa
+                    .fail(function () {
+                        //modalımızın bodysine Error! yaz
+                        $("#modelDetail .modal-body").text("Error!!");
+                        $("#modelDetail").modal("show");
+
+                    })
+            });
+        })
+    </script>
+
+}
+
+<div class="modal" id="modelDetail" tabindex="-1" role="dialog" aria-labelledby="">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">KAPAT</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="modelEdit" tabindex="-1" role="dialog" aria-labelledby="">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">KAPAT</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--begin::Content-->
+
+
+<div class="card shadow mb-4">
+    @using (Html.BeginForm("Index", "Roles", FormMethod.Get))
+    {
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-1">
+                    <select name="limit" asp-for="@Model.Limit" id="limit" class="select limit_kriter form-control input-sm">
+                        <option value="10">10</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                        <option value="200">200</option>
+                        <option value="250">250</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <input asp-for="@Model.Search" name="metin" id="metin" placeholder=" Arama ... " class="form-control input-sm">
+                </div>
+                <div class="col-md-1">
+                    <input name="submit" type="submit" value="Ara" class="btn btn-primary form-control">
+                </div>
+
+            </div>
+        </div>
+    }
+    <div class="card-header py-3 d-sm-flex align-items-center justify-content-between">
+        <h6 class="m-0 font-weight-bold text-primary">@Model.title</h6>
+        <a asp-action="Create" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-plus fa-sm text-white-50"></i> Yeni Ekle </a>
+    </div>
+    <div class="card-body">
+        @if (Model.roles.Count > 0)
+        {
+            <div class="table-responsive">
+                <table class="table table-condensed table-striped table-hover" @*id="dataTable"*@ width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Name</th>
+                            <th>Yetki Atama</th>
+                            <th>İşlemler</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.roles)
+                        {
+                        <tr>
+                            <td class="text-center">
+                                <a class="text-dark-50 text-hover-primary" href="#">@item.Id.Substring(0, 10).ToString() ... </a>
+                            </td>
+                            <td class="text-center">
+                                <span class="label-lg font-weight-bold">@item.Name</span>
+                            </td>
+                            <td class="text-center">
+                                <a class="btn d-block btn-success" asp-action="RoleClaimsAssign" asp-route-id="@item.Id">Yetki Ata</a>
+                            </td>
+                            <td class="text-center">
+                                <a href="javascript:;" data-target="/ysadmin/Roles/Edit/@item.Id" class="btn btn-outline btn-sm purple edit">
+                                    <i class="fa fa-edit"></i> Düzenle
+                                </a>
+                                <a href="javascript:;" data-target="/ysadmin/Roles/Detail/@item.Id" class="btn btn-outline btn-sm purple detail">
+                                    <i class="fa fa-eye"></i> İncele
+                                </a>
+                                <div class="btn btn-outline btn-circle dark btn-sm">
+                                    <form asp-action="RoleDelete" asp-route-id="@item.Id" method="post">
+                                        <button type="submit" title="Delete" class="btn btn-outline btn-circle dark btn-sm">
+                                            <i class="la la-trash"></i> Sil
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div page-model="@Model.PagingInfo"></div>
+        }
+        else
+        {
+            <div class="alert text-center">
+                <p>No Data</p>
+            </div>
+        }
+    </div>
+</div>

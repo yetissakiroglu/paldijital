@@ -1,0 +1,219 @@
+﻿@model DjListViewModel
+@{
+    var counter = 0;
+}
+
+
+<div class="small-header affix-top">
+    <div class="mb-4">
+        <div class="card-header py-3 d-sm-flex align-items-center justify-content-between">
+            <div class="pull-left">
+                <h4 class="m-b-xs">
+                    @Model.title
+                </h4>
+                <small>Yeni nesil panelde masaüstü ve mobil aygıtlarda hızlı bir şekilde veri ekleyebilir ve düzenleyebilirsiniz.</small>
+            </div>
+            <div class="btn-group pull-right">
+                <button name="geri_don" type="button" value="Geri Dön" onclick="javascript:window.history.go(-1);" class="btn btn-primary btn-sm"><i class="fa fa-angle-left"></i>&nbsp;Geri Dön</button>
+                <div class="btn-group">
+                    <a class="btn btn-sm green dropdown-toggle" href="javascript:;" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                        İşlemler
+                        <i class="fa fa-angle-down"></i>
+                    </a>
+                    <ul class="dropdown-menu pull-right">
+                        <li>
+                            <a asp-action="Create"><i class="fa fa-plus"></i>&nbsp;Yeni Ekle</a>
+                        </li>
+                        <li class="split"></li>
+                        <li>
+                            <a asp-action="Index"><i class="fa fa-list"></i>&nbsp;Tüm Kayıtlar</a>
+                        </li>
+                    </ul>
+                </div>
+                <input type="submit" value="KAYDET" class="btn btn-success btn-sm" />
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card-body">
+
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" name="Dj.djId" asp-for="Dj.djId" value="@Model.Dj.djId">
+    <input type="hidden" name="Dj.imgPath" asp-for="Dj.imgPath" value="@Model.Dj.imgPath">
+    <input type="hidden" name="Dj.url" asp-for="Dj.url" value="@Model.Dj.url">
+
+
+
+    <div class="form-group">
+        <label asp-for="Dj.title" class="control-label"></label>
+        <input asp-for="Dj.title" class="form-control" />
+        <span asp-validation-for="Dj.title" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label card-header">Radio Seç  <span class="badge badge-danger badge-counter">İsteğe Bağlı</span></label>
+
+        <div class="p-xs" style="background:#F9F9F9">
+
+            @foreach (var item in Model.WebRadios)
+            {
+                var isChecked = "";
+                if (Model.SelectedWebRadios.Any(i => i.radioApiId == item.radioApiId))
+                {
+                    isChecked = "checked";
+
+                    <input type="hidden" name="SelectedCategories[@counter].Id" value="@item.radioApiId" />
+                    <input type="hidden" name="SelectedCategories[@counter].Name" value="@item.title" />
+                    counter++;
+                }
+                else
+                {
+                    isChecked = "";
+                }
+
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox"
+                           name="categoryIds"
+                           value="@item.radioApiId"
+                           class="custom-control-input"
+                           id="category@(item.radioApiId)"
+                           @isChecked>
+                    <label class="custom-control-label" for="category@(item.radioApiId)">@item.title</label>
+                </div>
+
+            }
+        </div>
+
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Dj.keywords" class="control-label"></label>
+        <div class="form-group">
+            <input asp-for="Dj.keywords" class="form-control" data-role="tagsinput" />
+        </div>
+        <span asp-validation-for="Dj.keywords" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Dj.description" class="control-label"></label>
+        <textarea asp-for="Dj.description" class="form-control" rows="4"></textarea>
+        <span asp-validation-for="Dj.description" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <div class="row">
+            <div class="form-group col-md-4">
+                <div class="row">
+                    @Html.LabelFor(model => model.Dj.imgPath, htmlAttributes: new { @class = "control-label col-md-12" })
+                    <div class="col-md-12">
+                        <div class="fileinput fileinput-new" data-provides="fileinput">
+                            <div class="fileinput-new thumbnail">
+                                @if (Model.Dj.imgPath == null)
+                                {
+                                    <img src="https://via.placeholder.com/706x431" alt="" />
+                                }
+                                else
+                                {<img src="@Model.Dj.imgPath" width="250" alt="" />
+                                }
+                            </div>
+                            <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"> </div>
+                            <div>
+                                <span class="btn default btn-file">
+                                    <span class="fileinput-new"> Resim Seç </span>
+                                    <span class="fileinput-exists"> Değiştir </span>
+                                    <input type="file" id="imgPath" name="imgPath" class="form-control" accept=".jpg,.png" />
+                                </span>
+                                <a href="javascript:;" class="btn red fileinput-exists" data-dismiss="fileinput"> Sil </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @Html.ValidationMessageFor(model => model.Dj.imgPath, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <label asp-for="Dj.detail" class="control-label"></label>
+        <textarea id="editor" asp-for="Dj.detail" class="form-control" rows="6"></textarea>
+        <span asp-validation-for="Dj.detail" class="text-danger"></span>
+    </div>
+
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text">
+                <label asp-for="Dj.fUrl"></label>
+            </span>
+        </div>
+        <input asp-for="Dj.fUrl" class="form-control" aria-describedby="basic-addon3" />
+        <span asp-validation-for="Dj.fUrl" class="text-danger"></span>
+    </div>
+
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text">
+                <label asp-for="Dj.tUrl"></label>
+            </span>
+        </div>
+        <input asp-for="Dj.tUrl" class="form-control" aria-describedby="basic-addon3" />
+        <span asp-validation-for="Dj.tUrl" class="text-danger"></span>
+    </div>
+
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text">
+                <label asp-for="Dj.iUrl"></label>
+            </span>
+        </div>
+        <input asp-for="Dj.iUrl" class="form-control" aria-describedby="basic-addon3" />
+        <span asp-validation-for="Dj.iUrl" class="text-danger"></span>
+    </div>
+
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text">
+                <label asp-for="Dj.yUrl"></label>
+            </span>
+        </div>
+        <input asp-for="Dj.yUrl" class="form-control" aria-describedby="basic-addon3" />
+        <span asp-validation-for="Dj.yUrl" class="text-danger"></span>
+    </div>
+
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text">
+                <label asp-for="Dj.spUrl"></label>
+            </span>
+        </div>
+        <input asp-for="Dj.spUrl" class="form-control" aria-describedby="basic-addon3" />
+        <span asp-validation-for="Dj.spUrl" class="text-danger"></span>
+    </div>
+
+
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text">
+                <label asp-for="Dj.sUrl"></label>
+            </span>
+        </div>
+        <input asp-for="Dj.sUrl" class="form-control" aria-describedby="basic-addon3" />
+        <span asp-validation-for="Dj.sUrl" class="text-danger"></span>
+    </div>
+
+
+    <div class="form-group">
+        <label asp-for="Dj.row" class="control-label"></label>
+        <input asp-for="Dj.row" class="form-control" />
+        <span asp-validation-for="Dj.row" class="text-danger"></span>
+    </div>
+    <div class="form-group form-check">
+        <label class="form-check-label">
+            <input class="form-check-input" asp-for="Dj.status" /> @Html.DisplayNameFor(model => model.Dj.status)
+        </label>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="KAYDET" class="btn btn-primary" />
+    </div>
+
+</div>

@@ -1,0 +1,67 @@
+﻿@model BannerListViewModel
+
+
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<input type="hidden" name="Banner.imgPath" asp-for="Banner.imgPath" value="@Model.Banner.imgPath">
+<input type="hidden" name="Banner.bannerId" asp-for="Banner.bannerId" value="@Model.Banner.bannerId">
+
+<div class="form-group">
+    <label asp-for="Banner.title" class="control-label"></label>
+    <input asp-for="Banner.title" class="form-control" />
+    <span asp-validation-for="Banner.title" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label asp-for="Banner.detail" class="control-label"></label>
+    <input asp-for="Banner.detail" class="form-control" />
+    <span asp-validation-for="Banner.detail" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <div class="row">
+        <div class="form-group col-md-4">
+            <div class="row">
+                @Html.LabelFor(model => model.Banner.imgPath, htmlAttributes: new { @class = "control-label col-md-12" })
+                <div class="col-md-12">
+                    <div class="fileinput fileinput-new" data-provides="fileinput">
+                        <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
+                            @if (Model.Banner.imgPath == null)
+                            {
+                                <img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image" alt="" />
+                            }
+                            else
+                            {<img src="/img/@Model.Banner.imgPath" alt="" />
+                            }
+                        </div>
+                        <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"> </div>
+                        <div>
+                            <span class="btn default btn-file">
+                                <span class="fileinput-new"> Resim Seç </span>
+                                <span class="fileinput-exists"> Değiştir </span>
+                                <input type="file" id="imgPath" name="imgPath" class="form-control" accept=".jpg,.png" />
+                            </span>
+                            <a href="javascript:;" class="btn red fileinput-exists" data-dismiss="fileinput"> Sil </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @Html.ValidationMessageFor(model => model.Banner.imgPath, "", new { @class = "text-danger" })
+        </div>
+    </div>
+</div>
+<div class="form-group">
+    <label asp-for="Banner.url" class="control-label"></label>
+    <input asp-for="Banner.url" class="form-control" />
+    <span asp-validation-for="Banner.url" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label asp-for="Banner.row" class="control-label"></label>
+    <input asp-for="Banner.row" class="form-control" />
+    <span asp-validation-for="Banner.row" class="text-danger"></span>
+</div>
+<div class="form-group form-check">
+    <label class="form-check-label">
+        <input class="form-check-input" asp-for="Banner.status" /> @Html.DisplayNameFor(model => model.Banner.status)
+    </label>
+</div>
+<div class="form-group">
+    <input type="submit" value="KAYDET" class="btn btn-primary" />
+</div>

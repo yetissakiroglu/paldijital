@@ -1,0 +1,146 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<!--begin::Head-->
+<head>
+    <base href="">
+    <meta charset="utf-8" />
+    <title> YsAdmin | Dashboard </title>
+    <meta name="description" content="Updates and statistics" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <!-- Custom fonts for this template-->
+    <link href="/npanel/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+    <link href="/npanel/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template-->
+    <link href="/npanel/css/sb-admin-2.css" rel="stylesheet">
+    <link href="/npanel/css/style.css" rel="stylesheet">
+
+
+
+    <style>
+        .small-header.affix {
+            z-index: 9999;
+            top: 0;
+            left: 0;
+            right: 0;
+        }
+        .affix {
+            position: fixed;
+        }
+        .small-header .panel-body {
+            padding: 15px 25px;
+            border-right: none;
+            border-left: none;
+            border-top: none;
+            border-radius: 0;
+            background: #fff;
+            border: 1px solid #e4e5e7;
+            border-radius: 2px;
+            padding: 20px;
+            position: relative;
+        }
+
+
+    </style>
+    @RenderSection("Style", false)
+</head>
+<!--end::Head-->
+<!--begin::Body-->
+<body id="page-top">
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        @await Component.InvokeAsync("PanelLeftMenu")
+        <!-- End of Sidebar -->
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+            <!-- Main Content -->
+            <div id="content">
+                <!-- Topbar -->
+                @await Component.InvokeAsync("PanelHeader")
+                <!-- End of Topbar -->
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            @if (TempData["message"] != null)
+                            {
+                                <partial name="_resultmessage" model="@(TempData.Get<ResultMessage>("message"))" />
+                            }
+                        </div>
+                        <div class="col-md-12">
+                            @RenderBody()
+                            <!-- /.container-fluid -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End of Main Content -->
+            <!-- Footer -->
+            <partial name="_footer" />
+            <!-- End of Footer-->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!--begin::Scrolltop-->
+    <partial name="_scrolltop" />
+    <!--end::Scrolltop-->
+
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"> Çıkış </h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Mevcut oturumunuzu sonlandırmaya hazırsanız aşağıdaki "Oturumu Kapat"ı seçin.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Vazgeç</button>
+                    <a class="btn btn-primary" asp-controller="Account" asp-action="Logout" >Oturumu Kapat</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript-->
+      <!-- Bootstrap core JavaScript-->
+    <script src="/npanel/vendor/jquery/jquery.min.js"></script>
+
+    <script src="/npanel/dist/popper.min.js"></script>
+    <script src="/npanel/dist/js/bootstrap.min.js"></script>
+    @*<script src="/npanel/vendor/jquery.min.js" type="text/javascript"></script>
+
+    <script src="/npanel/vendor/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>*@
+    <!-- Core plugin JavaScript-->
+    <script src="/npanel/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="/npanel/js/sb-admin-2.min.js"></script>
+
+    <!--end::Global Theme Scripts-->
+    @RenderSection("Scripts", false)
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
+    <script type="text/javascript">
+        // ------------------------ Navigation Scroll
+        $(window).on('scroll', function () {
+            var sticky = $('.small-header'),
+                scroll = $(window).scrollTop();
+            if (scroll >= 100) sticky.addClass('affix');
+            else sticky.removeClass('affix');
+        });
+    </script>
+</body>
+</html>

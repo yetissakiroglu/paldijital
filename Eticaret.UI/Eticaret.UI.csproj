@@ -1,0 +1,45 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="6.0.0" />
+    <PackageReference Include="Mapster" Version="6.5.0" />
+    <PackageReference Include="Microsoft.AspNet.Mvc" Version="5.2.7" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.8" />
+    <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.5" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.7">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.7" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Eticaret.Core\Eticaret.Core.csproj" />
+    <ProjectReference Include="..\Eticaret.Business\Eticaret.Business.csproj" />
+    <ProjectReference Include="..\Eticaret.Entities\Eticaret.Entities.csproj" />
+
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\ysadmin\Data\" />
+    <Folder Include="Areas\ysadmin\Models\" />
+    <Folder Include="Migrations\" />
+    <Folder Include="wwwroot\upload\frekanslar\" />
+    <Folder Include="wwwroot\upload\listeler\" />
+    <Folder Include="wwwroot\upload\Podcast\" />
+    <Folder Include="wwwroot\upload\program\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\npanel\ckeditor\.github\ISSUE_TEMPLATE" />
+  </ItemGroup>
+</Project>

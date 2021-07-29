@@ -1,0 +1,187 @@
+﻿@model NewsCategoryListViewModel
+
+@{
+    ViewData["Title"] = "CategoryIndex";
+    Layout = "~/Areas/ysadmin/Views/Shared/_Layout.cshtml";
+}
+
+@section Style {
+    <link href="/npanel/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+
+    <style>
+        .table > thead > tr > th,
+        .table > tbody > tr > th,
+        .table > tfoot > tr > th,
+        .table > thead > tr > td,
+        .table > tbody > tr > td,
+        .table > tfoot > tr > td {
+            vertical-align: inherit;
+        }
+
+        .table td:last-child, .table.nobg td {
+            background-image: none;
+        }
+
+        .table td .fa-gear, .table td .fa-search {
+            /*color: #666;*/
+        }
+
+            .table td .fa-gear:hover, .table td .fa-search:hover {
+                /*color: #333;*/
+            }
+
+
+        .table tbody tr:hover td, .table tbody tr:hover th {
+            background-color: #FFFFCC !important;
+        }
+    </style>
+}
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3 d-sm-flex align-items-center justify-content-between">
+        <h6 class="m-0 font-weight-bold text-primary">Kategoriler</h6>
+        <a asp-controller="News" asp-action="CategoryCreate" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-plus fa-sm text-white-50"></i> Yeni Ekle </a>
+    </div>
+
+
+    <div class="card-body">
+        @if (Model.NewsCategorys.Count > 0)
+        {
+
+            <div class="table-responsive">
+                <table class="table table-condensed table-striped table-hover" @*id="dataTable"*@ width="100%" cellspacing="0">
+
+
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.NewsCategory.categoryId)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.NewsCategory.title)
+                            </th>
+                    
+                            <th>
+                                @Html.DisplayNameFor(model => model.NewsCategory.row)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.NewsCategory.status)
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.NewsCategorys)
+                        {
+                        <tr>
+                            <td class="text-center">
+                                @Html.DisplayFor(modelItem => item.categoryId)
+                            </td>
+                            <td class="text-center">
+                                @Html.DisplayFor(modelItem => item.title)
+                            </td>
+                          
+                      
+                            <td class="text-center">
+                                @Html.DisplayFor(modelItem => item.row)
+                            </td>
+                            <td class="text-center">
+                                <form asp-action="CategoryActive" asp-route-active="@item.status" asp-route-id="@item.categoryId" method="post">
+                                    @if (item.status == true)
+                                    {
+                                        <button type="submit" title="Status" class="btn dark btn-sm yellow">
+                                            @item.status
+                                        </button>
+                                    }
+                                    @if (item.status == false)
+                                    {
+                                        <button type="submit" title="Status" class="btn dark btn-sm red">
+                                            @item.status
+                                        </button>
+                                    }
+                                </form>
+                            </td>
+                            <td class="text-center">
+                                <a href="javascript:;" data-target="/ysadmin/News/CategoryViewPreview/@item.categoryId" class="btn btn-outline btn-sm purple detail">
+                                    <i class="fa fa-eye"></i> İncele
+                                </a>
+                                @Html.ActionLink("Düzenle", "CategoryEdit", new { id = item.categoryId }, new { @class = "btn btn-outline dark btn-sm black " }) |
+                                @Html.ActionLink("Sil", "CategoryDelete", new { id = item.categoryId }, new { @class = "btn btn-outline btn-circle dark btn-sm" })
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div page-model="@Model.PagingInfo"></div>
+
+        }
+        else
+        {
+            <div class="alert text-center">
+                <p>No Data</p>
+            </div>
+        }
+
+
+
+    </div>
+</div>
+
+@section Scripts {
+    <!-- Page level plugins -->
+    <script src="/npanel/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="/npanel/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="/npanel/js/demo/datatables-demo.js"></script>
+
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+
+        $(function () {
+
+            $("body").on("click", ".detail", function () {
+                //data-target dan url mizi al
+                var url = $(this).data("target");
+                //bu urlimizi post et
+
+                $.post(url, function (data) { })
+                    //eğer işlemimiz başarılı bir şekilde gerçekleşirse
+                    .done(function (data) {
+                        //gelen datayı .modal-body mizin içerise html olarak ekle
+                        $("#modelDetail .modal-body").html(data);
+                        $("#modelDetail").modal("show");
+
+                    })
+                    //eğer işlem başarısız olursa
+                    .fail(function () {
+                        //modalımızın bodysine Error! yaz
+                        $("#modelDetail .modal-body").text("Error!!");
+                        $("#modelDetail").modal("show");
+
+                    })
+            });
+
+        })
+    </script>
+
+}
+
+
+
+<!--begin::Modal-->
+<div class="modal" id="modelDetail" tabindex="-1" role="dialog" aria-labelledby="">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--end::Modal-->

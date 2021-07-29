@@ -1,0 +1,345 @@
+﻿@model BroadcastListViewModel
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/ysadmin/Views/Shared/_Layout.cshtml";
+}
+@section Style {
+
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    <link href="~/npanel/fullcalendar/core/main.css" rel="stylesheet" />
+    <link href="~/npanel/fullcalendar/daygrid/main.css" rel="stylesheet" />
+    <link href="~/npanel/fullcalendar/timegrid/main.css" rel="stylesheet" />
+    <link href="~/npanel/fullcalendar/list/main.css" rel="stylesheet" />
+    <link href="~/npanel/fullcalendar/bootstrap/main.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/css/tempusdominus-bootstrap-4.min.css" />
+
+}
+<div class="card shadow mb-4">
+    @using (Html.BeginForm("Index", "Broadcast", FormMethod.Get))
+    {
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-2">
+                    <select name="limit" asp-for="@Model.Limit" id="limit" class="select limit_kriter form-control input-sm">
+                        <option value="10">10</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                        <option value="200">200</option>
+                        <option value="250">250</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    @Html.DropDownListFor(model => model.RadioApiId, (IEnumerable<SelectListItem>)Model.RadiosApi, new { @class = "select kategori_kriter form-control input-sm" })
+                </div>
+                <div class="col-md-5">
+                    <input asp-for="@Model.Search" name="metin" id="metin" placeholder=" Arama ... " class="form-control input-sm">
+                </div>
+                <div class="col-md-1">
+                    <input name="submit" type="submit" value="Ara" class="btn btn-primary form-control">
+                </div>
+            </div>
+        </div>
+    }
+    <div class="card-header py-3 d-sm-flex align-items-center justify-content-between">
+        <h6 class="m-0 font-weight-bold text-primary">@Model.title</h6>
+        <a asp-action="Create" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-plus fa-sm text-white-50"></i> Yeni Ekle </a>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-4">
+
+            </div>
+            <div class="col-md-8">
+                <div id="calendar"> </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.28/moment-timezone-with-data-10-year-range.js"></script>
+
+    <!-- BEGIN PAGE LEVEL PLUGINS -->
+    <script src="~/npanel/fullcalendar/core/main.js"></script>
+    <script src='~/npanel/fullcalendar/moment/main.js'></script>
+    <script src='~/npanel/fullcalendar/moment-timezone/main.js'></script>
+    <script src="~/npanel/fullcalendar/daygrid/main.js"></script>
+    <script src="~/npanel/fullcalendar/timegrid/main.js"></script>
+    <script src="~/npanel/fullcalendar/list/main.js"></script>
+    <script src="~/npanel/fullcalendar/interaction/main.js"></script>
+    <script src="~/npanel/fullcalendar/bootstrap/main.js"></script>
+    <script src="~/npanel/fullcalendar/core/locales/tr.js"></script>
+    <!-- END PAGE LEVEL PLUGINS -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/js/tempusdominus-bootstrap-4.min.js"></script>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var calendarEl = document.getElementById('calendar');
+            var selectedEvent = null;
+            var events = [];
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                plugins: ['interaction', 'dayGrid', 'timeGrid', 'list', 'bootstrap', 'momentTimezone'],
+                timeZone: 'Europe/Istanbul',
+                themeSystem: 'bootstrap',
+                bootstrapFontAwesome: {
+                    dayGridMonth: 'calendar',
+                    prev: 'fa-chevron-circle-left',
+                    next: 'fa-chevron-circle-right',
+                    listWeek: 'fa-list'
+                },
+                locale: 'tr',
+                header: {
+                    left: 'prev, next, today',
+                    center: 'title',
+                    right: 'dayGridMonth, timeGridWeek , timeGridForFourDay, listWeek'
+                },
+                footer: {
+                    left: 'prevYear',
+                    right: 'nextYear'
+                },
+                //minTime: '08:00:00',
+                //maxTime: '21:00:00',
+                snapDuration: '00:15:00',
+                slotLabelInterval: '00:15:00',
+                slotLabelFormat: {
+                    hour: '2-digit',
+                    minute: '2-digit',
+                },
+                fixedWeekCount: true,
+                showNonCurrentDates: false,
+                contentHeight: 650,
+                defaultView: 'timeGridWeek',
+                weekends: true,
+                hiddenDays: [0],
+                allDaySlot: false,
+                titleFormat: {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                },
+                titleRangeSeparator: ' / ',
+                columnHeaderFormat: {
+                    weekday: 'long'
+                },
+                views: {
+                    timeGridForFourDay: {
+                        type: 'timeGrid',
+                        duration: { days: 4 },
+                        buttonText: '4 Gün'
+                    }
+                },
+                eventTimeFormat: {
+                    hour: '2-digit',
+                    minute: '2-digit',
+                },
+                events: [],
+                selectable: true,
+                select: function (selectionInfo) {
+                    console.log(selectionInfo);
+
+                    selectedEvent = {
+                        id: 0,
+                        start: moment(selectionInfo.start),
+                        end: moment(selectionInfo.end),
+                        title: "",
+                        description: "",
+                        djId: 0
+
+
+                    }
+
+                    openAddOrUpdateModal();
+                },
+                eventClick: function (info) {
+                    selectedEvent = {
+                        id: info.event.id,
+                        start: moment(info.event.start),
+                        end: moment(info.event.end),
+                        title: info.event.title,
+                        description: info.event.description,
+                        djId: info.event.extendedProps.djId
+                    };
+
+                    $('#selectDjIdDetail').val(info.event.extendedProps.djId);
+                    $('#inputStartDateDetail').val(moment(info.event.start).format('YYYY-MM-DD HH:ss'));
+                    $('#inputEndDateDetail').val(moment(info.event.end).format('YYYY-MM-DD HH:ss'))
+                    $('#inputTitleDetail').val(info.event.title);
+                    $('#inputDescriptionDetail').val(info.event.description);
+
+                    $('#detailModal').modal();
+                },
+                editable: true,
+                eventDrop: function (dropEventInfo) {
+                    var appointment = {
+                        BroadcastId: dropEventInfo.event.id,
+                        DjId: dropEventInfo.event.extendedProps.djId,
+                        BeginHour: moment(dropEventInfo.event.start).format('YYYY-MM-DD HH:mm'),
+                        FinishHour: moment(dropEventInfo.event.end).format('YYYY-MM-DD HH:mm'),
+                        Title: dropEventInfo.event.title,
+                        Description: dropEventInfo.event.description
+                    }
+                    //burada kaldım
+                    saveAppointment(appointment);
+
+
+                },
+                eventResize: function (dropEventInfo) {
+                    var appointment = {
+                        BroadcastId: dropEventInfo.event.id,
+                        DjId: dropEventInfo.event.extendedProps.djId,
+                        BeginHour: moment(dropEventInfo.event.start).format('YYYY-MM-DD HH:mm'),
+                        FinishHour: moment(dropEventInfo.event.end).format('YYYY-MM-DD HH:mm'),
+                        Title: dropEventInfo.event.title,
+                        Description: dropEventInfo.event.description
+                    }
+
+                    saveAppointment(appointment);
+                },
+
+            });
+
+            calendar.render();
+            getAppointments();
+
+            $('#datetimepicker1, #datetimepicker2').datetimepicker({
+                format: 'DD/MM/YYYY HH:mm'
+            });
+
+            function getAppointments() {
+                $.ajax({
+                    type: 'GET',
+                    url: '/BroadcastJson/GetAppointments',
+                    success: function (response) {
+                        events = [];
+                        var sources = calendar.getEventSources();
+                        for (var i = 0; i < sources.length; i++) {
+                            sources[i].remove();
+                        }
+                        for (var i = 0; i < response.length; i++) {
+                            events.push({
+                                id: response[i].broadcastId,
+                                title: response[i].title,
+                                start: response[i].beginHour,
+                                end: response[i].finishHour,
+                                description: response[i].description,
+                                djId: response[i].djId
+                            });
+                        }
+                        calendar.addEventSource(events);
+                    },
+                    error: function () {
+                        $('#saveModal').modal('hide');
+                        alertify.error('Yayın eklenirken bir problem oluştu.');
+                    }
+                });
+            }
+
+            function openAddOrUpdateModal() {
+                if (selectedEvent != null) {
+                    $('#broadcastId').val(selectedEvent.broadcastId);
+                    $('#inputStartDate').val(selectedEvent.start.format('YYYY-MM-DD HH:mm'));
+                    $('#inputEndDate').val(selectedEvent.end.format('YYYY-MM-DD HH:mm'));
+                    $('#inputTitle').val(selectedEvent.title);
+                    $('#inputDescription').val(selectedEvent.description);
+                    $('#selectDjId').val(selectedEvent.djId);
+                }
+
+                $('#saveModal').modal();
+            }
+
+            function saveAppointment(data) {
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/BroadcastJson/AddOrUpdateAppointment',
+                    data: data,
+                    success: function (response) {
+                        if (response === "200") {
+                            getAppointments();
+                            $('#saveModal').modal('hide');
+                            data.BroadcastId === "0" ? alertify.success('Yayın başarıyla eklendi.') : alertify.success('Yayın başarıyla güncellenmiştir.');
+                        } else {
+                            $('#saveModal').modal('hide');
+                            alertify.warning('Yayın eklenemedi.');
+                        }
+                    },
+                    error: function () {
+                        $('#saveModal').modal('hide');
+                        alertify.error('Erişim sağlanamadı.');
+                    }
+                });
+            }
+
+            $('#btnSave').click(function () {
+                //validasyon
+                if ($('#inputTitle').val() === "") {
+                    alert("Yayın Adı belirtilmelidir.");
+                    return;
+                }
+
+                var appointment = {
+                    BroadcastId: $('#broadcastId').val(),
+                    DjId: $('#selectDjId').val(),
+                    BeginHour: $('#inputStartDate').val(),
+                    FinishHour: $('#inputEndDate').val(),
+                    Title: $('#inputTitle').val(),
+                    Description: $('#inputDescription').val()
+                }
+
+                saveAppointment(appointment);
+            });
+
+            $('#btnUpdate').click(function () {
+                $('#detailModal').modal('hide');
+                openAddOrUpdateModal();
+            });
+
+            $('#btnDelete').click(function () {
+                if (confirm('Yayın silmek istediğinize emin misiniz?')) {
+                    $.ajax({
+                        type: 'GET',
+                        url: '/BroadcastJson/DeleteAppointment?id=' + selectedEvent.id,
+                        success: function (response) {
+                            if (response === '200') {
+                                var event = calendar.getEventById(selectedEvent.id);
+                                event.remove();
+                                $('#detailModal').modal('hide');
+                                alertify.success('Yayın silinmiştir.');
+                            }
+                        },
+                        error: function () {
+                            $('#detailModal').modal('hide');
+                            alertify.error('Yayın silinirken bir problem oluştu.');
+                        }
+                    });
+                }
+            });
+
+
+        });
+
+
+    </script>
+
+
+
+}
+<!--begin::Modal-->
+<div class="modal" id="modelDetail" tabindex="-1" role="dialog" aria-labelledby="">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--end::Modal-->

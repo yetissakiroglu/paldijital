@@ -1,0 +1,76 @@
+﻿
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Areas/ysadmin/Views/Shared/_Layout.cshtml";
+}
+
+@section Style {
+
+    <!-- BEGIN PAGE LEVEL PLUGINS -->
+    <link href="/npanel/vendor/bootstrap-fileinput/bootstrap-fileinput.css" rel="stylesheet" type="text/css" />
+    <!-- END PAGE LEVEL PLUGINS -->
+}
+<div class="card shadow mb-4">
+         <!-- form start -->
+        @using (Html.BeginForm("Edit", "News", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+        {
+            @Html.Partial("ViewForm")
+        }
+    <!-- END FORM-->
+</div>
+
+@section Scripts {
+    <script>
+        $(function () {
+            // a tagimizde bulunan .view classımıza click olduğunda
+            $("body").on("click", ".categorycreate", function () {
+                //data-target dan url mizi al
+                var url = $(this).data("target");
+                //bu urlimizi post et
+                $.get(url, function (data) { })
+                    //eğer işlemimiz başarılı bir şekilde gerçekleşirse
+                    .done(function (data) {
+                        //gelen datayı .modal-body mizin içerise html olarak ekle
+                        $("#modelCreate .modal-body").html(data);
+                        $("#modelCreate").modal("show");
+
+                    })
+                    //eğer işlem başarısız olursa
+                    .fail(function () {
+                        //modalımızın bodysine Error! yaz
+                        $("#modelCreate .modal-body").text("Error!!");
+                        $("#modelCreate").modal("show");
+                    })
+            });
+
+        })
+
+    </script>
+    <!-- BEGIN PAGE LEVEL PLUGINS -->
+    <script src="/npanel/vendor/bootstrap-fileinput/bootstrap-fileinput.js" type="text/javascript"></script>
+    <!-- END PAGE LEVEL PLUGINS -->
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <div class="modal" id="modelCreate" tabindex="-1" role="dialog" aria-labelledby="">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">KAPAT</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="~/npanel/ckeditor/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace("editor");
+    </script>
+}
+

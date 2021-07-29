@@ -1,0 +1,76 @@
+﻿@model NewsViewListModel
+@{
+    ViewData["Title"] = Model.NewsCategory.title + " | " + Model.title;
+}
+
+
+<!-- main content -->
+    <div class="container-fluid">
+        <div class="row row--grid">
+            <!-- breadcrumb -->
+            <div class="col-12">
+                <ul class="breadcrumb">
+                    <li class="breadcrumb__item"><a asp-controller="Home">Anasayfa</a></li>
+                    <li class="breadcrumb__item">Haberler</li>
+                    <li class="breadcrumb__item breadcrumb__item--active">@Model.NewsCategory.title</li>
+
+                </ul>
+            </div>
+            <!-- end breadcrumb -->
+            <!-- title -->
+            <div class="col-12">
+                <div class="main__title main__title--page">
+                    <h1>@Model.NewsCategory.title</h1>
+                </div>
+            </div>
+            <!-- end title -->
+
+            <div class="col-12">
+                <ul class="nav nav-tabs main__tabs">
+                    <li class="nav-item">
+                        <a href="@Url.RouteUrl("News")" class="nav-link"><span></span>Tümü</a>
+                    </li>
+                    @foreach (var item in Model.NewsCategories)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" href="@item.url" title="@item.title"><span></span>@item.title</a>
+                        </li>
+                    }
+
+                </ul>
+            </div>
+        </div>
+        <div class="row row--grid" id="ajax-main">
+            @Html.Partial("_newslist", Model)
+        </div>
+        <div class="loading" style="display:none;">Loading&#8230;</div>
+
+    </div>
+ <!-- end main content -->
+
+@section scripts
+{
+    <script type="text/javascript">
+        var pageNo = 1;
+        var isPageLoad = true;
+        $(window).scroll(function () {
+            if (Math.ceil($(window).scrollTop()) == $(document).height() - Math.ceil($(window).height())) {
+                if (isPageLoad) {
+                    $("#loading").show();
+                    $.ajax({
+                        url: '/News/NewsListAjax',
+                        data: { page: pageNo },
+                        success: function (data) {
+                            $("#ajax-main").append(data);
+                            $("#loading").hide();
+                            pageNo++;
+                            if ($.trim(data) == '') {
+                                isPageLoad = false;
+                            }
+                        }
+                    });
+                }
+            }
+        });
+    </script>
+}

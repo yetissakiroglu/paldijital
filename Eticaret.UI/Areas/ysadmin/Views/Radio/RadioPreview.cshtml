@@ -1,0 +1,127 @@
+﻿@model RadioListViewModel
+
+<div class="col-md-12">
+    <div class="form-group">
+        <label asp-for="Radio.title" class="control-label"></label>
+        <br />
+        <span class="btn btn-light-success btn-sm font-weight-bold btn-upper btn-text">
+            @Model.Radio.title
+        </span>
+    </div>
+    <div class="form-group">
+        <label class="control-label"> Yayın </label>
+        <br />
+        <audio controls>
+            <source src="@Model.Radio.streamUrl/1" type="audio/mpeg">
+        </audio>
+    </div>
+    @*<div class="form-group">
+        <label asp-for="Ip" class="control-label"></label>
+        <br />
+        <span class="btn btn-light-success btn-sm font-weight-bold btn-upper btn-text">
+            @Model.Ip
+        </span>
+    </div>*@
+    <div class="form-group">
+        <label asp-for="Radio.streamUrl" class="control-label"></label>
+        <br />
+        <span class="btn btn-light-success btn-sm font-weight-bold btn-upper btn-text">
+            @Model.Radio.streamUrl
+        </span>
+    </div>
+    @*<div class="form-group">
+
+        <label asp-for="Radio.port" class="control-label"></label>
+        <br />
+        <span class="btn btn-light-success btn-sm font-weight-bold btn-upper btn-text">
+            @Model.Port
+        </span>
+    </div>*@
+    @*<div class="form-group">
+
+        <label asp-for="StreamId" class="control-label"></label>
+        <br />
+        <span class="btn btn-light-success btn-sm font-weight-bold btn-upper btn-text">
+            @Model.StreamId
+        </span>
+    </div>*@
+    <div class="form-group">
+        <label asp-for="streamState.streams.CURRENTLISTENERS" class="control-label"></label>
+        <br />
+        <span class="btn btn-light-success btn-sm font-weight-bold btn-upper btn-text">
+            @Model.streamState.streams.CURRENTLISTENERS
+        </span>
+    </div>
+    <div class="form-group">
+        <label asp-for="streamState.streams.PEAKLISTENERS" class="control-label"></label>
+        <br />
+        <span class="btn btn-light-success btn-sm font-weight-bold btn-upper btn-text">
+            @Model.streamState.streams.PEAKLISTENERS
+        </span>
+    </div>
+    <div class="form-group">
+        <label asp-for="streamState.streams.MAXLISTENERS" class="control-label"></label>
+        <br />
+        <span class="btn btn-light-success btn-sm font-weight-bold btn-upper btn-text">
+            @Model.streamState.streams.MAXLISTENERS
+        </span>
+    </div>
+    <div class="form-group">
+        <label asp-for="streamState.streams.UNIQUELISTENERS" class="control-label"></label>
+        <br />
+        <span class="btn btn-light-success btn-sm font-weight-bold btn-upper btn-text">
+            @Model.streamState.streams.UNIQUELISTENERS
+        </span>
+    </div>
+    <div class="form-group">
+        <label asp-for="streamState.streams.AVERAGETIME" class="control-label"></label>
+        <br />
+        <span class="btn btn-light-success btn-sm font-weight-bold btn-upper btn-text">
+            @Model.streamState.streams.AVERAGETIME
+        </span>
+    </div>
+    <div class="form-group">
+        <label asp-for="streamState.streams.SERVERGENRE" class="control-label"></label>
+        <br />
+        <span class="btn btn-light-success btn-sm font-weight-bold btn-upper btn-text">
+            @Model.streamState.streams.SERVERGENRE
+        </span>
+    </div>
+    <div class="form-group">
+        <label asp-for="streamState.streams.SERVERURL" class="control-label"></label>
+        <br />
+        <span class="btn btn-light-success btn-sm font-weight-bold btn-upper btn-text">
+            @Model.streamState.streams.SERVERURL
+        </span>
+    </div>
+    <div class="form-group">
+        <label asp-for="streamState.streams.SERVERTITLE" class="control-label"></label>
+        <br />
+        <span class="btn btn-light-success btn-sm font-weight-bold btn-upper btn-text">
+            @Model.streamState.streams.SERVERTITLE
+        </span>
+    </div>
+    <div class="form-group">
+        <label asp-for="streamState.streams.SONGTITLE" class="control-label"></label>
+        <br />
+        <span class="btn btn-light-success btn-sm font-weight-bold btn-upper btn-text">
+            @Model.streamState.streams.SONGTITLE
+        </span>
+    </div>
+    <div class="form-group">
+        <label asp-for="streamState.streams.STREAMHITS" class="control-label"></label>
+        <br />
+        <span class="btn btn-light-success btn-sm font-weight-bold btn-upper btn-text">
+            @Model.streamState.streams.STREAMHITS
+        </span>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label"> YAYIN BASMA FORMAT BİLGİSİ </label>
+        <br />
+        <span class="btn btn-light-success btn-sm font-weight-bold btn-upper btn-text">
+            @Model.streamState.streams.BITRATE <span>kbps</span> @Model.streamState.streams.SAMPLERATE kHz  @Model.streamState.streams.CONTENT
+        </span>
+    </div>
+
+</div>

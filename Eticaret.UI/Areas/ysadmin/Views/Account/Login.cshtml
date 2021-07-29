@@ -1,0 +1,40 @@
+﻿@model LoginViewModel
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Areas/ysadmin/Views/Shared/_Layout_Account.cshtml";
+}
+<div class="text-center">
+    <h1 class="h4 text-gray-900 mb-4">
+        Hesabınıza Giriş Yapınız
+    </h1>
+</div>
+<div class="card-body">
+    <div class="login-form">
+        <form asp-controller="Account" asp-action="login" class="user" novalidate="novalidate" method="post">
+            <input type="hidden" name="" value="@Model.ReturnUrl" />
+            <div asp-validation-summary="ModelOnly" class="text-center"></div>
+            <div class="form-group">
+                @*<label asp-for="Email" class="font-size-h6 font-weight-bolder text-dark"></label>*@
+                <input asp-for="Email" class="form-control form-control-user" autocomplete="off" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                @*<div class="d-flex justify-content-between">
+                        <label asp-for="Password" class="form-control form-control-user"></label>
+                    </div>*@
+                <input asp-for="Password" class="form-control form-control-user" autocomplete="off" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group d-flex flex-wrap justify-content-between align-items-center">
+                <div class="custom-control custom-checkbox small">
+                    <input type="checkbox" asp-for="RememberMe" class="custom-control-input" id="customCheck">
+                    <label class="custom-control-label" for="customCheck" asp-for="RememberMe">Şifremi Hatırla</label>
+                </div>
+                <a asp-controller="Account" asp-action="ForgotPassword" class="text-primary font-size-h6 font-weight-bolder text-hover-primary">Şifremi Unuttum ?</a>
+            </div>
+            <div class="form-group text-center mt-10">
+                <button type="submit" class="btn btn-primary btn-user btn-block">Giriş Yap</button>
+            </div>
+        </form>
+    </div>
+</div>

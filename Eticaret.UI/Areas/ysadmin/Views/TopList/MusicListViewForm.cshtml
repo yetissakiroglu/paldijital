@@ -1,0 +1,154 @@
+﻿@model MusicListListViewModel
+
+<div class="small-header affix-top">
+    <div class="mb-4">
+        <div class="card-header py-3 d-sm-flex align-items-center justify-content-between">
+            <div class="pull-left">
+                <h4 class="m-b-xs">
+                    @Model.title
+                </h4>
+                <small>Yeni nesil panelde masaüstü ve mobil aygıtlarda hızlı bir şekilde veri ekleyebilir ve düzenleyebilirsiniz.</small>
+            </div>
+            <div class="btn-group pull-right">
+                <button name="geri_don" type="button" value="Geri Dön" onclick="javascript:window.history.go(-1);" class="btn btn-primary btn-sm"><i class="fa fa-angle-left"></i>&nbsp;Geri Dön</button>
+                <div class="btn-group">
+                    <a class="btn btn-sm green dropdown-toggle" href="javascript:;" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                        İşlemler
+                        <i class="fa fa-angle-down"></i>
+                    </a>
+                    <ul class="dropdown-menu pull-right">
+                        <li>
+                            <a asp-action="MusicListCreate" asp-route-TopMusicListId="@Model.SelectedTopMusicListId"><i class="fa fa-plus"></i>&nbsp;Yeni Ekle</a>
+                        </li>
+                        <li class="split"></li>
+                        <li>
+                            <a asp-action="MusicListIndex" asp-route-TopMusicListId="@Model.SelectedTopMusicListId"><i class="fa fa-list"></i>&nbsp;Tüm Kayıtlar</a>
+                        </li>
+                    </ul>
+                </div>
+                <input type="submit" value="KAYDET" class="btn btn-success btn-sm" />
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card-body">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" name="MusicList.musicListId" asp-for="MusicList.musicListId" value="@Model.MusicList.musicListId">
+    <input type="hidden" name="MusicList.topmusicListId" asp-for="MusicList.topmusicListId" value="@Model.MusicList.topmusicListId">
+    <input type="hidden" name="MusicList.imgPath" asp-for="MusicList.imgPath" value="@Model.MusicList.imgPath">
+    <input type="hidden" name="MusicList.filePath" asp-for="MusicList.filePath" value="@Model.MusicList.filePath">
+    <input type="hidden" name="SelectedTopMusicListId" asp-for="SelectedTopMusicListId" value="@Model.SelectedTopMusicListId">
+
+
+    <div class="form-group">
+        <label asp-for="MusicList.songName" class="control-label"></label>
+        <input asp-for="MusicList.songName" class="form-control" />
+        <span asp-validation-for="MusicList.songName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="MusicList.singerName" class="control-label"></label>
+        <input asp-for="MusicList.singerName" class="form-control" />
+        <span asp-validation-for="MusicList.singerName" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="MusicList.filePath" class="control-label"></label>
+        <div class="row">
+            <div class="col-sm-12">
+                @if (Model.MusicList.filePath == null)
+                {
+                    <p>Mp3 Dosyası Yok</p>
+                }
+                else
+                {
+                    <div class="form-group">
+                        <audio controls>
+                            <source src="video.ogg" type="audio/ogg">
+                            <source src="@Model.MusicList.filePath" type="audio/mpeg">
+                        </audio>
+                    </div>
+
+                }
+                <div class="fileinput fileinput-new" data-provides="fileinput">
+                    <div class="input-group input-large">
+                        <div class="form-control uneditable-input input-fixed input-medium" data-trigger="fileinput">
+                            <i class="fa fa-file fileinput-exists"></i>&nbsp;
+                            <span class="fileinput-filename">@Model.MusicList.filePath</span>
+                        </div>
+                        <span class="input-group-addon btn default btn-file">
+                            <span class="fileinput-new"> Dosya Seç </span>
+                            <span class="fileinput-exists"> Değiştir </span>
+                            <input type="file" id="filePath" name="filePath" class="form-control" accept=".mp3" />
+                        </span>
+                        <a href="javascript:;" class="input-group-addon btn red fileinput-exists" data-dismiss="fileinput"> Sil </a>
+                    </div>
+                </div>
+                <br />
+                <span class="help-block">Sadece mp3</span>
+            </div>
+        </div>
+        <span asp-validation-for="MusicList.filePath" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <div class="row">
+            <div class="col-sm-6">
+                <label asp-for="MusicList.thisWeek" class="control-label"></label>
+                <input asp-for="MusicList.thisWeek" class="form-control" />
+                <span asp-validation-for="MusicList.thisWeek" class="text-danger"></span>
+            </div>
+            <div class="col-sm-6">
+                <label asp-for="MusicList.lastWeek" class="control-label"></label>
+                <input asp-for="MusicList.lastWeek" class="form-control" />
+                <span asp-validation-for="MusicList.lastWeek" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="row">
+            <div class="form-group col-md-4">
+                <div class="row">
+                    @Html.LabelFor(model => model.MusicList.imgPath, htmlAttributes: new { @class = "control-label col-md-12" })
+                    <div class="col-md-12">
+                        <div class="fileinput fileinput-new" data-provides="fileinput">
+                            <div class="fileinput-new thumbnail">
+                                @if (Model.MusicList.imgPath == null)
+                                {
+                                    <img src="https://via.placeholder.com/200x200" alt="" />
+                                }
+                                else
+                                {<img src="@Model.MusicList.imgPath" width="50" alt="" />
+                                }
+                            </div>
+                            <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"> </div>
+                            <div>
+                                <span class="btn default btn-file">
+                                    <span class="fileinput-new"> Resim Seç </span>
+                                    <span class="fileinput-exists"> Değiştir </span>
+                                    <input type="file" id="imgPath" name="imgPath" class="form-control" accept=".jpg,.png" />
+                                </span>
+                                <a href="javascript:;" class="btn red fileinput-exists" data-dismiss="fileinput"> Sil </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @Html.ValidationMessageFor(model => model.MusicList.imgPath, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="MusicList.row" class="control-label"></label>
+        <input asp-for="MusicList.row" class="form-control" />
+        <span asp-validation-for="MusicList.row" class="text-danger"></span>
+    </div>
+
+    <div class="form-group form-check">
+        <label class="form-check-label">
+            <input class="form-check-input" asp-for="MusicList.status" /> @Html.DisplayNameFor(model => model.MusicList.status)
+        </label>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="KAYDET" class="btn btn-primary" />
+    </div>
+</div>
