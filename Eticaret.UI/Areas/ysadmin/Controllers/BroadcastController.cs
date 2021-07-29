@@ -9,6 +9,7 @@ using Eticaret.UI.Areas.ysadmin.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Eticaret.Core.Extensions;
+using Eticaret.Business.Abstract.Admin;
 
 namespace Eticaret.UI.Areas.ysadmin.Controllers
 {

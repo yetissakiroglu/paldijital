@@ -12,6 +12,7 @@ using Eticaret.Entities.Concrete;
 using Microsoft.AspNetCore.Http;
 using Mapster;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Eticaret.Business.Abstract.Admin;
 
 namespace Eticaret.UI.Areas.ysadmin.Controllers
 {

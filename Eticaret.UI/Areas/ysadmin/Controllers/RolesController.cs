@@ -13,6 +13,7 @@ using Eticaret.Core.Extensions;
 using System.Threading.Tasks;
 using WebUIStandart.Areas.ysadmin.ClaimsRepository;
 using System.Security.Claims;
+using Eticaret.Business.Abstract.Admin;
 
 namespace Eticaret.UI.Areas.ysadmin.Controllers
 {

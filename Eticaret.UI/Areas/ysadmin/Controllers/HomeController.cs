@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Eticaret.Business.Abstract;
+using Eticaret.Business.Abstract.Admin;
 using Eticaret.UI.Areas.ysadmin.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
