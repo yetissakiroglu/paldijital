@@ -1,0 +1,61 @@
+﻿@model ApplicationViewListModel
+<!-- main content -->
+<div class="container-fluid">
+    <div class="row row--grid">
+        <!-- breadcrumb -->
+        <div class="col-12">
+            <ul class="breadcrumb">
+                <li class="breadcrumb__item"><a asp-controller="Home">Anasayfa</a></li>
+                <li class="breadcrumb__item breadcrumb__item--active">@Model.title</li>
+
+            </ul>
+        </div>
+        <!-- end breadcrumb -->
+        <!-- title -->
+        <div class="col-12">
+            <div class="main__title main__title--page">
+                <h1>@Model.title</h1>
+            </div>
+        </div>
+        <!-- end title -->
+    </div>
+
+    <div class="row row--grid">
+
+        <div class="col-12 col-md-6 col-lg-6 order-md-2 order-lg-1">
+            <div class="plan plan--red">
+                <h3 class="plan__title text-center">
+                    iPhone / iPad
+                </h3>
+                <p>Pal Media iOS (iPhone, iPad ve iPod Touch) cihazlarında müzik her zaman yanınızda! Pal Media radyolarını kesintisiz canlı dinleyebilirsiniz...</p>
+                <div class="row justify-content-start">
+
+                    <div class="col-8">
+                        <button class="plan__btn plan__btn_m0" type="button">Uygulamayı İndir</button>
+                    </div>
+                    <div class="col-4">
+                        <img src="/_tema/icon/app/appstore.png" alt="Ios Uygulaması" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-6 col-lg-6 order-md-2 order-lg-2">
+            <div class="plan plan--red">
+                <h3 class="plan__title text-center">
+                    Google Android Phone / Tablet
+                </h3>
+                <p>Pal Media Google Android cihazlarında müzik her zaman yanınızda! Pal Media radyolarını kesintisiz canlı dinleyebilirsiniz...</p>
+                <div class="row">
+                    <div class="col-8 col-md-8">
+                        <button class="plan__btn plan__btn_m0" type="button">Uygulamayı İndir</button>
+                    </div>
+                    <div class="col-4 col-md-4">
+                        <img src="/_tema/icon/app/googleplay.png" class=" img-responsive" alt="Android Uygulaması" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
