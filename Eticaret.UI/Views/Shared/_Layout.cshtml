@@ -153,13 +153,6 @@
     <!-- end player -->
     <!-- main content -->
     <main class="main">
-        <div class="col-md-12">
-
-            @if (TempData["message"] != null)
-            {
-                <partial name="_resultmessage" model="@(TempData.Get<ResultMessage>("message"))" />
-            }
-        </div>
         @RenderBody()
     </main>
     <!-- end main content -->

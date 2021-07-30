@@ -40,8 +40,8 @@ namespace Eticaret.Business.DependencyResolvers.Autofac
             builder.RegisterType<EfBildirWebDal>().As<IBildirWebDal>();
 
             //İletişim kısmı
-            builder.RegisterType<ContactsWebManager>().As<IBildirWebService>();
-            builder.RegisterType<EfContactsWebDal>().As<IBildirWebDal>();
+            builder.RegisterType<ContactsWebManager>().As<IContactsWebService>();
+            builder.RegisterType<EfContactsWebDal>().As<IContactsWebDal>();
 
 
 
