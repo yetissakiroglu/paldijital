@@ -175,7 +175,7 @@ namespace Eticaret.UI
               );
 
                 routes.MapRoute(
-                    name: "NewsDetail", 
+                    name: "NewsDetail",
                     template: "haberler/{categoryUrl}/{newsUrl}",
                     defaults: new { controller = "News", action = "Detail" });
 
@@ -203,9 +203,16 @@ namespace Eticaret.UI
      template: "bildir",
      defaults: new { controller = "bildir", action = "Index" });
 
-                 
+                routes.MapRoute(name: "Contacts",
+template: "contacts",
+defaults: new { controller = "contacts", action = "Index" });
 
-        });
+
+
+
+
+
+            });
 
 
         }
