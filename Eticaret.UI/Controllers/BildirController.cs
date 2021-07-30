@@ -10,12 +10,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using Eticaret.Core.Extensions;
 using Eticaret.Core.Utilities.Messages.WebMessage;
+using AutoMapper;
 
 namespace Eticaret.UI.Controllers
 {
     public class BildirController : Controller
     {
-        IBildirWebService _bildirWebService;
+        private readonly IBildirWebService _bildirWebService;
 
         public BildirController(IBildirWebService bildirWebService)
         {
@@ -32,13 +33,18 @@ namespace Eticaret.UI.Controllers
         [HttpPost]
         public async Task<IActionResult> Save(BildirViewListModel model)
         {
-            if (!ModelState.IsValid) return View(model);
+            if (!ModelState.IsValid)
+            {
+                model.title = Titles.Bildir;
+                return View("Index", model);
+            }
+
             Bildir entity = new Bildir()
             {
-                name=model.Bildir.name,
-                email=model.Bildir.email,
+                name = model.Bildir.name,
+                email = model.Bildir.email,
                 message = model.Bildir.message
-               
+
             };
             var result = _bildirWebService.Create(entity);
 
@@ -53,7 +59,7 @@ namespace Eticaret.UI.Controllers
 
             }
 
-            return RedirectToAction("Index");
+            return View("Index");
         }
 
     }

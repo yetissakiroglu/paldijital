@@ -22,7 +22,6 @@
 
 
     <div class="row row--grid">
-
         <div class="col-md-12">
             @if (TempData["message"] != null)
             {
@@ -30,23 +29,29 @@
             }
         </div>
 
+        <p>Uygulama ile ilgili hataları bizlere bildirmek isterseniz. Aşağıdaki formu doldurunuz. Bu bildirimler sayesinde uygulamayı daha iyi bir hale getirmek istiyor. </p>
         <div class="col-lg-offset-2 col-12 col-lg-7 col-xl-8">
             @using (Html.BeginForm("Save", "Bildir", FormMethod.Post, new { @enctype = "multipart/form-data", @class = "sign__form sign__form--contacts" }))
             {
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
                 <div class="row">
                     <div class="col-12 col-md-6">
                         <div class="sign__group">
                             @Html.TextBoxFor(m => m.Bildir.name, new { @class = "sign__input", @placeholder = "Adınız soyadınız." })
+                            @Html.ValidationMessageFor(model => model.Bildir.name, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="col-12 col-md-6">
                         <div class="sign__group">
                             @Html.TextBoxFor(m => m.Bildir.email, new { @class = "sign__input", @placeholder = "E-posta adresiniz." })
+                            @Html.ValidationMessageFor(model => model.Bildir.email, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="col-12 col-md-12">
                         <div class="sign__group">
                             @Html.TextAreaFor(m => m.Bildir.message, new { @class = "sign__textarea", @placeholder = "Uygulama hatalarını bize yazınız." })
+                            @Html.ValidationMessageFor(model => model.Bildir.message, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="col-12 col-xl-3">
