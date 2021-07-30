@@ -25,21 +25,20 @@
         <div class="col-lg-offset-2 col-12 col-lg-7 col-xl-8">
             @using (Html.BeginForm("Save", "Bildir", FormMethod.Post, new { @enctype = "multipart/form-data", @class = "sign__form sign__form--contacts" }))
             {
-
             <div class="row">
                 <div class="col-12 col-md-6">
                     <div class="sign__group">
-                        @Html.TextBoxFor(m => m.Bildir.name, new { @class = "form-control", @placeholder = "Adınız Soyadınız." })
+                        @Html.TextBoxFor(m => m.Bildir.name, new { @class = "sign__input", @placeholder = "Adınız soyadınız." })
                     </div>
                 </div>
                 <div class="col-12 col-md-6">
                     <div class="sign__group">
-                        @Html.TextBoxFor(m => m.Bildir.email, new { @class = "form-control", @placeholder = "E-posta Adresiniz." })
+                        @Html.TextBoxFor(m => m.Bildir.email, new { @class = "sign__input", @placeholder = "E-posta adresiniz." })
                     </div>
                 </div>
-                <div class="col-12 col-md-6">
+                <div class="col-12 col-md-12">
                     <div class="sign__group">
-                        @Html.TextAreaFor(m => m.Bildir.message, new { @class = "form-control", @placeholder = "Uygulama Hatasınız Bize Yazınız." })
+                        @Html.TextAreaFor(m => m.Bildir.message, new { @class = "sign__textarea", @placeholder = "Uygulama hatalarını bize yazınız." })
                     </div>
                 </div>
                            <div class="col-12 col-xl-3">
