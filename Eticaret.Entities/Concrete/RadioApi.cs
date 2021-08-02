@@ -23,14 +23,14 @@ namespace Eticaret.Entities.Concrete
         public virtual List<Banner  > Banners { get; set; }
         public virtual List<Broadcast> Broadcasts { get; set; }
         public virtual List<Frequency> Frequencys { get; set; }
-        public virtual List<Program> Programs { get; set; }
+        public virtual List<ProgramList> Programs { get; set; }
         public virtual List<TopMusicList> TopMusicLists { get; set; }
 
 
         public RadioApi()
         {
             Frequencys = new List<Frequency>();
-            Programs = new List<Program>();
+            Programs = new List<ProgramList>();
         }
     }
 }

@@ -17,16 +17,16 @@ namespace Eticaret.UI.Controllers
     {
         INewsService _newsService;
         INewsCategoryService _newsCategoryService;
-        IRadioService _radioService;
+        IRadioWebService _radioWebService;
         IRadioApiService _radioApiService;
         IDjService _djService;
         ITopMusicListWebService _topMusicListWebService;
-        public HomeController(ITopMusicListWebService topMusicListWebService, IDjService djService, INewsService newsService, INewsCategoryService newsCategoryService, IRadioService radioService, IRadioApiService radioApiService)
+        public HomeController(ITopMusicListWebService topMusicListWebService, IDjService djService, INewsService newsService, INewsCategoryService newsCategoryService, IRadioWebService radioWebService, IRadioApiService radioApiService)
         {
             _djService = djService;
             _newsService = newsService;
             _newsCategoryService = newsCategoryService;
-            _radioService = radioService;
+            _radioWebService = radioWebService;
             _radioApiService = radioApiService;
             _topMusicListWebService = topMusicListWebService;
 
@@ -42,7 +42,7 @@ namespace Eticaret.UI.Controllers
             var mansetler = _newsService.HomeManset(5);
             var onecikanlar = _newsService.HomeOnecikan(8);
             var programlar = _radioApiService.ListRadioApiWithFull();
-            var radios = _radioService.ListRadio();
+            var radios = _radioWebService.ListRadio();
             var djs = _djService.ListDjWithRadioApi();
             var listeler = _topMusicListWebService.ListTopMusicListWithMusicListWithRadioApi();
 

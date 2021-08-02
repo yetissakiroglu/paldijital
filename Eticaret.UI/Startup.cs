@@ -196,16 +196,28 @@ namespace Eticaret.UI
 
 
                 routes.MapRoute(name: "Frequency",
-           template: "frekanslar",
-           defaults: new { controller = "Frequency", action = "Index" });
+                template: "frekanslar",
+                defaults: new { controller = "Frequency", action = "Index" });
+
+
+                routes.MapRoute(
+               name: "podcastDetail",
+               template: "podcast/{podcastUrl}",
+               defaults: new { controller = "Podcast", action = "Detail" });
+
+
+                routes.MapRoute(name: "Podcast",
+             template: "podcast",
+            defaults: new { controller = "Podcast", action = "Index" });
+                   
 
                 routes.MapRoute(name: "Bildir",
-     template: "bildir",
-     defaults: new { controller = "bildir", action = "Index" });
+          template: "bildir",
+          defaults: new { controller = "bildir", action = "Index" });
 
                 routes.MapRoute(name: "Contacts",
-template: "contacts",
-defaults: new { controller = "contacts", action = "Index" });
+          template: "contacts",
+          defaults: new { controller = "contacts", action = "Index" });
 
 
 

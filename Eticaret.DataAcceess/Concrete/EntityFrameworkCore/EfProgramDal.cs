@@ -10,7 +10,7 @@ using System.Text;
 
 namespace Eticaret.DataAccess.Concrete.EntityFrameworkCore
 {
-    public class EfProgramDal : EfEntityRepositoryBase<Program, WebDbContext>, IProgramDal
+    public class EfProgramDal : EfEntityRepositoryBase<ProgramList, WebDbContext>, IProgramDal
     {
         public int CountProgramByradioApiId(int radioApiId)
         {
@@ -28,7 +28,7 @@ namespace Eticaret.DataAccess.Concrete.EntityFrameworkCore
             }
         }
 
-        public Program GetProgramWithRadioApiByprogramId(int programId)
+        public ProgramList GetProgramWithRadioApiByprogramId(int programId)
         {
             using (var context = new WebDbContext())
             {
@@ -40,7 +40,7 @@ namespace Eticaret.DataAccess.Concrete.EntityFrameworkCore
         }
 
 
-        public List<Program> ListProgramWithRadioApi()
+        public List<ProgramList> ListProgramWithRadioApi()
         {
             using (var context = new WebDbContext())
             {
@@ -50,7 +50,7 @@ namespace Eticaret.DataAccess.Concrete.EntityFrameworkCore
             }
         }
 
-        public List<Program> ListProgramWithRadioApiByradioApiId(int radioApiId)
+        public List<ProgramList> ListProgramWithRadioApiByradioApiId(int radioApiId)
         {
             using (var context = new WebDbContext())
             {
@@ -61,7 +61,7 @@ namespace Eticaret.DataAccess.Concrete.EntityFrameworkCore
             }
         }
 
-        public List<Program> ListProgramPaging(int page, int pageSize)
+        public List<ProgramList> ListProgramPaging(int page, int pageSize)
         {
             using (var context = new WebDbContext())
             {
@@ -71,7 +71,7 @@ namespace Eticaret.DataAccess.Concrete.EntityFrameworkCore
             }
         }
 
-        public List<Program> ListProgramWithRadioApiPaging(int page, int pageSize)
+        public List<ProgramList> ListProgramWithRadioApiPaging(int page, int pageSize)
         {
             using (var context = new WebDbContext())
             {
@@ -82,7 +82,7 @@ namespace Eticaret.DataAccess.Concrete.EntityFrameworkCore
             }
         }
 
-        public List<Program> ListProgramWithRadioApiPagingByradioApiId(int radioApiId, int page, int pageSize)
+        public List<ProgramList> ListProgramWithRadioApiPagingByradioApiId(int radioApiId, int page, int pageSize)
         {
             using (var context = new WebDbContext())
             {
@@ -99,7 +99,7 @@ namespace Eticaret.DataAccess.Concrete.EntityFrameworkCore
             }
         }
 
-        public List<Program> ListProgramWithRadioApiPagingByradioApiTitle(string radioApi, int page, int pageSize)
+        public List<ProgramList> ListProgramWithRadioApiPagingByradioApiTitle(string radioApi, int page, int pageSize)
         {
             using (var context = new WebDbContext())
             {
@@ -114,7 +114,7 @@ namespace Eticaret.DataAccess.Concrete.EntityFrameworkCore
             }
         }
 
-        public List<Program> ListProgramWithRadioApiAndAramaPaging(string aramametin, int page, int pageSize)
+        public List<ProgramList> ListProgramWithRadioApiAndAramaPaging(string aramametin, int page, int pageSize)
         {
             using (var context = new WebDbContext())
             {
@@ -134,7 +134,7 @@ namespace Eticaret.DataAccess.Concrete.EntityFrameworkCore
 
         }
 
-        public List<Program> ListProgramWithRadioApiPagingByradioApiIdAndArama(string aramametin, int radioApiId, int page, int pageSize)
+        public List<ProgramList> ListProgramWithRadioApiPagingByradioApiIdAndArama(string aramametin, int radioApiId, int page, int pageSize)
         {
             using (var context = new WebDbContext())
             {
@@ -148,6 +148,7 @@ namespace Eticaret.DataAccess.Concrete.EntityFrameworkCore
                 {
                     news = news.Where(q => q.title.Contains(aramametin));
                 }
+
                 news = news.Include(i => i.RadioApi);
 
                 return news.Skip((page - 1) * pageSize).Take(pageSize).ToList();

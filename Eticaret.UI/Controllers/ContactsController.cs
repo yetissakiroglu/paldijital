@@ -17,6 +17,8 @@ namespace Eticaret.UI.Controllers
         {
             _contactsWebService = contactsWebService;
         }
+
+        [Route("bize-ulasin")]
         public IActionResult Index()
         {
             ContactsViewListModel newmodel = new ContactsViewListModel();

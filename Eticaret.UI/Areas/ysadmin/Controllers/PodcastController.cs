@@ -30,7 +30,7 @@ namespace Eticaret.UI.Areas.ysadmin.Controllers
             _podcastMusicListService = podcastMusicListService;
             _radioApiService = radioApiService;
         }
-
+        [Route("podcasts")]
         public IActionResult Index(DateTime SDate, DateTime FDate, int limit, string metin, int programId, int page = 1)
         {
             if (limit == 0)
@@ -102,7 +102,9 @@ namespace Eticaret.UI.Areas.ysadmin.Controllers
             return View(model);
         }
         [HttpPost]
-        public async Task<IActionResult> Create(PodcastMusicListListViewModel model, IFormFile soundPath)
+
+        [RequestSizeLimit(150)]
+        public async Task<IActionResult> Create([FromBody]  PodcastMusicListListViewModel model, IFormFile soundPath)
         {
             PodcastMusicList entity = model.PodcastMusicList.Adapt<PodcastMusicList>();
 

@@ -1,7 +1,7 @@
 /*==============================
 	Fonts
 ==============================*/
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&amp;family=Roboto:wght@400;500&amp;display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 /*==============================
 	Common styles
 ==============================*/
@@ -16,7 +16,7 @@ body {
 }
 
 body {
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Exo 2', sans-serif;
     font-weight: 400;
     background-color: #f6f9fb;
     -webkit-font-smoothing: antialiased;
@@ -313,7 +313,7 @@ body::-webkit-scrollbar-thumb {
     position: absolute;
     top: 1px;
     left: 10px;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Exo 2', sans-serif;
     font-size: 10px;
     pointer-events: none;
 }
@@ -1280,7 +1280,7 @@ body::-webkit-scrollbar-thumb {
         font-family: 'Roboto', sans-serif;
         font-weight: 400;
         color: #0e2d49;
-        font-size: 30px;
+        font-size: 25px;
         line-height: 140%;
         margin-bottom: 0;
         position: relative;
@@ -1431,7 +1431,7 @@ body::-webkit-scrollbar-thumb {
 
 .main__title--page {
     margin-bottom: 0;
-    margin-top: 50px;
+    margin-top: 0;
 }
 
 .main__link {
@@ -1635,6 +1635,7 @@ body::-webkit-scrollbar-thumb {
     flex-wrap: wrap;
     width: 100%;
     margin-top: 10px;
+    border-bottom: 0;
 }
 
     .main__tabs li {
@@ -1654,10 +1655,10 @@ body::-webkit-scrollbar-thumb {
         height: 45px;
         min-width: 70px;
         width: auto;
+        background-color: #e4638b !important;
         color: #fff;
         font-size: 14px;
-        background-color: #e15480;
-        border-radius: 20px;
+        border-radius: 20px !important;
         padding: 0 20px;
     }
 
@@ -1869,12 +1870,12 @@ body::-webkit-scrollbar-thumb {
     }
 
     .main__title {
-        margin-top: 70px;
+        margin-top: 0;
         margin-bottom: 0;
     }
 
         .main__title h1 {
-            font-size: 36px;
+            font-size: 25px;
         }
 
         .main__title h2 {
@@ -2106,7 +2107,7 @@ body::-webkit-scrollbar-thumb {
 
 @media (min-width: 1200px) {
     .breadcrumb {
-        margin-top: 25px;
+        margin-top: 20px;
     }
 
     .breadcrumb--hidden-desk {
@@ -4804,13 +4805,15 @@ body::-webkit-scrollbar-thumb {
     font-weight: 400;
     margin-top: 20px;
 }
+
 .plan__btn_m0 {
-margin:0 !important;
+    margin: 0 !important;
 }
-    .plan__btn:hover {
-        color: #fff;
-        background-color: #f65656;
-    }
+
+.plan__btn:hover {
+    color: #fff;
+    background-color: #f65656;
+}
 
 @media (min-width: 768px) {
     .plan {

@@ -40,7 +40,7 @@ namespace Eticaret.DataAccess.Concrete.EntityFrameworkCore.Contexts
         public DbSet<Frequency> Frequencys { get; set; }
         public DbSet<MusicList> MusicLists { get; set; }
         public DbSet<PodcastMusicList> PodcastMusicLists { get; set; }
-        public DbSet<Program> Programs { get; set; }
+        public DbSet<ProgramList> Programs { get; set; }
         public DbSet<TopMusicList> TopMusicLists { get; set; }
         public DbSet<Seo> Seos { get; set; }
 

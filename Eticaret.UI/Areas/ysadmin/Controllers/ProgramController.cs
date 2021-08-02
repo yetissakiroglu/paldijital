@@ -88,19 +88,19 @@ namespace Eticaret.UI.Areas.ysadmin.Controllers
         }
         public IActionResult Create()
         {
-            List<Eticaret.Entities.Concrete.Program> radioapi = new List<Eticaret.Entities.Concrete.Program>();
+            List<Eticaret.Entities.Concrete.ProgramList> radioapi = new List<Eticaret.Entities.Concrete.ProgramList>();
             ProgramListViewModel model = new ProgramListViewModel()
             {
                 title = "YENİ PROFRAM OLUŞTUR",
                 RadiosApi = new SelectList(_radioApiService.ListWebRadio().Data, "radioApiId", "title", "--Select--"),
-                Program = new Eticaret.Entities.Concrete.Program(),
+                Program = new Eticaret.Entities.Concrete.ProgramList(),
             };
             return View(model);
         }
         [HttpPost]
         public async Task<IActionResult> Create(ProgramListViewModel model, IFormFile imgPath)
         {
-            Eticaret.Entities.Concrete.Program entity = model.Program.Adapt<Eticaret.Entities.Concrete.Program>();
+            Eticaret.Entities.Concrete.ProgramList entity = model.Program.Adapt<Eticaret.Entities.Concrete.ProgramList>();
             var ImgFile = await DosyaCreateExtensions.ImgCreate(imgPath, "program", model.Program.title);
             entity.imgPath = ImgFile;
             entity.url = Replace.UrlAndTitleReplace(model.Program.url == null ? model.Program.title : model.Program.url);
@@ -137,8 +137,8 @@ namespace Eticaret.UI.Areas.ysadmin.Controllers
             {
                 var model = new ProgramListViewModel()
                 {
-                    title = program.Data.Adapt<Eticaret.Entities.Concrete.Program>().title,
-                    Program = program.Data.Adapt<Eticaret.Entities.Concrete.Program>(),
+                    title = program.Data.Adapt<Eticaret.Entities.Concrete.ProgramList>().title,
+                    Program = program.Data.Adapt<Eticaret.Entities.Concrete.ProgramList>(),
                     RadiosApi = new SelectList(_radioApiService.ListWebRadio().Data, "radioApiId", "title"),
                 };
 
@@ -155,7 +155,7 @@ namespace Eticaret.UI.Areas.ysadmin.Controllers
             var editmodel = _programService.GetProgramByprogramId(model.Program.programId);
             if (editmodel.Success)
             {
-                Eticaret.Entities.Concrete.Program entity = model.Program.Adapt<Eticaret.Entities.Concrete.Program>();
+                Eticaret.Entities.Concrete.ProgramList entity = model.Program.Adapt<Eticaret.Entities.Concrete.ProgramList>();
 
                 if (imgPath != null)
                 {
@@ -230,7 +230,7 @@ namespace Eticaret.UI.Areas.ysadmin.Controllers
             var deletemodel = _programService.GetProgramByprogramId((int)id);
             if (deletemodel.Success)
             {
-                Eticaret.Entities.Concrete.Program entity = deletemodel.Data.Adapt<Eticaret.Entities.Concrete.Program>();
+                Eticaret.Entities.Concrete.ProgramList entity = deletemodel.Data.Adapt<Eticaret.Entities.Concrete.ProgramList>();
                 var modeldelete = _programService.Delete(entity);
                 if (modeldelete.Success)
                 {

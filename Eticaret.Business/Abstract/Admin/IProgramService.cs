@@ -8,31 +8,31 @@ namespace Eticaret.Business.Abstract.Admin
 {
     public interface IProgramService
     {
-        IDataResult<Program> GetProgramByprogramId(int programId);
-        IDataResult<List<Program>> ListProgramByradioApiId(int radioApiId);
-        IDataResult<List<Program>> ListProgram();
-        IResult Create(Program program);
-        IResult Update(Program program);
-        IResult Delete(Program program);
+        IDataResult<ProgramList> GetProgramByprogramId(int programId);
+        IDataResult<List<ProgramList>> ListProgramByradioApiId(int radioApiId);
+        IDataResult<List<ProgramList>> ListProgram();
+        IResult Create(ProgramList program);
+        IResult Update(ProgramList program);
+        IResult Delete(ProgramList program);
         IDataResult<int> CountProgram();
 
 
 
 
 
-        IDataResult<List<Program>> ListProgramWithRadioApi();
-        IDataResult<List<Program>> ListProgramPaging(int page, int pageSize);
-        IDataResult<List<Program>> ListProgramWithRadioApiPaging(int page, int pageSize);
+        IDataResult<List<ProgramList>> ListProgramWithRadioApi();
+        IDataResult<List<ProgramList>> ListProgramPaging(int page, int pageSize);
+        IDataResult<List<ProgramList>> ListProgramWithRadioApiPaging(int page, int pageSize);
 
-        IDataResult<List<Program>> ListProgramWithRadioApiPagingByradioApiId(int radioApiId, int page, int pageSize);
-        IDataResult<List<Program>> ListProgramWithRadioApiPagingByradioApiTitle(string radioApi, int page, int pageSize);
-        IDataResult<Program> GetProgramWithRadioApiByprogramId(int programId);
-        IDataResult<List<Program>> ListProgramWithRadioApiByradioApiId(int radioApiId);
+        IDataResult<List<ProgramList>> ListProgramWithRadioApiPagingByradioApiId(int radioApiId, int page, int pageSize);
+        IDataResult<List<ProgramList>> ListProgramWithRadioApiPagingByradioApiTitle(string radioApi, int page, int pageSize);
+        IDataResult<ProgramList> GetProgramWithRadioApiByprogramId(int programId);
+        IDataResult<List<ProgramList>> ListProgramWithRadioApiByradioApiId(int radioApiId);
         IDataResult<int> CountProgramByradioApiId(int radioApiId);
         //Arama
-        IDataResult<List<Program>> ListProgramWithRadioApiAndAramaPaging(string aramametin, int page, int pageSize);
+        IDataResult<List<ProgramList>> ListProgramWithRadioApiAndAramaPaging(string aramametin, int page, int pageSize);
         //Arama
-        IDataResult<List<Program>> ListProgramWithRadioApiPagingByradioApiIdAndArama(string aramametin, int radioApiId, int page, int pageSize);
+        IDataResult<List<ProgramList>> ListProgramWithRadioApiPagingByradioApiIdAndArama(string aramametin, int radioApiId, int page, int pageSize);
 
     }
 }

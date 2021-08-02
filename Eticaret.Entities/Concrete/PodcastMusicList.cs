@@ -11,8 +11,8 @@ namespace Eticaret.Entities.Concrete
     {
         [Display(Name = "Podcast Id: ")]
         public int podcastMusicListId { get; set; }
-        [ForeignKey("Program")]
         [Display(Name = "Ait Olduğu Program: ")]
+        [ForeignKey("Program")]
         public int programId { get; set; }
         [Display(Name = "Podcast Adı: ")]
         public string title { get; set; }
@@ -24,7 +24,7 @@ namespace Eticaret.Entities.Concrete
         public DateTime startingDate { get; set; }
         public int row { get; set; }
         public bool status { get; set; }
-        public virtual Program Program { get; set; }
+        public virtual ProgramList Program { get; set; }
 
     }
 }

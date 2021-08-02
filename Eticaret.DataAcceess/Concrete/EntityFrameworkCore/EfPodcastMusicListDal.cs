@@ -169,7 +169,7 @@ namespace Eticaret.DataAccess.Concrete.EntityFrameworkCore
                 news = news
                            .Include(i => i.Program);
 
-                news = news.Where(q => q.startingDate >= sData && q.startingDate <= fData  );
+     //           news = news.Where(q => q.startingDate >= sData && q.startingDate <= fData  );
 
         
 

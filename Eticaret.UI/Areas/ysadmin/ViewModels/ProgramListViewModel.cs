@@ -9,8 +9,8 @@ namespace Eticaret.UI.Areas.ysadmin.ViewModels
     public class ProgramListViewModel
     {
         public string title { get; set; }
-        public Eticaret.Entities.Concrete.Program Program { get; set; }
-        public List<Eticaret.Entities.Concrete.Program> Programs { get; set; }
+        public Eticaret.Entities.Concrete.ProgramList Program { get; set; }
+        public List<Eticaret.Entities.Concrete.ProgramList> Programs { get; set; }
 
         public IEnumerable<SelectListItem> RadiosApi { get; set; }
 
