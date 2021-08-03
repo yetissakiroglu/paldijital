@@ -13,5 +13,7 @@ namespace Eticaret.UI.ViewModels
         public ProgramList Program { get; set; }
         public List<ProgramList> Programs { get; set; }
 
+        //Ajax 
+        public string soundPath { get; set; }
     }
 }

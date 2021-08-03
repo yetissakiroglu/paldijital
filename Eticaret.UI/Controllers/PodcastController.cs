@@ -51,12 +51,8 @@ namespace Eticaret.UI.Controllers
                     };
                     note.Add(selectList);
                 }
-
                 newmodel.RadiosApiSelectListItem = note;
-
-
                 return View(newmodel);
-
             }
             catch
             {
@@ -70,8 +66,6 @@ namespace Eticaret.UI.Controllers
             try
             {
                 PodcastViewListModel viewmodel = new PodcastViewListModel();
-
-
                 if (!string.IsNullOrEmpty(podcastUrl))
                 {
                     var model = _programWebService.GetProgramWithPodcastListByprogramUrl(podcastUrl);
@@ -80,8 +74,6 @@ namespace Eticaret.UI.Controllers
                         viewmodel.title = Titles.Podcastler;
                         viewmodel.Program = model.Data;
                     }
-
-
                 }
                 return View(viewmodel);
             }
@@ -91,5 +83,19 @@ namespace Eticaret.UI.Controllers
             }
         }
 
+        [HttpGet]
+        public IActionResult PodcastGetAjax(int? podcastid)
+        {
+            PodcastViewListModel newmodel = new PodcastViewListModel();
+            if (podcastid.HasValue)
+            {
+                var radyo = _podcastWebService.GetPodcastbyId((int)podcastid);
+                if (radyo.Success)
+                {
+                    newmodel.soundPath = radyo.Data.soundPath;
+                }
+            }
+            return Ok(newmodel);
+        }
     }
 }

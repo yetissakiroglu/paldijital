@@ -28,13 +28,28 @@ namespace Eticaret.UI.Controllers
 
              var radios = _radioService.ListRadio();
             if (radios.Success)
-            {
+            { 
                 modelradio.Radios = radios.Data;
             }
            
 
 
             return View(modelradio);
+        }
+
+        [HttpGet]
+        public IActionResult RadyoGetAjax(int? rdid)
+        {
+            RadioViewListeModel newmodel = new RadioViewListeModel();
+            if (rdid.HasValue)
+            {
+                var radyo = _radioService.GetRadioByradioId((int)rdid);
+                if (radyo.Success)
+                {
+                    newmodel.streamUrl = radyo.Data.streamUrl;
+                }
+            }
+            return Json(newmodel);
         }
     }
 }

@@ -8,7 +8,13 @@ namespace Eticaret.UI.ViewModels
 {
     public class RadioViewListeModel
     {
+
         public List<Radio> Radios { get; set; }
+
+        //Ajax tanımlamaları
+        public string streamUrl { get; set; }
+        
+
 
     }
 }

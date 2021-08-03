@@ -568,6 +568,9 @@ $(document).ready(function () {
         });
 
         function run2(link, player) {
+
+            let typedata = $(link).data('typedata');
+
             if ($(link).hasClass('play')) {
                 $(link).removeClass('play');
                 audio[0].pause();
@@ -579,21 +582,57 @@ $(document).ready(function () {
                 $(link).addClass('play');
             }
             else {
-                $('a[data-playlist]').removeClass('active');
-                $('a[data-playlist]').removeClass('pause');
-                $('a[data-playlist]').removeClass('play');
-                $(link).addClass('active');
-                $(link).addClass('play');
-                player.src = $(link).attr('href');
 
-                let title = $(link).data('title');
-                let artist = $(link).data('artist');
-                let img = $(link).data('img');
-                $('.player__title').text(title);
-                $('.player__artist').text(artist);
-                $('.player__cover img').attr('src', img);
-                audio[0].load();
-                audio[0].play();
+                if (typedata == "radio") {
+
+                    let rdId = $(link).data('rdid');
+                    $.ajax({
+                        url: '/Radio/RadyoGetAjax',
+                        data: { rdid: rdId },
+                        success: function (data) {
+                            $('a[data-playlist]').removeClass('active');
+                            $('a[data-playlist]').removeClass('pause');
+                            $('a[data-playlist]').removeClass('play');
+                            $(link).addClass('active');
+                            $(link).addClass('play');
+                            player.src = data.streamUrl + "/stream.mp3";
+
+                            let title = $(link).data('title');
+                            let artist = $(link).data('artist');
+                            let img = $(link).data('img');
+                            $('.player__title').text(title);
+                            $('.player__artist').text(artist);
+                            $('.player__cover img').attr('src', img);
+                            audio[0].load();
+                            audio[0].play();
+                        }
+                    });
+                }
+                else if (typedata == "podcast") {
+                    let podcasttid = $(link).data('podcasttid');
+                    $.ajax({
+                        url: '/Podcast/PodcastGetAjax',
+                        data: { podcastid: podcasttid },
+                        success: function (data) {
+                            $('a[data-playlist]').removeClass('active');
+                            $('a[data-playlist]').removeClass('pause');
+                            $('a[data-playlist]').removeClass('play');
+                            $(link).addClass('active');
+                            $(link).addClass('play');
+                            player.src = data.soundPath;
+                            let title = $(link).data('title');
+                            let artist = $(link).data('artist');
+                            let img = $(link).data('img');
+                            $('.player__title').text(title);
+                            $('.player__artist').text(artist);
+                            $('.player__cover img').attr('src', img);
+                            audio[0].load();
+                            audio[0].play();
+                        }
+                    });
+                }
+            
+
             }
         }
     }
