@@ -24,6 +24,11 @@ namespace Eticaret.Business.Concrete.Managers.UI
             return new SuccessDataResult<PodcastMusicList>(_podcastWebDal.Get(p => p.programId == programId));
         }
 
+        public IDataResult<PodcastMusicList> GetPodcastWithProgrambypodcastId(int podcastId)
+        {
+            return new SuccessDataResult<PodcastMusicList>(_podcastWebDal.GetPodcastWithProgrambypodcastId(podcastId));
+        }
+
         public IDataResult<List<PodcastMusicList>> ListPodcast()
         {
             return new SuccessDataResult<List<PodcastMusicList>>(_podcastWebDal.GetAll().ToList());

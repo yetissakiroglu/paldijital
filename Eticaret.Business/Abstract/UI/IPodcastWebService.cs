@@ -12,6 +12,7 @@ namespace Eticaret.Business.Abstract.UI
         IDataResult<List<PodcastMusicList>> ListPodcastbyId(int programId);
         IDataResult<List<PodcastMusicList>> ListPodcast();
         IDataResult<List<PodcastMusicList>> ListPodcastWithProgrambyProgramId(int programId);
-
+        IDataResult<PodcastMusicList> GetPodcastWithProgrambypodcastId(int podcastId);
+        
     }
 }

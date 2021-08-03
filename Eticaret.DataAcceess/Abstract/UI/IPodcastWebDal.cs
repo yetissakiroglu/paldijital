@@ -9,5 +9,7 @@ namespace Eticaret.DataAccess.Abstract.UI
     public interface IPodcastWebDal : IEntityRepository<PodcastMusicList>
     {
         List<PodcastMusicList> ListPodcastWithProgrambyProgramId(int programId);
+        PodcastMusicList GetPodcastWithProgrambypodcastId(int podcastId);
+
     }
 }

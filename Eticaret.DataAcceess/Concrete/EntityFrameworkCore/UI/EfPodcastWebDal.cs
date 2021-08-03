@@ -12,6 +12,15 @@ namespace Eticaret.DataAccess.Concrete.EntityFrameworkCore.UI
 {
     public class EfPodcastWebDal : EfEntityRepositoryBase<PodcastMusicList, WebDbContext>, IPodcastWebDal
     {
+        public PodcastMusicList GetPodcastWithProgrambypodcastId(int podcastId)
+        {
+            using (var context = new WebDbContext())
+            {
+                return context.PodcastMusicLists
+                  .Where(i => i.podcastMusicListId == podcastId)
+                  .Include(i => i.Program).FirstOrDefault();
+            }
+        }
 
         public List<PodcastMusicList> ListPodcastWithProgrambyProgramId(int programId)
         {

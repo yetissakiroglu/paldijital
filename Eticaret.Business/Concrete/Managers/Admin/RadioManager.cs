@@ -2,7 +2,7 @@
 using Eticaret.Business.Constants;
 using Eticaret.Core.Utilities.Business;
 using Eticaret.Core.Utilities.Results;
-using Eticaret.DataAccess.Abstract;
+using Eticaret.DataAccess.Abstract.Admin;
 using Eticaret.Entities.ComplexTypes;
 using Eticaret.Entities.Concrete;
 using System;

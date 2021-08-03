@@ -14,12 +14,15 @@ namespace Eticaret.UI.Controllers
     {
 
         private readonly IRadioApiWebService _radioApiWebService;
+        private readonly IProgramWebService _programWebService;
         private readonly IPodcastWebService _podcastWebService;
 
-        public PodcastController(IRadioApiWebService radioApiWebService, IPodcastWebService podcastWebService )
+
+        public PodcastController(IProgramWebService programWebService, IRadioApiWebService radioApiWebService, IPodcastWebService podcastWebService )
         {
             _radioApiWebService = radioApiWebService;
             _podcastWebService = podcastWebService;
+            _programWebService = programWebService;
         }
 
 
@@ -62,22 +65,25 @@ namespace Eticaret.UI.Controllers
 
         }
         [HttpGet]
-        public IActionResult Detail(string newsUrl)
+        public IActionResult Detail(string podcastUrl)
         {
             try
             {
-                RadioApiViewListModel newmodel = new RadioApiViewListModel();
+                PodcastViewListModel viewmodel = new PodcastViewListModel();
 
 
-                //if (!string.IsNullOrEmpty(newsUrl))
-                //{
-                //    var news = _radioApiWebService.
-                //    if (news.Success)
-                //    {
-                //        newmodel.RadioApies = news.Data;
-                //    }
-                //}
-                return View(newmodel);
+                if (!string.IsNullOrEmpty(podcastUrl))
+                {
+                    var model = _programWebService.GetProgramWithPodcastListByprogramUrl(podcastUrl);
+                    if (model.Success)
+                    {
+                        viewmodel.title = Titles.Podcastler;
+                        viewmodel.Program = model.Data;
+                    }
+
+
+                }
+                return View(viewmodel);
             }
             catch
             {

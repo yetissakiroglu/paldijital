@@ -2,10 +2,7 @@
 using Castle.DynamicProxy;
 using Eticaret.Core.Utilities.Interceptors;
 using Autofac.Extras.DynamicProxy;
-using Eticaret.DataAccess.Abstract;
-using Eticaret.DataAccess.Concrete.EntityFrameworkCore;
 using Eticaret.Business.Abstract.Admin;
-using Eticaret.Business.Concrete.Managers;
 using Pal.Core.EmailServices.Concrete;
 using Pal.Core.EmailServices;
 using Eticaret.DataAccess.Abstract.UI;
@@ -13,6 +10,8 @@ using Eticaret.Business.Abstract.UI;
 using Eticaret.Business.Concrete.Managers.UI;
 using Eticaret.DataAccess.Concrete.EntityFrameworkCore.UI;
 using Eticaret.Business.Concrete.Managers.Admin;
+using Eticaret.DataAccess.Concrete.EntityFrameworkCore.Admin;
+using Eticaret.DataAccess.Abstract.Admin;
 
 namespace Eticaret.Business.DependencyResolvers.Autofac
 {
@@ -47,7 +46,11 @@ namespace Eticaret.Business.DependencyResolvers.Autofac
             builder.RegisterType<PodcastWebManager>().As<IPodcastWebService>();
             builder.RegisterType<EfPodcastWebDal>().As<IPodcastWebDal>();
 
-            
+            //Program kısmı
+            builder.RegisterType<ProgramWebManager>().As<IProgramWebService>();
+            builder.RegisterType<EfProgramWebDal>().As<IProgramWebDal>();
+
+
 
             //Ayarlar Kısmı
             builder.RegisterType<SettingManager>().As<ISettingService>();

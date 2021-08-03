@@ -1,7 +1,7 @@
 ﻿using Eticaret.Business.Abstract.Admin;
 using Eticaret.Business.Constants;
 using Eticaret.Core.Utilities.Results;
-using Eticaret.DataAccess.Abstract;
+using Eticaret.DataAccess.Abstract.Admin;
 using Eticaret.Entities.Concrete;
 using System;
 using System.Collections.Generic;
