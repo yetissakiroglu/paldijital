@@ -60,6 +60,7 @@ namespace Eticaret.UI.Controllers
             }
 
         }
+
         [HttpGet]
         public IActionResult Detail(string podcastUrl)
         {

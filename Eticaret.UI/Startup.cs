@@ -165,64 +165,71 @@ namespace Eticaret.UI
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
-                  name: "areas",
-                 template: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
-               );
+                name: "areas",
+                template: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 
                 routes.MapRoute(
-                  name: "default",
-                  template: "{controller=Home}/{action=Index}"
-              );
+                name: "default",
+                template: "{controller=Home}/{action=Index}");
 
                 routes.MapRoute(
-                    name: "NewsDetail",
-                    template: "haberler/{categoryUrl}/{newsUrl}",
-                    defaults: new { controller = "News", action = "Detail" });
-
+                name: "NewsDetail",
+                template: "haberler/{categoryUrl}/{newsUrl}",
+                defaults: new { controller = "News", action = "Detail" });
 
                 routes.MapRoute(
-                    name: "NewsCategory",
-                    template: "haberler/{categoryUrl}",
-                    defaults: new { controller = "News", action = "Category" });
+                name: "NewsCategory",
+                template: "haberler/{categoryUrl}",
+                defaults: new { controller = "News", action = "Category" });
 
                 routes.MapRoute(name: "News",
-               template: "haberler",
-               defaults: new { controller = "News", action = "Index" });
-
+                template: "haberler",
+                defaults: new { controller = "News", action = "Index" });
 
                 routes.MapRoute(name: "Radio",
-               template: "radyolar",
-               defaults: new { controller = "Radio", action = "Index" });
-
+                template: "radyolar",
+                defaults: new { controller = "Radio", action = "Index" });
 
                 routes.MapRoute(name: "Frequency",
                 template: "frekanslar",
                 defaults: new { controller = "Frequency", action = "Index" });
 
-
                 routes.MapRoute(
-               name: "podcastDetail",
-               template: "podcast/{podcastUrl}",
-               defaults: new { controller = "Podcast", action = "Detail" });
-
+                name: "podcastDetail",
+                template: "podcast/{podcastUrl}",
+                defaults: new { controller = "Podcast", action = "Detail" });
 
                 routes.MapRoute(name: "Podcast",
-             template: "podcast",
-            defaults: new { controller = "Podcast", action = "Index" });
-                   
+                template: "podcast",
+                defaults: new { controller = "Podcast", action = "Index" });
 
                 routes.MapRoute(name: "Bildir",
-          template: "bildir",
-          defaults: new { controller = "bildir", action = "Index" });
+                template: "bildir",
+                defaults: new { controller = "bildir", action = "Index" });
 
                 routes.MapRoute(name: "Contacts",
-          template: "contacts",
-          defaults: new { controller = "contacts", action = "Index" });
+                template: "iletisim",
+                defaults: new { controller = "contacts", action = "Index" });
 
+                routes.MapRoute(name: "Events",
+                template: "etkinlikler",
+                defaults: new { controller = "Events", action = "Index" });
 
+                routes.MapRoute(name: "List",
+                template: "listeler",
+                defaults: new { controller = "List", action = "Index" });
 
+                routes.MapRoute(name: "Musicarchive",
+               template: "muzik-listeleri",
+               defaults: new { controller = "Musicarchive", action = "Index" });
 
+                routes.MapRoute(name: "Streaming",
+                template: "yayin-akisi",
+                defaults: new { controller = "Streaming", action = "Index" });
 
+                routes.MapRoute(name: "Program",
+                template: "programlar",
+                defaults: new { controller = "Program", action = "Index" });
 
             });
 
