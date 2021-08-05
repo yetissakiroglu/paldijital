@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace Eticaret.UI.ViewModels
 {
-    public class ContactsViewListModel
+    public class ContactViewListModel
     {
 
         public string title { get; set; }
 
-        public Contacts Contacts { get; set; }
+        public Contact Contact { get; set; }
 
 
 

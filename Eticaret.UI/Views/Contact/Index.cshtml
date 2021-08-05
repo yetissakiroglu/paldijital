@@ -1,4 +1,4 @@
-﻿@model ContactsViewListModel
+﻿@model ContactViewListModel
 <!-- main content -->
 <div class="container-fluid">
     <div class="row row--grid">
@@ -34,22 +34,22 @@
                     <div class="row row row--grid">
                         <div class="col-12 col-md-6">
                             <div class="sign__group">
-                                @Html.TextBoxFor(m => m.Contacts.name, new { @class = "sign__input", @placeholder = "Adınız soyadınız" })
+                                @Html.TextBoxFor(m => m.Contact.name, new { @class = "sign__input", @placeholder = "Adınız soyadınız" })
                             </div>
                         </div>
                         <div class="col-12 col-md-6">
                             <div class="sign__group">
-                                @Html.TextBoxFor(m => m.Contacts.email, new { @class = "sign__input", @placeholder = "E-posta adresiniz" })
+                                @Html.TextBoxFor(m => m.Contact.email, new { @class = "sign__input", @placeholder = "E-posta adresiniz" })
                             </div>
                         </div>
                         <div class="col-12 ">
                             <div class="sign__group">
-                                @Html.TextAreaFor(m => m.Contacts.subject, new { @class = "sign__textarea", @placeholder = "Konu" })
+                                @Html.TextAreaFor(m => m.Contact.subject, new { @class = "sign__textarea", @placeholder = "Konu" })
                             </div>
                         </div>
                         <div class="col-12 ">
                             <div class="sign__group">
-                                @Html.TextAreaFor(m => m.Contacts.message, new { @class = "sign__textarea", @placeholder = "Mesajınız" })
+                                @Html.TextAreaFor(m => m.Contact.message, new { @class = "sign__textarea", @placeholder = "Mesajınız" })
                             </div>
                         </div>
                         <div class="col-12 col-xl-3">

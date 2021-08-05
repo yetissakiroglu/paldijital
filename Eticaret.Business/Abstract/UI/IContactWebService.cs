@@ -6,8 +6,8 @@ using System.Text;
 
 namespace Eticaret.Business.Abstract.UI
 {
-    public interface IContactsWebService
+    public interface IContactWebService
     {
-        IDataResult< Contacts > GetBildirById(int Id);
+        IDataResult< Contact > GetBildirById(int Id);
     }
 }

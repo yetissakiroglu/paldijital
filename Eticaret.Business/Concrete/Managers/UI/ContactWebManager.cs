@@ -8,17 +8,17 @@ using System.Text;
 
 namespace Eticaret.Business.Concrete.Managers.UI
 {
-    public class ContactsWebManager : IContactsWebService
+    public class ContactWebManager : IContactWebService
     {
-        private IContactsWebDal _contactsWebDal;
+        private IContactWebDal _contactsWebDal;
 
-        public ContactsWebManager(IContactsWebDal contactsWebDal)
+        public ContactWebManager(IContactWebDal contactsWebDal)
         {
             _contactsWebDal = contactsWebDal;
         }
-        public IDataResult<Contacts> GetBildirById(int Id)
+        public IDataResult<Contact> GetBildirById(int Id)
         {
-            return new SuccessDataResult<Contacts>(_contactsWebDal.Get(p => p.Id == Id));
+            return new SuccessDataResult<Contact>(_contactsWebDal.Get(p => p.Id == Id));
         }
     }
 }

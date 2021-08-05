@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Eticaret.Entities.Concrete
 {
-    public class Contacts: IEntity
+    public class Contact: IEntity
     {
         public int Id { get; set; }
         public string name { get; set; }    

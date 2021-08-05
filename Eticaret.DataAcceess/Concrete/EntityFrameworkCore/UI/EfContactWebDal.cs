@@ -8,7 +8,7 @@ using System.Text;
 
 namespace Eticaret.DataAccess.Concrete.EntityFrameworkCore.UI
 {
-    public class EfContactsWebDal: EfEntityRepositoryBase<Contacts,WebDbContext>,IContactsWebDal
+    public class EfContactWebDal: EfEntityRepositoryBase<Contact,WebDbContext>,IContactWebDal
     {
     }
 }

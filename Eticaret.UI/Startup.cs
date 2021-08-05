@@ -207,9 +207,9 @@ namespace Eticaret.UI
                 template: "bildir",
                 defaults: new { controller = "bildir", action = "Index" });
 
-                routes.MapRoute(name: "Contacts",
+                routes.MapRoute(name: "Contact",
                 template: "iletisim",
-                defaults: new { controller = "contacts", action = "Index" });
+                defaults: new { controller = "contact", action = "Index" });
 
                 routes.MapRoute(name: "Events",
                 template: "etkinlikler",

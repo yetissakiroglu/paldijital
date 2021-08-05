@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Eticaret.DataAccess.Abstract.UI
 {
-    public interface IContactsWebDal:IEntityRepository<Contacts>
+    public interface IContactWebDal:IEntityRepository<Contact>
     { 
 
     }

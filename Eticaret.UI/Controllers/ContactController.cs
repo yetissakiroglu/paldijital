@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace Eticaret.UI.Controllers
 {
-    public class ContactsController : Controller
+    public class ContactController : Controller
     {
-        IContactsWebService _contactsWebService;
+        IContactWebService _contactsWebService;
 
-        public ContactsController(IContactsWebService contactsWebService)
+        public ContactController(IContactWebService contactsWebService)
         {
             _contactsWebService = contactsWebService;
         }
@@ -21,7 +21,7 @@ namespace Eticaret.UI.Controllers
         [Route("bize-ulasin")]
         public IActionResult Index()
         {
-            ContactsViewListModel newmodel = new ContactsViewListModel();
+            ContactViewListModel newmodel = new ContactViewListModel();
             newmodel.title = Titles.Iletisim;
             return View(newmodel);
         }
