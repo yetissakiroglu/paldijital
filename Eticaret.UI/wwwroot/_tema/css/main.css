@@ -1880,6 +1880,7 @@ body::-webkit-scrollbar-thumb {
 
         .main__title h2 {
             font-size: 30px;
+            margin-top: 10px;
         }
 
             .main__title h2 svg {
