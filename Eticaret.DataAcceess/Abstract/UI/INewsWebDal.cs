@@ -12,5 +12,6 @@ namespace Eticaret.DataAccess.Abstract.UI
        List<News> ListNewsWithNewsCategoryPagingByCategoryUrl(int page, int pageSize,string url);
         News GetNewsWithNewsCategoryBynewsUrl(string pageUrl);
 
+        List<News> ListNewsWithNewsCategoryBycategoryId(int categoryId, int page, int pageSize);
     }
 }

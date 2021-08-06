@@ -2,6 +2,9 @@
 	Fonts
 ==============================*/
 @import url('https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Mina:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Shadows+Into+Light+Two&display=swap');
+
 /*==============================
 	Common styles
 ==============================*/
@@ -18,7 +21,7 @@ body {
 body {
     font-family: 'Exo 2', sans-serif;
     font-weight: 400;
-    background-color: #f6f9fb;
+    background-color: #e6eaf2;
     -webkit-font-smoothing: antialiased;
 }
 
@@ -1273,13 +1276,13 @@ body::-webkit-scrollbar-thumb {
 }
 
     .main__title h1 {
+        font-family: 'Shadows Into Light Two', cursive;
         display: flex;
         flex-direction: row;
         justify-content: flex-start;
         align-items: flex-start;
-        font-family: 'Roboto', sans-serif;
-        font-weight: 400;
-        color: #0e2d49;
+        font-weight: 200;
+        color: #ffffff;
         font-size: 25px;
         line-height: 140%;
         margin-bottom: 0;
@@ -1876,6 +1879,7 @@ body::-webkit-scrollbar-thumb {
 
         .main__title h1 {
             font-size: 25px;
+            padding: 10px;
         }
 
         .main__title h2 {
@@ -1911,7 +1915,7 @@ body::-webkit-scrollbar-thumb {
         padding: 0;
         flex-direction: row;
         align-items: center;
-        margin-top: 30px;
+        margin-top: 0;
         height: 70px;
     }
 
@@ -1964,7 +1968,7 @@ body::-webkit-scrollbar-thumb {
 
 @media (min-width: 1200px) {
     .main {
-        padding: 0 15px 70px 295px;
+        padding: 0px 3px 70px 283px;
         margin-top: 0;
     }
 
@@ -2047,20 +2051,19 @@ body::-webkit-scrollbar-thumb {
 	Breadcrumb
 ==============================*/
 .breadcrumb {
+    float: right;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
-    align-items: center;
     flex-wrap: wrap;
-    width: 100%;
 }
 
 .breadcrumb__item {
     font-size: 14px;
-    color: #626f83;
+    color: #ffffff;
     transition: 0.5s ease;
     position: relative;
-    margin-right: 34px;
+    margin-right: 15px;
 }
 
     .breadcrumb__item:before {
@@ -2069,7 +2072,7 @@ body::-webkit-scrollbar-thumb {
         left: 100%;
         top: 1px;
         bottom: 0;
-        width: 34px;
+        width: 15px;
         background: url("../img/breadcrumb.svg") no-repeat center/16px auto;
     }
 
@@ -2099,7 +2102,7 @@ body::-webkit-scrollbar-thumb {
     }
 
 .breadcrumb a {
-    color: #626f83;
+    color: #ffffff;
 }
 
     .breadcrumb a:hover {
@@ -2108,7 +2111,7 @@ body::-webkit-scrollbar-thumb {
 
 @media (min-width: 1200px) {
     .breadcrumb {
-        margin-top: 20px;
+        margin-top: 15px;
     }
 
     .breadcrumb--hidden-desk {
@@ -3810,9 +3813,9 @@ body::-webkit-scrollbar-thumb {
 }
 
     .post__title a {
-        line-height: 1.3;
-        font-size: 13px;
-        color: #0e2d49;
+        line-height: 1.2;
+        font-size: 20px;
+        color: #7175b0;
         display: block;
     }
 
@@ -3840,7 +3843,7 @@ body::-webkit-scrollbar-thumb {
 }
 
     .post__date svg {
-        fill: #0e2d49;
+        fill: #7175b0;
         width: 16px;
         height: auto;
         margin-right: 5px;
@@ -3856,7 +3859,7 @@ body::-webkit-scrollbar-thumb {
 }
 
     .post__comments svg {
-        fill: #0e2d49;
+        fill: #7175b0;
         width: 16px;
         height: auto;
         margin-right: 5px;
@@ -5551,6 +5554,41 @@ body::-webkit-scrollbar-thumb {
             display: block;
             margin-bottom: 20px;
         }
+/*News infrom*/
+.article__new {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+    .article__new img {
+        height: auto;
+        width: 350px !important;
+        margin-right: 20px;
+        border-radius: 20px;
+    }
+
+    .article__new div {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
+
+        .article__new div h1 {
+            margin-bottom: 0;
+        }
+
+        .article__new div span {
+            font-size: 14px;
+            color: #626f83;
+            display: block;
+            margin-bottom: 20px;
+        }
 
 @media (min-width: 576px) {
     .article__content iframe {
@@ -5617,6 +5655,23 @@ body::-webkit-scrollbar-thumb {
         }
 
             .article__artist div span {
+                margin-bottom: 30px;
+            }
+
+    /*News info*/
+    .article__new {
+        flex-direction: row;
+    }
+
+        .article__new img {
+            margin-bottom: 0 !important;
+        }
+
+        .article__new div {
+            width: calc(100% - 220px);
+        }
+
+            .article__new div span {
                 margin-bottom: 30px;
             }
 }
@@ -7349,4 +7404,10 @@ body::-webkit-scrollbar-thumb {
         -o-transform: rotate(360deg);
         transform: rotate(360deg);
     }
+}
+
+/*.news-background*/
+
+.news-background {
+    background-color: #7175b0;
 }

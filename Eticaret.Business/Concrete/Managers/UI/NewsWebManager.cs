@@ -22,6 +22,11 @@ namespace Eticaret.Business.Concrete.Managers.UI
             return new SuccessDataResult<News>(_newsWebDal.GetNewsWithNewsCategoryBynewsUrl(pageUrl));
         }
 
+        public IDataResult<List<News>> ListNewsWithNewsCategoryBycategoryId(int categoryId, int page, int pageSize)
+        {
+            return new SuccessDataResult<List<News>>(_newsWebDal.ListNewsWithNewsCategoryBycategoryId(categoryId,page, pageSize));
+        }
+
         public IDataResult<List<News>> ListNewsWithNewsCategoryPaging(int page, int pageSize)
         {
             return new SuccessDataResult<List<News>>(_newsWebDal.ListNewsWithNewsCategoryPaging(page, pageSize));

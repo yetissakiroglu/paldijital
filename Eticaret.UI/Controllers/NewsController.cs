@@ -115,7 +115,7 @@ namespace Eticaret.UI.Controllers
         }
 
         [HttpGet]
-        public IActionResult NewsListAjax(int? page)
+        public IActionResult FullNewsListAjax(int? page)
         {
             NewsViewListModel newmodel = new NewsViewListModel();
             if (page.HasValue)
@@ -128,6 +128,22 @@ namespace Eticaret.UI.Controllers
                 }
             }
             return PartialView("_newslist", newmodel);
+        }
+        [HttpGet]
+        public IActionResult CategoryNewsListAjax(int? categoryId, int? page)
+        {
+            NewsViewListModel newmodel = new NewsViewListModel();
+            if (page.HasValue && categoryId.HasValue)
+            {
+                int pageIndex = page.Value;
+                var news = _newsWebService.ListNewsWithNewsCategoryBycategoryId((int)categoryId, pageIndex, pageSize);
+                if (news.Success)
+                {
+                    newmodel.Newsies = news.Data;
+                }
+            }
+            return PartialView("_newslist", newmodel);
+
         }
     }
 }

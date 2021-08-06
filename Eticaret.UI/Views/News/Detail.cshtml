@@ -16,14 +16,15 @@
             <div class="article">
                 <!-- article content -->
                 <div class="article__content">
-                    <img src="@Model.Detail.imgPath" alt="@Model.Detail.title" class="img-responsive">
-
+                    <div class="article__new">
+                        <img src="@Model.Detail.imgPath" alt="@Model.Detail.title" class="img-responsive">
+                    </div>
                     <div class="article__meta">
                         <a href="@Url.RouteUrl("NewsCategory", new { @categoryUrl = Model.Detail.NewsCategory.url })" class="article__category">@Model.Detail.NewsCategory.title</a>
                         <span class="article__date"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12,2A10,10,0,1,0,22,12,10.01114,10.01114,0,0,0,12,2Zm0,18a8,8,0,1,1,8-8A8.00917,8.00917,0,0,1,12,20ZM14.09814,9.63379,13,10.26807V7a1,1,0,0,0-2,0v5a1.00025,1.00025,0,0,0,1.5.86621l2.59814-1.5a1.00016,1.00016,0,1,0-1-1.73242Z" /></svg> 09.03.2021, 16:37</span>
                     </div>
                     @Html.Raw(Model.Detail.detail)
-                      </div>
+                </div>
                 <!-- end article content -->
                 <!-- share -->
                 <div class="share">

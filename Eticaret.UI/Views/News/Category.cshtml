@@ -1,55 +1,94 @@
 ﻿@model NewsViewListModel
 @{
     ViewData["Title"] = Model.NewsCategory.title + " | " + Model.title;
+    ViewData["Keywords"] = Model.NewsCategory.keywords;
 }
 
 
 <!-- main content -->
-    <div class="container-fluid">
-        <div class="row row--grid">
-            <!-- breadcrumb -->
-            <div class="col-12">
-                <ul class="breadcrumb">
-                    <li class="breadcrumb__item"><a asp-controller="Home">Anasayfa</a></li>
-                    <li class="breadcrumb__item">Haberler</li>
-                    <li class="breadcrumb__item breadcrumb__item--active">@Model.NewsCategory.title</li>
+<div class="container-fluid">
+    <div class="row row--grid">
+        <!-- breadcrumb -->
+        <div class="col-12">
+            <ul class="breadcrumb">
+                <li class="breadcrumb__item"><a asp-controller="Home">Anasayfa</a></li>
+                <li class="breadcrumb__item">Haberler</li>
+                <li class="breadcrumb__item breadcrumb__item--active">@Model.NewsCategory.title</li>
 
-                </ul>
+            </ul>
+        </div>
+        <!-- end breadcrumb -->
+        <!-- title -->
+        <div class="col-12">
+            <div class="main__title main__title--page">
+                <h1>@Model.NewsCategory.title</h1>
             </div>
-            <!-- end breadcrumb -->
-            <!-- title -->
-            <div class="col-12">
-                <div class="main__title main__title--page">
-                    <h1>@Model.NewsCategory.title</h1>
+        </div>
+        <!-- end title -->
+
+        <div class="col-12">
+            <ul class="nav nav-tabs main__tabs">
+                <li class="nav-item">
+                    <a href="@Url.RouteUrl("News")" class="nav-link"><span></span>Tümü</a>
+                </li>
+                @foreach (var item in Model.NewsCategories)
+                {
+                    <li class="nav-item">
+                        <a class="nav-link" href="@item.url" title="@item.title"><span></span>@item.title</a>
+                    </li>
+                }
+
+            </ul>
+        </div>
+    </div>
+    <div class="row row--grid">
+        <div class="col-12">
+            <div class="main__filter">
+                <form action="#" class="main__filter-search">
+                    <input type="text" placeholder="haber ara ...">
+                    <button type="button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21.71,20.29,18,16.61A9,9,0,1,0,16.61,18l3.68,3.68a1,1,0,0,0,1.42,0A1,1,0,0,0,21.71,20.29ZM11,18a7,7,0,1,1,7-7A7,7,0,0,1,11,18Z" /></svg></button>
+                </form>
+
+                <div class="main__filter-wrap">
+
+                    <select id="select_id" class="main__select">
+                        <option value="all">All genres</option>
+                        @foreach (var item in Model.NewsCategories)
+                        {
+                            <option value="@Url.RouteUrl("NewsCategory", new { @categoryUrl = item.url})"> @item.title</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="slider-radio">
+                    <input type="radio" name="grade" id="featured" checked="checked"><label for="featured">Featured</label>
+                    <input type="radio" name="grade" id="popular"><label for="popular">Popular</label>
+                    <input type="radio" name="grade" id="newest"><label for="newest">Newest</label>
                 </div>
             </div>
-            <!-- end title -->
 
-            <div class="col-12">
-                <ul class="nav nav-tabs main__tabs">
-                    <li class="nav-item">
-                        <a href="@Url.RouteUrl("News")" class="nav-link"><span></span>Tümü</a>
-                    </li>
-                    @foreach (var item in Model.NewsCategories)
-                    {
-                        <li class="nav-item">
-                            <a class="nav-link" href="@item.url" title="@item.title"><span></span>@item.title</a>
-                        </li>
-                    }
+            <div class="row row--grid" id="ajax-main">
 
-                </ul>
+                @Html.Partial("_newslist")
             </div>
         </div>
-        <div class="row row--grid" id="ajax-main">
-            @Html.Partial("_newslist", Model)
-        </div>
-        <div class="loading" style="display:none;">Loading&#8230;</div>
-
     </div>
- <!-- end main content -->
+
+
+</div>
+<!-- end main content -->
 
 @section scripts
 {
+    <script type="text/javascript">
+        var pageNo = 1;
+        $('#select_id').change(function () {
+            window.location.href = $(this).val();
+            var result = $(this).val().split("/");
+            var choose = result[result.length - 1];
+            $(this).val() = result;
+        })
+    </script>
     <script type="text/javascript">
         var pageNo = 1;
         var isPageLoad = true;
@@ -58,7 +97,7 @@
                 if (isPageLoad) {
                     $("#loading").show();
                     $.ajax({
-                        url: '/News/NewsListAjax',
+                        url: '/News/FullNewsListAjax',
                         data: { page: pageNo },
                         success: function (data) {
                             $("#ajax-main").append(data);

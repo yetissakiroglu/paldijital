@@ -23,6 +23,19 @@ namespace Eticaret.DataAccess.Concrete.EntityFrameworkCore.UI
             }
         }
 
+        public List<News> ListNewsWithNewsCategoryBycategoryId(int categoryId, int page, int pageSize)
+        {
+            using (var context = new WebDbContext())
+            {
+                var news = context.News.AsQueryable();
+                news = news
+                    .Where(i => i.categoryId == categoryId)
+                            .Include(i => i.NewsCategory);
+                return news.OrderByDescending(p => p.newsId).Skip(page * pageSize).Take(pageSize).ToList();
+            }
+           
+        }
+
         public List<News> ListNewsWithNewsCategoryPaging(int page, int pageSize)
         {
             using (var context = new WebDbContext())
@@ -31,7 +44,7 @@ namespace Eticaret.DataAccess.Concrete.EntityFrameworkCore.UI
                 news = news
                             .Include(i => i.NewsCategory);
                 return news.OrderByDescending(p => p.newsId).Skip(page * pageSize).Take(pageSize).ToList();
-                    
+
             }
         }
 
