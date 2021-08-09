@@ -524,7 +524,8 @@ $(document).ready(function () {
         var tracks = playlist.find('li a[data-playlist]');
         var len = tracks.length;
 
-        playlist.find('a[data-playlist]').on('click', function (e) {
+        playlist.find('a.postb').on('click', function (e) {
+            alert("dasdasd");
             e.preventDefault();
             let link = $(this);
             current = link.parent().index();

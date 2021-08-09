@@ -85,7 +85,7 @@ namespace Eticaret.UI.Controllers
         }
 
         [HttpGet]
-        public IActionResult PodcastGetAjax(int? podcastid)
+        public JsonResult PodcastGetAjax(int? podcastid)
         {
             PodcastViewListModel newmodel = new PodcastViewListModel();
             if (podcastid.HasValue)
@@ -96,7 +96,7 @@ namespace Eticaret.UI.Controllers
                     newmodel.soundPath = radyo.Data.soundPath;
                 }
             }
-            return Ok(newmodel);
+            return Json(newmodel);
         }
     }
 }

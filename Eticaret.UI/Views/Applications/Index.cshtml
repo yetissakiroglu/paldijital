@@ -1,27 +1,24 @@
 ﻿@model ApplicationViewListModel
 <!-- main content -->
 <div class="container-fluid">
-    <div class="row row--grid">
-        <!-- breadcrumb -->
-        <div class="col-12">
-            <ul class="breadcrumb">
-                <li class="breadcrumb__item"><a asp-controller="Home">Anasayfa</a></li>
-                <li class="breadcrumb__item breadcrumb__item--active">@Model.title</li>
-
-            </ul>
-        </div>
-        <!-- end breadcrumb -->
+    <div class="row row--grid news-background">
         <!-- title -->
-        <div class="col-12">
+        <div class="col-6">
             <div class="main__title main__title--page">
                 <h1>@Model.title</h1>
             </div>
         </div>
         <!-- end title -->
+        <!-- breadcrumb -->
+        <div class="col-6">
+            <ul class="breadcrumb">
+                <li class="breadcrumb__item"><a asp-controller="Home">Anasayfa</a></li>
+                <li class="breadcrumb__item breadcrumb__item--active">@Model.title</li>
+            </ul>
+        </div>
+        <!-- end breadcrumb -->
     </div>
-
     <div class="row row--grid">
-
         <div class="col-12 col-md-6 col-lg-6 order-md-2 order-lg-1">
             <div class="plan plan--red">
                 <h3 class="plan__title text-center">

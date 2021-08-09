@@ -1,23 +1,23 @@
 ﻿@model RadioApiViewListModel
 <div class="container-fluid">
-    <div class="row row--grid">
+    <div class="row row--grid news-background">
+        <!-- title -->
+        <div class="col-6">
+            <div class="main__title main__title--page">
+                <h1>@Model.title</h1>
+            </div>
+        </div>
+        <!-- end title -->
         <!-- breadcrumb -->
-        <div class="col-12">
+        <div class="col-6">
             <ul class="breadcrumb">
                 <li class="breadcrumb__item"><a asp-controller="Home">Anasayfa</a></li>
                 <li class="breadcrumb__item breadcrumb__item--active">@Model.title</li>
             </ul>
         </div>
         <!-- end breadcrumb -->
-        <!-- title -->
-        <div class="col-12">
-            <div class="main__title main__title--page">
-                <h1>@Model.title</h1>
-            </div>
-        </div>
-        <!-- end title -->
-    </div>
 
+    </div>
     <div class="row row--grid">
         <div class="col-12">
             <div class="main__filter">
@@ -43,15 +43,21 @@
     <script type="text/javascript">
         $('#drp_radio').change(function () {
             var selected = $(this).val();
-                    $.ajax({
-                        url: '/Frequency/FrequencyListAjax',
-                        data: { page: $('#drp_radio option:selected').val() },
-                        success: function (data) {
-                            $("#ajax-main").empty();
+            if (selected != 0) {
+                $.ajax({
+                    url: '/Frequency/FrequencyListAjax',
+                    data: { page: $('#drp_radio option:selected').val() },
+                    success: function (data) {
+                        $("#ajax-main").empty();
+                        if ($.trim(data) == '') {
+                            $("#ajax-main").append("<div class='alert alert-danger' role='alert'> Listelenecek kayıt bulunamadı. </div >");
+                        } else {
                             $("#ajax-main").append(data);
                         }
-                    });
-               
+
+                    }
+                });
+            }            
         }); 
       
     </script>

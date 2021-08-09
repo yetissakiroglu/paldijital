@@ -245,7 +245,7 @@ body::-webkit-scrollbar-thumb {
     right: 0;
     width: auto;
     height: 70px;
-    background-color: #fff;
+    background-color: #064420;
     border-bottom: 2px solid #e6eaf2;
     z-index: 101;
 }
@@ -816,7 +816,7 @@ body::-webkit-scrollbar-thumb {
 
         .header__nav a {
             font-size: 16px;
-            color: #0e2d49;
+            color: #ffffff;
             margin-right: 30px;
             font-family: 'Roboto', sans-serif;
         }
@@ -826,7 +826,7 @@ body::-webkit-scrollbar-thumb {
             }
 
             .header__nav a:hover {
-                color: #f65656;
+                color: #FAF1E6;
             }
 
     .header__all {
@@ -846,7 +846,7 @@ body::-webkit-scrollbar-thumb {
     }
 
         .header__all:hover {
-            color: #f65656;
+            color: #FAF1E6;
         }
 }
 /*==============================
@@ -1276,17 +1276,17 @@ body::-webkit-scrollbar-thumb {
 }
 
     .main__title h1 {
-        font-family: 'Shadows Into Light Two', cursive;
         display: flex;
         flex-direction: row;
         justify-content: flex-start;
         align-items: flex-start;
-        font-weight: 200;
-        color: #ffffff;
+        font-weight: 300;
+        color: #064420;
         font-size: 25px;
         line-height: 140%;
         margin-bottom: 0;
         position: relative;
+        font-family: 'Exo 2', sans-serif;
     }
 
         .main__title h1 b {
@@ -2060,7 +2060,7 @@ body::-webkit-scrollbar-thumb {
 
 .breadcrumb__item {
     font-size: 14px;
-    color: #ffffff;
+    color: #064420;
     transition: 0.5s ease;
     position: relative;
     margin-right: 15px;
@@ -2102,7 +2102,7 @@ body::-webkit-scrollbar-thumb {
     }
 
 .breadcrumb a {
-    color: #ffffff;
+    color: #064420;
 }
 
     .breadcrumb a:hover {
@@ -4699,7 +4699,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 .plan--red .plan__title {
-    color: #f65656;
+    color: #064420;
 }
 
 .plan--red .plan__list li.green svg {
@@ -4795,7 +4795,7 @@ body::-webkit-scrollbar-thumb {
     min-width: 140px;
     height: 50px;
     border-radius: 25px;
-    background-color: #0e2d49;
+    background-color: #585da2;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -4865,7 +4865,7 @@ body::-webkit-scrollbar-thumb {
 
     .contacts__social a {
         margin-top: 20px;
-        margin-right: 15px;
+        margin-right: 10px;
         display: flex;
         flex-direction: row;
         justify-content: center;
@@ -6745,7 +6745,7 @@ body::-webkit-scrollbar-thumb {
 @media (min-width: 768px) {
     .sign__form--contacts,
     .sign__form--profile {
-        margin-top: 30px;
+        margin-top: 20px;
     }
 
         .sign__form--contacts .sign__btn,
@@ -7409,5 +7409,155 @@ body::-webkit-scrollbar-thumb {
 /*.news-background*/
 
 .news-background {
-    background-color: #7175b0;
+    background-color: #ffffff;
 }
+
+.blockquote {
+    text-align: center;
+    width: 100%;
+    margin: 35px auto;
+    font-style: italic;
+    color: #555555;
+    padding: 1.2em 30px 1.2em 75px;
+    line-height: 1.6;
+    position: relative;
+}
+
+/*Efeckler*/
+.l3-left .offer-tip {
+    padding: 1.2rem;
+    top: -3.3rem;
+    left: 1.8rem;
+}
+
+.offer-tip.open {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+    -ms-transform: translateY(0);
+    transform: translateY(0);
+}
+
+.offer-tip {
+    box-sizing: border-box;
+    font-size: 12px;
+    background-color: #303338;
+    padding: 20px;
+    color: #fff;
+    border-radius: .6rem;
+    z-index: 9;
+    bottom: 0;
+    -webkit-transform: translateY(0.5rem);
+    -ms-transform: translateY(0.5rem);
+    transform: translateY(0.5rem);
+    -webkit-transition: opacity .3s ease,transform .3s cubic-bezier(0.91,0.2,0.25,1);
+    transition: opacity .3s ease,transform .3s cubic-bezier(0.91,0.2,0.25,1);
+}
+
+    .offer-tip:after {
+        display: block;
+        position: absolute;
+        bottom: -1rem;
+        left: 1rem;
+        content: "";
+        width: 0;
+        height: 0;
+        border-left: solid 1.3rem transparent;
+        border-right: solid 1.3rem transparent;
+        border-top: solid 1.3rem #303338;
+    }
+
+    .offer-tip strong {
+        font-weight: 400;
+        display: block;
+        font-size: 15px;
+        line-height: 1.4em;
+    }
+
+    .offer-tip span {
+        font-size: 0.9rem;
+        display: block;
+        opacity: .8;
+        line-height: 1.4em;
+        font-weight: lighter;
+    }
+
+
+.offer-form .form-caption {
+    font-size: 1.8rem;
+    margin-top: 10px;
+    line-height: 1.2em;
+    letter-spacing: .01em;
+    margin-bottom: 10px;
+}
+
+.offer-form .form-caption {
+    border-bottom: 1px solid #e6eaf2;
+}
+
+.offer-form .phone-link, .offer-form .custom-title {
+    background: #b21f17;
+    display: inline-block;
+    letter-spacing: -0.025em;
+    color: #fff;
+    font-size: 20px;
+    padding: .6rem .8rem;
+    border-radius: .5rem;
+}
+
+.offer-form .form-info {
+    font-size: 15px;
+    line-height: 1.5em;
+    letter-spacing: .025em;
+    margin-bottom: 10px;
+}
+
+    .offer-form .form-info b {
+        display: block;
+        margin: .5rem 0 1.2rem;
+        font-size: 1.1rem;
+        letter-spacing: .025em;
+        opacity: .7;
+    }
+
+.address {
+    margin-top: 20px;
+    width: 100%;
+    text-align: center;
+    height: 240px;
+    display: inline-block;
+}
+
+    .address a strong {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: 700;
+        color: #fff;
+        font-size: 120%;
+        letter-spacing: 1px;
+        margin-top: 15px;
+    }
+
+    .address a {
+        color: #fff;
+        display: flex;
+        border-radius: 20px;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+        height: 100%;
+        line-height: 1.5;
+        font-weight: 300;
+        font-size: 14px;
+        padding: 0 20px;
+        box-sizing: border-box;
+        transition: all .3s cubic-bezier(.42,0,.07,.99);
+        position: relative;
+        background-color: #064420;
+        top: 0px;
+        box-shadow: 0 10px 20px rgb(0 0 0 / 15%);
+    }
+
+
+        .address a .address-title {
+            padding-top: 5px;
+        }

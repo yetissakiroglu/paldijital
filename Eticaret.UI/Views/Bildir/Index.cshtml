@@ -1,26 +1,23 @@
 ﻿@model BildirViewListModel
 <!-- main content -->
 <div class="container-fluid">
-    <div class="row row--grid">
-        <!-- breadcrumb -->
-        <div class="col-12">
-            <ul class="breadcrumb">
-                <li class="breadcrumb__item"><a asp-controller="Home">Anasayfa</a></li>
-                <li class="breadcrumb__item breadcrumb__item--active">@Model.title</li>
-
-            </ul>
-        </div>
-        <!-- end breadcrumb -->
+    <div class="row row--grid news-background">
         <!-- title -->
-        <div class="col-12">
+        <div class="col-6">
             <div class="main__title main__title--page">
                 <h1>@Model.title</h1>
             </div>
         </div>
         <!-- endtitle -->
+        <!-- breadcrumb -->
+        <div class="col-6">
+            <ul class="breadcrumb">
+                <li class="breadcrumb__item"><a asp-controller="Home">Anasayfa</a></li>
+                <li class="breadcrumb__item breadcrumb__item--active">@Model.title</li>
+            </ul>
+        </div>
+        <!-- end breadcrumb -->
     </div>
-
-
     <div class="row row--grid">
         <div class="col-md-12">
             @if (TempData["message"] != null)
@@ -29,10 +26,18 @@
             }
         </div>
 
-        <p>Uygulama ile ilgili hataları bizlere bildirmek isterseniz. Aşağıdaki formu doldurunuz. Bu bildirimler sayesinde uygulamayı daha iyi bir hale getirmek istiyor. </p>
-        <div class="col-lg-offset-2 col-12 col-lg-7 col-xl-8">
+        <div class="col-lg-offset-2 col-12 col-lg-6 col-xl-6">
             @using (Html.BeginForm("Save", "Bildir", FormMethod.Post, new { @enctype = "multipart/form-data", @class = "sign__form sign__form--contacts" }))
             {
+                <div class="offer-form">
+                    <h2 class="form-caption">
+                        <span>Hata Bildirim Formu</span>
+                    </h2>
+                    <p class="form-info">
+                        <span><b>formu doldurun</b> Uygulama ile ilgili hataları bizlere bildirmek isterseniz. Aşağıdaki formu doldurunuz. Bu bildirimler sayesinde uygulamayı daha iyi bir hale getirmek istiyor.</span>
+                    </p>
+                </div>
+
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
                 <div class="row">
