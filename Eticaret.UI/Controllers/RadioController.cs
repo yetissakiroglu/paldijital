@@ -1,5 +1,6 @@
 ﻿using Eticaret.Business.Abstract;
 using Eticaret.Business.Abstract.Admin;
+using Eticaret.UI.Constants;
 using Eticaret.UI.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -28,7 +29,8 @@ namespace Eticaret.UI.Controllers
 
              var radios = _radioService.ListRadio();
             if (radios.Success)
-            { 
+            {
+                modelradio.title = Titles.Radyolar;
                 modelradio.Radios = radios.Data;
             }
            
