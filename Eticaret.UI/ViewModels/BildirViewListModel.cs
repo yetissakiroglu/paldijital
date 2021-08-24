@@ -1,4 +1,5 @@
-﻿using Eticaret.Entities.Concrete;
+﻿using Eticaret.Core.Entities;
+using Eticaret.Entities.Concrete;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Eticaret.UI.ViewModels
 {
-    public class BildirViewListModel
+    public class BildirViewListModel:IDto
     {
 
      

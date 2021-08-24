@@ -471,6 +471,7 @@ $(document).ready(function () {
     var audio = $('#audio');
 
     player.on('play', event => {
+       
         $('a[data-link].active, a[data-playlist].active').addClass('play');
         $('a[data-link].active, a[data-playlist].active').removeClass('pause');
     });
@@ -524,8 +525,8 @@ $(document).ready(function () {
         var tracks = playlist.find('li a[data-playlist]');
         var len = tracks.length;
 
-        playlist.find('a.postb').on('click', function (e) {
-            alert("dasdasd");
+        playlist.find('a[data-playlist]').on('click', function (e) {
+            alert("1");
             e.preventDefault();
             let link = $(this);
             current = link.parent().index();
@@ -569,6 +570,7 @@ $(document).ready(function () {
         });
 
         function run2(link, player) {
+            alert("2");
 
             let typedata = $(link).data('typedata');
 
@@ -583,7 +585,7 @@ $(document).ready(function () {
                 $(link).addClass('play');
             }
             else {
-
+                alert("3");
                 if (typedata == "radio") {
 
                     let rdId = $(link).data('rdid');
@@ -610,10 +612,10 @@ $(document).ready(function () {
                     });
                 }
                 else if (typedata == "podcast") {
-                    let podcasttid = $(link).data('podcasttid');
+                    let podcastid = $(link).data('podcastid');
                     $.ajax({
                         url: '/Podcast/PodcastGetAjax',
-                        data: { podcastid: podcasttid },
+                        data: { podcastid: podcastid },
                         success: function (data) {
                             $('a[data-playlist]').removeClass('active');
                             $('a[data-playlist]').removeClass('pause');

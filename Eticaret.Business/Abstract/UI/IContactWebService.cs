@@ -8,6 +8,9 @@ namespace Eticaret.Business.Abstract.UI
 {
     public interface IContactWebService
     {
-        IDataResult< Contact > GetBildirById(int Id);
+        IDataResult<Contact> GetContactById(int Id);
+        IDataResult<List<Contact>> ListContactById(int Id);
+        IDataResult<List<Contact>> ListContact();
+        IResult Create(Contact contact);
     }
 }

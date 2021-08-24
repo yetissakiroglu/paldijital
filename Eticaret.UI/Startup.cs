@@ -41,6 +41,8 @@ namespace Eticaret.UI
             {
                 options.UseSqlServer(_configuration["ConnectionStrings:IdentityConnection"], b => b.MigrationsAssembly("Eticaret.UI"));
             });
+            services.AddAutoMapper(typeof(Startup));
+
 
             //Yönetim Paneli Ýçin Role için Claims
             services.AddAuthorization(opts =>

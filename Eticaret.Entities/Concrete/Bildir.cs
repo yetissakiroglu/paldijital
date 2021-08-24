@@ -19,7 +19,6 @@ namespace Eticaret.Entities.Concrete
         [Display(Name = "Uygulama Hata Mesajı : ", Prompt = "Uygulamada oluşan hataları bildiriniz.")]
         [Required(ErrorMessage = "Bu alan boş burakılamaz.")]
         public string message { get; set; }
-  
         public bool IsRead { get; set; }
         public bool IsEdited { get; set; }
         

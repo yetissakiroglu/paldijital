@@ -10,8 +10,9 @@ using Eticaret.Business.DependencyResolvers.Autofac;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Eticaret.UI;
 
-namespace Eticaret.UI
+namespace paldijital.UI
 {
     public class Program
     {

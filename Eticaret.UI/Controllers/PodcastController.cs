@@ -66,6 +66,8 @@ namespace Eticaret.UI.Controllers
         {
             try
             {
+              //  var purl= Url.RequestContext.RouteData.Values["id"];
+
                 PodcastViewListModel viewmodel = new PodcastViewListModel();
                 if (!string.IsNullOrEmpty(podcastUrl))
                 {
@@ -93,7 +95,10 @@ namespace Eticaret.UI.Controllers
                 var radyo = _podcastWebService.GetPodcastbyId((int)podcastid);
                 if (radyo.Success)
                 {
-                    newmodel.soundPath = radyo.Data.soundPath;
+                    if (radyo.Data != null)
+                    {
+                        newmodel.soundPath = radyo.Data.soundPath;
+                    }
                 }
             }
             return Json(newmodel);

@@ -17,9 +17,11 @@ namespace Eticaret.UI.Controllers
     public class BildirController : Controller
     {
         private readonly IBildirWebService _bildirWebService;
+        private readonly IMapper _mapper;
 
-        public BildirController(IBildirWebService bildirWebService)
+        public BildirController(IBildirWebService bildirWebService,IMapper mapper)
         {
+            _mapper = mapper;
             _bildirWebService = bildirWebService;
         }
         public IActionResult Index()
@@ -33,6 +35,7 @@ namespace Eticaret.UI.Controllers
         [HttpPost]
         public async Task<IActionResult> Save(BildirViewListModel model)
         {
+
             if (!ModelState.IsValid)
             {
                 model.title = Titles.Bildir;
@@ -44,7 +47,6 @@ namespace Eticaret.UI.Controllers
                 name = model.Bildir.name,
                 email = model.Bildir.email,
                 message = model.Bildir.message
-
             };
             var result = _bildirWebService.Create(entity);
 
@@ -59,7 +61,7 @@ namespace Eticaret.UI.Controllers
 
             }
 
-            return View("Index");
+            return RedirectToAction("Index");
         }
 
     }

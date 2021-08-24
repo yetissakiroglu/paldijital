@@ -25,7 +25,6 @@
                 <partial name="_resultmessage" model="@(TempData.Get<ResultMessage>("message"))" />
             }
         </div>
-
         <div class="col-lg-offset-2 col-12 col-lg-6 col-xl-6">
             @using (Html.BeginForm("Save", "Bildir", FormMethod.Post, new { @enctype = "multipart/form-data", @class = "sign__form sign__form--contacts" }))
             {
@@ -37,9 +36,7 @@
                         <span><b>formu doldurun</b> Uygulama ile ilgili hataları bizlere bildirmek isterseniz. Aşağıdaki formu doldurunuz. Bu bildirimler sayesinde uygulamayı daha iyi bir hale getirmek istiyor.</span>
                     </p>
                 </div>
-
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
                 <div class="row">
                     <div class="col-12 col-md-6">
                         <div class="sign__group">
@@ -64,8 +61,6 @@
                     </div>
                 </div>
             }
-
-
         </div>
     </div>
 </div>

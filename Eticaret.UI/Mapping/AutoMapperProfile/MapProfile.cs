@@ -12,8 +12,11 @@ namespace Eticaret.UI.Mapping.AutoMapperProfile
     {
         public MapProfile()
         {
-            //CreateMap<BildirViewListModel, Bildir>();
-            //CreateMap<Bildir, BildirViewListModel>();
+            CreateMap<BildirViewListModel, Bildir>();
+            CreateMap<Bildir, BildirViewListModel>();
+
+            CreateMap<ContactViewListModel, Contact>();
+            CreateMap<Contact, ContactViewListModel>();
         }
     }
 }

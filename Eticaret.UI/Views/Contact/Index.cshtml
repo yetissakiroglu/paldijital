@@ -27,15 +27,8 @@
                 <partial name="_resultmessage" model="@(TempData.Get<ResultMessage>("message"))" />
             }
         </div>
-
-        @*<button class="btn-common" id="btnMiniBasvuru" onclick="MiniBasvuru($('#txtFormAdSoyad').val(),$('#txtCepNo').attr('value-unmasked'),$('#txtAciklama').val(),'@Url.Action("MiniBasvuru")')">Ücretsiz Danışın</button>
-
-        <div class="alert alert-danger" id="basvuruAnasayfaHata" role="alert" style="display: none;">*@
-
-
-
             <div class="col-lg-offset-2 col-12 col-lg-6 col-xl-6">
-                @using (Html.BeginForm("Send", "Contacts", FormMethod.Post, new { @enctype = "multipart/form-data", @class = "sign__form sign__form--contacts" }))
+                @using (Html.BeginForm("Send", "Contact", FormMethod.Post, new { @enctype = "multipart/form-data", @class = "sign__form sign__form--contacts" }))
                 {
                     <div class="offer-form">
                         <h2 class="form-caption">

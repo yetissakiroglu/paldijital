@@ -1,4 +1,5 @@
 ﻿using Eticaret.Business.Abstract.UI;
+using Eticaret.Entities.Concrete;
 using Eticaret.UI.Constants;
 using Eticaret.UI.ViewModels;
 using Microsoft.AspNetCore.Mvc;
@@ -6,6 +7,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Eticaret.Core.Extensions;
+using Eticaret.Core.Entities.ComplexTypes;
+using Eticaret.Core.Utilities.Messages.WebMessage;
 
 namespace Eticaret.UI.Controllers
 {
@@ -26,62 +30,39 @@ namespace Eticaret.UI.Controllers
             return View(newmodel);
         }
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public JsonResult MiniBasvuru(string adVal, string cepVal, string aciklamaVal)
-        //{
-        //    List<string> alert = null;
-        //    if (string.IsNullOrEmpty(cepVal) || string.IsNullOrWhiteSpace(cepVal))
-        //    {
-        //        alert = new List<string> { "İletişim numarası eksik veya hatalı tekrar deneyiniz." };
-        //    }
-        //    else
-        //    {
-        //        if (cepVal.Length <
-        //            15)
-        //        {
-        //            alert = new List<string> { "İletişim numarası eksik veya hatalı tekrar deneyiniz." };
-        //            //alert = new List<string> { "İletişim numarası eksik veya hatalı tekrar deneyiniz." };
-        //        }
-        //    }
+        [HttpPost]
+        public IActionResult Send(ContactViewListModel model)
+        {
+            //AppUser = _mapper.Map<AppUserListDto>(_userManager.Users.FirstOrDefault(I => I.Id == model.PersonelId)),
 
-        //    if (alert != null && alert.Count > 0)
-        //    {
-        //        return Json(new
-        //        {
-        //            alert = alert,
-        //            durum = JsonResultEnum.Error,
-        //        });
-        //    }
-        //    var basvuruServices = DependencyResolver.Current.GetService<IBasvuruServices>();
+            //return View(_mapper.Map<GorevUpdateDto>(gorev));
+            if (ModelState.IsValid)
+            {
+                Contact entity = new Contact()
+                {
+                    name = model.Contact.name,
+                    subject = model.Contact.subject,
+                    email = model.Contact.email,
+                    message = model.Contact.message
+                };
+                var result = _contactsWebService.Create(entity);
 
-        //    basvuruServices.AddBasvuru(new BasvuruModel
-        //    {
-        //        Universite = "",
-        //        AdSoyad = adVal,
-        //        Bolum = "Belirsiz Bölüm Tercihi",
-        //        CepNo = cepVal,
-        //        Mesaj = aciklamaVal,
-        //        Tip = (int)KurumEnum.Belirsiz,
-        //        IsDeleted = (int)IsActiveOrAccepted.Active,
-        //        Durum = (int)BasvuruEnum.Yeni,
-        //        BasvuruTarihi = DateTime.Now,
-        //    });
 
-        //    if (basvuruServices.Issues.IsValid)
-        //    {
-        //        return Json(new
-        //        {
-        //            durum = JsonResultEnum.Success,
-        //        });
-        //    }
-        //    return Json(new
-        //    {
-        //        alert = basvuruServices.Issues.ValidationIssues.Select(x => x.ErrorMessage),
-        //        durum = JsonResultEnum.Error,
-        //    });
+                if (result.Success)
+                {
+                    TempData.Put("message", new ResultMessage()
+                    {
+                        Title = ProsesWebMessages.Success,
+                        Message = result.Message,
+                        Css = ProsesWebMessages.CssSuccess,
+                    });
 
-          
-        //}
+                    return RedirectToAction("Index");
+                }
+
+                return BadRequest(result.Message);
+            }
+            return View(model);
+        }
     }
 }

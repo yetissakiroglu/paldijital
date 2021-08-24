@@ -8,12 +8,7 @@ namespace Eticaret.UI.ViewModels
 {
     public class ContactViewListModel
     {
-
         public string title { get; set; }
-
         public Contact Contact { get; set; }
-
-
-
     }
 }
